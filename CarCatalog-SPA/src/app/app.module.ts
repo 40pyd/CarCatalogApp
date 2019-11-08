@@ -16,32 +16,49 @@ import { RegisterComponent } from './register/register.component';
 import { appRoutes } from './routes';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { CarsListComponent } from './cars-list/cars-list.component';
+import { UserService } from './_services/user.service';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+
+export function tokenGet() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      CarComponent,
-      NavComponent,
-      HomeComponent,
-      RegisterComponent,
-      CarsListComponent
-   ],
-   imports: [
-      BrowserModule,
-      HttpClientModule,
-      FormsModule,
-      ReactiveFormsModule,
-      BsDropdownModule.forRoot(),
-      TabsModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
-   ],
-   providers: [
-      AuthService,
-      AlertifyService,
-      ErrorInterceptorProvider
-   ],
-   bootstrap: [
-      AppComponent
-   ]
+  declarations: [
+    AppComponent,
+    CarComponent,
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    CarsListComponent,
+    UserEditComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGet,
+        whitelistedDomains: ['localhost:5000'],
+        blacklistedRoutes: ['localhost:5000/api/auth']
+      }
+    })
+  ],
+  providers: [
+    AuthService,
+    AlertifyService,
+    ErrorInterceptorProvider,
+    UserService,
+    UserEditResolver,
+    PreventUnsavedChanges
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
