@@ -38,6 +38,30 @@ namespace Persistence.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("Domain.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsMain");
+
+                    b.Property<string>("PublicId");
+
+                    b.Property<string>("Url");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -52,6 +76,14 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Domain.Photo", b =>
+                {
+                    b.HasOne("Domain.User", "User")
+                        .WithMany("Photos")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
