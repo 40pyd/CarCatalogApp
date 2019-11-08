@@ -42,9 +42,9 @@ namespace Persistence.Data
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers(int id)
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(x => x.Photos).ToListAsync();
         }
 
         public async Task<bool> SaveAll()

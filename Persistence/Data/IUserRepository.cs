@@ -11,7 +11,7 @@ namespace Persistence.Data
         Task<bool> SaveAll();
         // Task<PagedList<User>> GetUsers(UserParams userParams);
         Task<User> GetUser(int id);
-        Task<IEnumerable<User>> GetUsers(int id);
+        Task<IEnumerable<User>> GetUsers();
         Task<Photo> GetPhoto(int id);
         Task<Photo> GetMainPhoto(int userId);
     }
