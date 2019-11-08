@@ -31,7 +31,7 @@ export class NavComponent implements OnInit {
         this.alertify.error(error);
       },
       () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/cars']);
       }
     );
   }

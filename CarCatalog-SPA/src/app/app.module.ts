@@ -15,29 +15,33 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { appRoutes } from './routes';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { CarsListComponent } from './cars-list/cars-list.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CarComponent,
-    NavComponent,
-    HomeComponent,
-    RegisterComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BsDropdownModule.forRoot(),
-    TabsModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
-  ],
-  providers: [
-    AuthService,
-    AlertifyService,
-    ErrorInterceptorProvider
-  ],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      CarComponent,
+      NavComponent,
+      HomeComponent,
+      RegisterComponent,
+      CarsListComponent
+   ],
+   imports: [
+      BrowserModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      BsDropdownModule.forRoot(),
+      TabsModule.forRoot(),
+      RouterModule.forRoot(appRoutes)
+   ],
+   providers: [
+      AuthService,
+      AlertifyService,
+      ErrorInterceptorProvider
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule {}
