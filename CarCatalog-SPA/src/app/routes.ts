@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CarsListComponent } from './cars-list/cars-list.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';

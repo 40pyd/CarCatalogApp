@@ -12,7 +12,7 @@
       </ul>
   
       <div *ngIf="loggedIn()" class="dropdown" dropdown>
-        <span class="mr-1">
+        <span class="mr-3">
           <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
         </span>
         <a class="dropdown-toggle text-light" dropdownToggle>
@@ -21,11 +21,11 @@
   
         <div class="dropdown-menu mt-3" *dropdownMenu>
           <a class="dropdown-item" [routerLink]="['/user/edit']" 
-            ><i class="fa fa-user"></i>Edit profile</a
+            ><i class="fa fa-user mr-3"></i>Edit profile</a
           >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()"
-            ><i class="fa fa-sign-out"></i>Logout</a
+          <a class="dropdown-item" (click)="logout()" [routerLink]="['/home']"
+            ><i class="fa fa-sign-out mr-3"></i>Logout</a
           >
         </div>
       </div>
