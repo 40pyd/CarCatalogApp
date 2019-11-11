@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Domain;
 
-namespace Domain
+namespace Persistence.Dtos
 {
-    public class Car 
+    public class CarForDetailedDto
     {
         public int Id { get; set; }
         public string BrandName { get; set; }
@@ -15,6 +16,7 @@ namespace Domain
         public DateTime Manufactured { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        public ICollection<CarPhoto> Photos { get; set; }
+        public string PhotoUrl { get; set; }
+        public ICollection<PhotoForDetailedDto> Photos { get; set; }
     }
 }

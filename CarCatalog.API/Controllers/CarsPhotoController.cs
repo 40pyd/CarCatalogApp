@@ -15,17 +15,19 @@ using Persistence.Dtos;
 namespace CarCatalog.API.Controllers
 {
     [Authorize]
-    [Route("api/users/{userId}/photos")]
+    [Route("api/users/{userId}/cars/{carId}")]
     [ApiController]
-    public class PhotosController : ControllerBase 
+    public class CarsPhotoController : ControllerBase
     {
-        private readonly IUserRepository _repo;
+        private readonly ICarRepository _repo;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
-        public PhotosController(IUserRepository repo, IMapper mapper,
-        IOptions<CloudinarySettings> cloudinaryConfig)
+        private readonly IUserRepository _userRepo;
+        public CarsPhotoController(ICarRepository repo, IMapper mapper,
+        IOptions<CloudinarySettings> cloudinaryConfig, IUserRepository userRepo)
         {
+            _userRepo = userRepo;
             _cloudinaryConfig = cloudinaryConfig;
             _mapper = mapper;
             _repo = repo;
@@ -39,7 +41,7 @@ namespace CarCatalog.API.Controllers
             _cloudinary = new Cloudinary(acc);
         }
 
-        [HttpGet("{id}", Name = "GetPhoto")]
+        [HttpGet("{id}", Name = "GetCarPhoto")]
         public async Task<IActionResult> GetPhoto(int id)
         {
             var photoFromRepo = await _repo.GetPhoto(id);
@@ -51,13 +53,16 @@ namespace CarCatalog.API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUSer(int userId,
+        public async Task<IActionResult> AddPhotoForCar(int userId, int carId,
             [FromForm]PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var userFromRepo = await _repo.GetUser(userId);
+            var carFromRepo = await _repo.GetCar(carId);
+
+            if (carFromRepo.UserId != userId)
+                return Unauthorized();
 
             var file = photoForCreationDto.File;
 
@@ -80,31 +85,31 @@ namespace CarCatalog.API.Controllers
             photoForCreationDto.Url = uploadResult.Uri.ToString();
             photoForCreationDto.PublicId = uploadResult.PublicId;
 
-            var photo = _mapper.Map<Photo>(photoForCreationDto);
+            var photo = _mapper.Map<CarPhoto>(photoForCreationDto);
 
-            if (!userFromRepo.Photos.Any(u => u.IsMain))
+            if (!carFromRepo.Photos.Any(u => u.IsMain))
                 photo.IsMain = true;
 
-            userFromRepo.Photos.Add(photo);
+            carFromRepo.Photos.Add(photo);
 
             if (await _repo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetCarPhoto", new { id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");
         }
 
         [HttpPost("{id}/setMain")]
-        public async Task<IActionResult> SetMainPhoto(int userId, int id)
+        public async Task<IActionResult> SetMainPhoto(int userId, int carId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var carFromRepo = await _repo.GetCar(carId);
 
-            if (!user.Photos.Any(p => p.Id == id))
+            if (carFromRepo.UserId != userId)
                 return Unauthorized();
 
             var photoFromRepo = await _repo.GetPhoto(id);
@@ -112,7 +117,7 @@ namespace CarCatalog.API.Controllers
             if (photoFromRepo.IsMain)
                 return BadRequest("This is already the main photo");
 
-            var currentMainPhoto = await _repo.GetMainPhoto(userId);
+            var currentMainPhoto = await _repo.GetMainPhoto(carId);
 
             currentMainPhoto.IsMain = false;
             photoFromRepo.IsMain = true;
@@ -124,14 +129,14 @@ namespace CarCatalog.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePhoto(int userId, int id)
+        public async Task<IActionResult> DeletePhoto(int userId, int carId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var carFromRepo = await _repo.GetCar(carId);
 
-            if (!user.Photos.Any(p => p.Id == id))
+            if (carFromRepo.UserId != userId)
                 return Unauthorized();
 
             var photoFromRepo = await _repo.GetPhoto(id);

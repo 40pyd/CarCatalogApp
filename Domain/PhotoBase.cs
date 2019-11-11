@@ -1,8 +1,8 @@
 using System;
 
-namespace Persistence.Dtos
+namespace Domain
 {
-    public class PhotoForDetailedDto
+    public class PhotoBase
     {
         public int Id { get; set; }
         public string Url { get; set; }

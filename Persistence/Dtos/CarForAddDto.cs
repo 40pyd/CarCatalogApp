@@ -1,20 +1,19 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Domain
+namespace Persistence.Dtos
 {
-    public class Car 
+    public class CarForAddDto
     {
-        public int Id { get; set; }
+        [Required]
         public string BrandName { get; set; }
+        [Required]
         public string ModelName { get; set; }
+        [Required]
         public string Color { get; set; }
+        [Required]
         public int Price { get; set; }
         public int HorsePowers { get; set; }
-        public DateTime Created { get; set; }
         public DateTime Manufactured { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
-        public ICollection<CarPhoto> Photos { get; set; }
     }
 }

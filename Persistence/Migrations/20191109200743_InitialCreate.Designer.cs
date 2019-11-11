@@ -9,8 +9,8 @@ using Persistence.Data;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191107203747_PhotosAdded")]
-    partial class PhotosAdded
+    [Migration("20191109200743_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,17 +27,47 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Color");
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<int>("HorsePowers");
+
+                    b.Property<DateTime>("Manufactured");
 
                     b.Property<string>("ModelName");
 
-                    b.Property<string>("PhotoUrl");
-
                     b.Property<int>("Price");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("Domain.CarPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CarId");
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsMain");
+
+                    b.Property<string>("PublicId");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("CarPhotos");
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>
@@ -78,6 +108,22 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Domain.Car", b =>
+                {
+                    b.HasOne("Domain.User", "User")
+                        .WithMany("Cars")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.CarPhoto", b =>
+                {
+                    b.HasOne("Domain.Car", "Car")
+                        .WithMany("Photos")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>

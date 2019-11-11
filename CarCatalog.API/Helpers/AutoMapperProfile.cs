@@ -20,6 +20,20 @@ namespace CarCatalog.API.Helpers
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<UserForRegisterDto, User>();
+            
+            
+            
+            CreateMap<Car, CarForListDto>()
+                .ForMember(dest => dest.PhotoUrl,
+                    opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url));
+            CreateMap<Car, CarForDetailedDto>()
+                .ForMember(dest => dest.PhotoUrl,
+                    opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url));
+            CreateMap<CarPhoto, PhotoForDetailedDto>();
+            CreateMap<CarPhoto, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, CarPhoto>();
+            CreateMap<CarForUpdateDto, Car>();
+            CreateMap<CarForAddDto, Car>();
         }
     }
 }
