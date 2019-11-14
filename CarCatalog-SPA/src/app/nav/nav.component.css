@@ -6,3 +6,6 @@ img {
     border: 2px solid white;
     display: inline;
 }
+.dropdown-menu {
+    z-index: 9999;
+}

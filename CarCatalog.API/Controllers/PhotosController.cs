@@ -15,7 +15,7 @@ using Persistence.Dtos;
 namespace CarCatalog.API.Controllers
 {
     [Authorize]
-    [Route("api/users/{userId}/photos")]
+    [Route("api/users/{userId}/photos")] 
     [ApiController]
     public class PhotosController : ControllerBase 
     {

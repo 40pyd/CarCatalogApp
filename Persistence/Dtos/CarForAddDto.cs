@@ -13,7 +13,9 @@ namespace Persistence.Dtos
         public string Color { get; set; }
         [Required]
         public int Price { get; set; }
+        [Required]
         public int HorsePowers { get; set; }
+        [Required]
         public DateTime Manufactured { get; set; }
     }
 }

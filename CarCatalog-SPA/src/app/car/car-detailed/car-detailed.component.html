@@ -1,0 +1,86 @@
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-sm-4 pt-2">
+      <div class="card text-center">
+        <img
+          class="card-img-top img-thumbnail"
+          src="{{ car.photoUrl || '../../../assets/user.png' }}"
+          alt="{{ car.modelName }}"
+        />
+        <div class="card-body mb-3">
+          <div>
+            <h2>{{ car.brandName }} {{ car.modelName }}</h2>
+            <h4>
+              {{ car.manufactured | date: 'yyyy' }}
+              <span class="tab-1 ml-3">{{ car.price }} $</span>
+            </h4>
+          </div>
+          <button *ngIf="isAuthorizedUser" class="btn btn-primary" [routerLink]="['/cars/edit/', car.id]">
+            <i class="fa fa-pencil"></i> Edit car
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8 pt-2">
+      <div class="tab-panel">
+        <tabset class="member-tabset" #memberTabs>
+          <tab heading="Photos">
+            <div class="card text-center p-2 mt-2">
+                <ngx-gallery
+                  [options]="galleryOptions"
+                  [images]="galleryImages"
+                ></ngx-gallery>
+              </div>
+              </tab>
+          <tab class="mt-2" heading="Information">
+            <div class="card text-center">
+              <div class="card-body">
+                <div>
+                  <h4>
+                    Brand <span class="tab-1 ml-3">{{ car.brandName }}</span>
+                  </h4>
+                </div>
+                <div>
+                  <h4>
+                    Model <span class="tab-1 ml-3">{{ car.modelName }}</span>
+                  </h4>
+                </div>
+                <div>
+                  <h4>
+                    Year
+                    <span class="tab-1 ml-3">{{
+                      car.manufactured | date: 'yyyy'
+                    }}</span>
+                  </h4>
+                </div>
+                <div>
+                  <h4>
+                    HP <span class="tab-1 ml-3">{{ car.horsePowers }}</span>
+                  </h4>
+                </div>
+                <div>
+                  <h4>
+                    Color <span class="tab-1 ml-3">{{ car.color }}</span>
+                  </h4>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div>
+                  <h4>
+                    <span class="tab-1 ml-3">{{ car.price }} $</span>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <tab class="mt-2" heading="Owner info">
+            <!-- <ngx-gallery
+                [options]="galleryOptions"
+                [images]="galleryImages"
+              ></ngx-gallery> -->
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

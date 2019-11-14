@@ -61,7 +61,7 @@ namespace CarCatalog.API.Controllers
         public async Task<IActionResult> AddCar(int id, CarForAddDto carForAddDto)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+                return Unauthorized(); 
 
             var carToAdd = _mapper.Map<Car>(carForAddDto);
             carToAdd.UserId = id;
