@@ -70,7 +70,7 @@ namespace CarCatalog.API.Controllers
             _repo.Add(carToAdd);
 
             if (await _repo.SaveAll())
-                return NoContent();
+                return Ok(carToAdd);
 
             throw new Exception($"Adding car failed");
         }

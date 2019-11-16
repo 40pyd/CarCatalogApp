@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgxGalleryModule } from 'ngx-gallery';
 
@@ -32,6 +32,7 @@ import { CarEditComponent } from './car/car-edit/car-edit.component';
 import { CarphotoEditorComponent } from './car/carphoto-editor/carphoto-editor.component';
 import { CarphotoEditResolver } from './_resolvers/carphoto-edit.resolver';
 import { AuthGuard } from './_guards/auth.guard';
+import { CarAddComponent } from './car/car-add/car-add.component';
 
 export function tokenGet() {
   return localStorage.getItem('token');
@@ -57,6 +58,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     CarCardComponent,
     CarDetailedComponent,
     CarEditComponent,
+    CarAddComponent,
     CarphotoEditorComponent
   ],
   imports: [
@@ -65,6 +67,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     FormsModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,

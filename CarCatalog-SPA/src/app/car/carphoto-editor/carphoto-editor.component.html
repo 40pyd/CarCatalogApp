@@ -1,4 +1,5 @@
-<div class="row">
+<div class="container">
+  <div class="row">
     <div class="col-sm-2" *ngFor="let photo of photos">
       <img src="{{ photo.url }}" class="img-thumbnail p-1" alt="" />
       <div class="text-center">
@@ -22,11 +23,11 @@
       </div>
     </div>
   </div>
-  
+
   <div class="row mt-3">
     <div class="col-md-3">
       <h3>Add photos</h3>
-  
+      <hr />
       <div
         ng2FileDrop
         [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
@@ -37,14 +38,14 @@
         <i class="fa fa-upload fa-3x"></i>
         Drop photos here
       </div>
-  
+
       Multiple
       <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
-  
+
       Single
       <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
-  
+
     <div
       *ngIf="uploader?.queue?.length"
       class="col-md-9"
@@ -52,7 +53,7 @@
     >
       <h3>Upload queue</h3>
       <p>Queue length: {{ uploader?.queue?.length }}</p>
-  
+
       <table class="table">
         <thead>
           <tr>
@@ -71,7 +72,7 @@
           </tr>
         </tbody>
       </table>
-  
+
       <div>
         <div>
           Queue progress:
@@ -109,4 +110,14 @@
         </button>
       </div>
     </div>
+    <div class="col-xs-12 col-12 text-center">
+    <button
+      class="btn btn-primary btn-block mt-3"
+      type="button"
+      [routerLink]="['/cars']"
+    ><i class="fa fa-check-square-o mr-3"></i>
+      Save & back to list
+    </button>
   </div>
+  </div>
+</div>

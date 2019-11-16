@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { CarService } from 'src/app/_services/car.service';
 import { Car } from 'src/app/_models/car';
 import { AuthService } from 'src/app/_services/auth.service';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-car-edit',
@@ -15,6 +16,7 @@ export class CarEditComponent implements OnInit {
   @ViewChild('editForm', { static: true }) editForm: NgForm;
   car: Car;
   carPhotoUrl: string;
+  bsConfig: Partial<BsDatepickerConfig>;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     if (this.editForm.dirty) {
@@ -30,6 +32,10 @@ export class CarEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    (this.bsConfig = {
+      dateInputFormat: 'YYYY',
+      containerClass: 'theme-green'
+    }),
     this.route.data.subscribe(data => {
       this.car = data['car'];
     });

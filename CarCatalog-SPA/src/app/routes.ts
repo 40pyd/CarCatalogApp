@@ -12,6 +12,7 @@ import { CarEditComponent } from './car/car-edit/car-edit.component';
 import { CarEditResolver } from './_resolvers/car-edit.resolver';
 import { CarphotoEditorComponent } from './car/carphoto-editor/carphoto-editor.component';
 import { CarphotoEditResolver } from './_resolvers/carphoto-edit.resolver';
+import { CarAddComponent } from './car/car-add/car-add.component';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,16 +32,19 @@ export const appRoutes: Routes = [
         resolve: { car: CarDetailedResolver }
       },
       {
+        path: 'addcar',
+        component: CarAddComponent
+      },
+      {
         path: 'cars/edit/:id',
         component: CarEditComponent,
         resolve: { car: CarEditResolver },
         canDeactivate: [PreventUnsavedChanges]
       },
       {
-        path: 'cars/edit/photos:id',
+        path: 'cars/edit/photos/:id',
         component: CarphotoEditorComponent,
-        resolve: { car: CarphotoEditResolver },
-        canDeactivate: [PreventUnsavedChanges]
+        resolve: { car: CarphotoEditResolver }
       },
       {
         path: 'user/edit',

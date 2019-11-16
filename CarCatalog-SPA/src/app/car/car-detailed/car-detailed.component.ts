@@ -2,13 +2,15 @@ import { OnInit, ViewChild, Component } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { Car } from 'src/app/_models/car';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   NgxGalleryOptions,
   NgxGalleryImage,
   NgxGalleryAnimation
 } from 'ngx-gallery';
 import { AuthService } from 'src/app/_services/auth.service';
+import { CarService } from 'src/app/_services/car.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-car-detailed',
@@ -18,6 +20,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class CarDetailedComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
   car: Car;
+  user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   isAuthorizedUser: boolean;
@@ -25,14 +28,18 @@ export class CarDetailedComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private carService: CarService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.car = data['car'];
     });
-    this.isAuthorizedUser = (+this.authService.decodedToken.nameid === this.car.userId) ? true : false;
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.isAuthorizedUser =
+    +this.authService.decodedToken.nameid === this.car.userId ? true : false;
     this.route.queryParams.subscribe(params => {
       const selectedTab = params['tab'];
       this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
@@ -79,5 +86,21 @@ export class CarDetailedComponent implements OnInit {
 
   selectTab(tabId: number) {
     this.memberTabs.tabs[tabId].active = true;
+  }
+
+  deleteCar() {
+    this.alertify.confirm('Are you sure you want to delete this car?', () => {
+      this.carService
+        .deleteCar(this.authService.decodedToken.nameid, this.car.id)
+        .subscribe(
+          next => {
+            this.alertify.success('Car was deleted successfully');
+            this.router.navigate(['cars']);
+          },
+          error => {
+            this.alertify.error('Problem on deleting the car');
+          }
+        );
+    });
   }
 }

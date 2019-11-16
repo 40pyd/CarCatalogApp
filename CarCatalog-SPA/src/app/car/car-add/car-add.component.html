@@ -1,0 +1,133 @@
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <form [formGroup]="addingForm" (ngSubmit)="addCar()">
+        <h2 class="text-center text-primary">Adding new car</h2>
+        <hr />
+
+        <div class="form-group">
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                addingForm.get('brandName').errors &&
+                addingForm.get('brandName').touched
+            }"
+            class="form-control"
+            formControlName="brandName"
+            placeholder="Brand"
+          />
+          <div class="invalid-feedback">Please enter the brand's name</div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                addingForm.get('modelName').errors &&
+                addingForm.get('modelName').touched
+            }"
+            class="form-control"
+            formControlName="modelName"
+            placeholder="Model"
+          />
+          <div class="invalid-feedback">Please enter the model name</div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                addingForm.get('color').errors &&
+                addingForm.get('color').touched
+            }"
+            class="form-control"
+            formControlName="color"
+            placeholder="Color"
+          />
+          <div class="invalid-feedback">Please enter the color</div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="number"
+            [ngClass]="{
+              'is-invalid':
+                addingForm.get('price').errors &&
+                addingForm.get('price').touched
+            }"
+            class="form-control"
+            formControlName="price"
+            placeholder="Price"
+          />
+          <div class="invalid-feedback">Please enter the price</div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="number"
+            [ngClass]="{
+              'is-invalid':
+                addingForm.get('horsePowers').errors &&
+                addingForm.get('horsePowers').touched
+            }"
+            class="form-control"
+            formControlName="horsePowers"
+            placeholder="Horse Powers"
+          />
+          <div class="invalid-feedback">Please enter the amount of hp</div>
+        </div>
+
+        <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    addingForm.get('manufactured').errors &&
+                    addingForm.get('manufactured').touched
+                }"
+                type="text"
+                bsDatepicker
+                #dp="bsDatepicker"
+                [bsConfig]="bsConfig"
+                placement="top"
+                class="form-control"
+                placeholder="Year of production"
+                formControlName="manufactured"
+              />
+              <button
+                class="btn btn-primary btn-block mt-3"
+                (click)="dp.toggle()"
+                [attr.aria-expanded]="dp.isOpen"
+                type="button"
+              >
+                select date
+              </button>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              addingForm.get('manufactured').touched &&
+              addingForm.get('manufactured').hasError('required')
+            "
+          >
+            Date of Production is required
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <button
+            class="btn btn-success"
+            [disabled]="!addingForm.valid"
+            type="submit"
+          >
+            Add the car
+          </button>
+          <button class="btn btn-danger" type="button" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

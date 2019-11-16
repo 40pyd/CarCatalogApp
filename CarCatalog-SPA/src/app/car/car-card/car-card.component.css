@@ -5,6 +5,10 @@
     opacity: 0.8;
 }
 
+.card {
+    background-color: rgb(245, 245, 241) !important;
+}
+
 .card img {
     transform: scale(1.0, 1.0);
     transition-duration: 500ms;

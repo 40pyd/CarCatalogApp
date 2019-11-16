@@ -70,6 +70,9 @@ export class CarphotoEditorComponent implements OnInit {
           description: res.description,
           isMain: res.isMain
         };
+        if (!this.photos) {
+          this.photos = [];
+        }
         this.photos.push(photo);
         if (photo.isMain) {
           this.carService.changeCarPhoto(photo.url);

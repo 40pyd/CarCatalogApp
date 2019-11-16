@@ -37,6 +37,7 @@ export class UserEditComponent implements OnInit {
   }
 
   updateUser() {
+    this.user.username = this.user.username.toLowerCase();
     this.userService
       .updateUser(this.authService.decodedToken.nameid, this.user)
       .subscribe(
@@ -45,7 +46,7 @@ export class UserEditComponent implements OnInit {
           this.editForm.reset(this.user);
         },
         error => {
-          this.alertify.error(error);
+          this.alertify.error('Username did not change');
         }
       );
   }

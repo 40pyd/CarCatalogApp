@@ -4,7 +4,7 @@
       <div class="card text-center">
         <img
           class="card-img-top img-thumbnail"
-          src="{{ car.photoUrl || '../../../assets/user.png' }}"
+          src="{{ car.photoUrl || '../../../assets/car.png' }}"
           alt="{{ car.modelName }}"
         />
         <div class="card-body mb-3">
@@ -15,23 +15,43 @@
               <span class="tab-1 ml-3">{{ car.price }} $</span>
             </h4>
           </div>
-          <button *ngIf="isAuthorizedUser" class="btn btn-primary" [routerLink]="['/cars/edit/', car.id]">
-            <i class="fa fa-pencil"></i> Edit car
-          </button>
+          <div *ngIf="isAuthorizedUser" class="btn-group">
+            <button
+              class="btn btn-primary"
+              [routerLink]="['/cars/edit/', car.id]"
+            >
+              <i class="fa fa-pencil"></i> Edit car
+            </button>
+            <button class="btn btn-danger" (click)="deleteCar()">
+              <i class="fa fa-trash"></i> Delete car
+            </button>
+            
+          </div>
+        </div>
+        <div class="card-footer">
+            <div class="col-xs-12 col-12 text-center">
+                <button
+                  class="btn btn-primary btn-block mt-3"
+                  type="button"
+                  [routerLink]="['/cars']"
+                ><i class="fa fa-arrow-left mr-3"></i>
+                  Cancel
+                </button>
+              </div>
         </div>
       </div>
     </div>
     <div class="col-sm-8 pt-2">
       <div class="tab-panel">
         <tabset class="member-tabset" #memberTabs>
-          <tab heading="Photos">
+          <tab *ngIf="car.photos.length>0" heading="Photos">
             <div class="card text-center p-2 mt-2">
-                <ngx-gallery
-                  [options]="galleryOptions"
-                  [images]="galleryImages"
-                ></ngx-gallery>
-              </div>
-              </tab>
+              <ngx-gallery
+                [options]="galleryOptions"
+                [images]="galleryImages"
+              ></ngx-gallery>
+            </div>
+          </tab>
           <tab class="mt-2" heading="Information">
             <div class="card text-center">
               <div class="card-body">
@@ -73,14 +93,9 @@
               </div>
             </div>
           </tab>
-          <tab class="mt-2" heading="Owner info">
-            <!-- <ngx-gallery
-                [options]="galleryOptions"
-                [images]="galleryImages"
-              ></ngx-gallery> -->
-          </tab>
         </tabset>
       </div>
     </div>
+    
   </div>
 </div>

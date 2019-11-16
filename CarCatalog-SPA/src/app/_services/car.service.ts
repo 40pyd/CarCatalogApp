@@ -34,7 +34,15 @@ export class CarService {
   }
 
   addCar(id: number, car: Car) {
-      return this.http.post(this.baseUrl + 'cars/' + id, car);
+      return this.http.post(this.baseUrl + 'cars/' + id, car).pipe(
+        map((response: any) => {
+          const newCar = response;
+          if (newCar) {
+            localStorage.setItem('car', JSON.stringify(newCar));
+            this.currentCar = newCar;
+          }
+        })
+      );
   }
 
   updateCar(userId: number, id: number, car: Car) {
@@ -52,7 +60,7 @@ export class CarService {
   }
 
   deleteCar(userId: number, id: number) {
-    return this.http.delete(this.baseUrl + 'cars/' + userId + id);
+    return this.http.delete(this.baseUrl + 'cars/' + userId + '/' + id);
   }
 
   setMainPhoto(userId: number, carId: number, id: number) {

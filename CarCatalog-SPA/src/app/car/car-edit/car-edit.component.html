@@ -15,26 +15,17 @@
       <div class="card">
         <img
           class="card-img-top img-thumbnail"
-          src="{{ carPhotoUrl || '../../../../../assets/user.png' }}"
+          src="{{ carPhotoUrl || '../../../../../assets/car.png' }}"
           alt="{{ car.modelName }}"
         />
         <div class="card-body mb-3 text-center">
-            <div>
-              <h2>{{ car.brandName }} {{ car.modelName }}</h2>
-              <h4>
-                {{ car.manufactured | date: 'yyyy' }}
-                <span class="tab-1 ml-3">{{ car.price }} $</span>
-              </h4>
-            </div>
+          <div>
+            <h2>{{ car.brandName }} {{ car.modelName }}</h2>
+            <h4>
+              {{ car.manufactured | date: 'yyyy' }}
+              <span class="tab-1 ml-3">{{ car.price }} $</span>
+            </h4>
           </div>
-        <div class="card-footer">
-          <button
-            [disabled]="!editForm.dirty"
-            form="editForm"
-            class="btn btn-success btn-block"
-          >
-            Save Changes
-          </button>
         </div>
       </div>
     </div>
@@ -46,21 +37,18 @@
               <h4>Brand Name</h4>
               <input
                 name="brandName"
-                rows="6"
                 class="form-control"
                 [(ngModel)]="car.brandName"
               />
               <h4>Model Name</h4>
               <input
                 name="modelName"
-                rows="6"
                 class="form-control"
                 [(ngModel)]="car.modelName"
               />
               <h4>Color</h4>
               <input
                 name="color"
-                rows="6"
                 class="form-control"
                 [(ngModel)]="car.color"
               />
@@ -68,7 +56,6 @@
               <input
                 type="number"
                 name="price"
-                rows="6"
                 class="form-control"
                 [(ngModel)]="car.price"
               />
@@ -76,19 +63,50 @@
               <input
                 type="number"
                 name="horsePowers"
-                rows="6"
                 class="form-control"
                 [(ngModel)]="car.horsePowers"
               />
-              <h4>Year of production</h4>
+              <h4>Date of production</h4>
               <input
-                type="date"
+                type="text"
+                bsDatepicker
+                #dp="bsDatepicker"
+                [bsConfig]="bsConfig"
                 name="manufactured"
-                rows="6"
                 class="form-control"
+                placement="top"
+                placeholder="Datepicker"
                 [(ngModel)]="car.manufactured"
               />
+              <div class="row mt-2">
+                <div class="col-xs-12 col-12 text-center">
+                  <button
+                    class="btn btn-primary btn-block"
+                    (click)="dp.toggle()"
+                    [attr.aria-expanded]="dp.isOpen"
+                    type="button"
+                  >
+                    select date
+                  </button>
+                </div>
+              </div>
+              <button
+                [disabled]="!editForm.dirty"
+                form="editForm"
+                class="btn btn-success btn-block mt-2"
+              >
+                Save Changes
+              </button>
             </form>
+            <div class="col-xs-12 col-12 text-center">
+                <button
+                  class="btn btn-danger btn-block mt-3"
+                  type="button"
+                  [routerLink]="['/cars']"
+                ><i class="fa fa-check-square-o mr-3"></i>
+                  Cancel & back to list
+                </button>
+              </div>
           </tab>
           <tab heading="Edit photos">
             <app-carphoto-editor

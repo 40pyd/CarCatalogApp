@@ -46,10 +46,14 @@ namespace CarCatalog.API.Controllers
         public async Task<IActionResult> UpdateUser(int id,
             UserForUpdateDto userForUpdateDto)
         {
+            userForUpdateDto.Username = userForUpdateDto.Username.ToLower();
+            
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var userFromRepo = await _repo.GetUser(id);
+            if(userForUpdateDto.Username.ToLower() == userFromRepo.Username.ToLower()) 
+                throw new Exception($"User's username is the same");
             _mapper.Map(userForUpdateDto, userFromRepo);
 
             if (await _repo.SaveAll())
