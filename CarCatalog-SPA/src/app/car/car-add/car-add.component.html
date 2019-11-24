@@ -1,129 +1,408 @@
 <div class="container mt-3">
   <div class="row justify-content-center">
-    <div class="col-sm-4">
+    <h2 class="text-center text-success">
+      <span class="text-primary"></span>Car information
+    </h2>
+
+    <div class="col-sm-12">
       <form [formGroup]="addingForm" (ngSubmit)="addCar()">
-        <h2 class="text-center text-primary">Adding new car</h2>
-        <hr />
+        <div class="row justify-content-center">
+          <div class="col-9 col-sm-12 col-md-9">
+            <hr />
+            <strong><h4>Required fields:</h4></strong>
 
-        <div class="form-group">
-          <input
-            type="text"
-            [ngClass]="{
-              'is-invalid':
-                addingForm.get('brandName').errors &&
-                addingForm.get('brandName').touched
-            }"
-            class="form-control"
-            formControlName="brandName"
-            placeholder="Brand"
-          />
-          <div class="invalid-feedback">Please enter the brand's name</div>
-        </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-car"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  [ngClass]="{
+                    'is-invalid':
+                      addingForm.get('brandName').errors &&
+                      addingForm.get('brandName').touched
+                  }"
+                  class="form-control"
+                  formControlName="brandName"
+                  placeholder="Brand"
+                />
+                <div class="invalid-feedback">
+                  Please enter the brand's name
+                </div>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <input
-            type="text"
-            [ngClass]="{
-              'is-invalid':
-                addingForm.get('modelName').errors &&
-                addingForm.get('modelName').touched
-            }"
-            class="form-control"
-            formControlName="modelName"
-            placeholder="Model"
-          />
-          <div class="invalid-feedback">Please enter the model name</div>
-        </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-car"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  [ngClass]="{
+                    'is-invalid':
+                      addingForm.get('modelName').errors &&
+                      addingForm.get('modelName').touched
+                  }"
+                  class="form-control"
+                  formControlName="modelName"
+                  placeholder="Model"
+                />
+                <div class="invalid-feedback">Please enter the model name</div>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <input
-            type="text"
-            [ngClass]="{
-              'is-invalid':
-                addingForm.get('color').errors &&
-                addingForm.get('color').touched
-            }"
-            class="form-control"
-            formControlName="color"
-            placeholder="Color"
-          />
-          <div class="invalid-feedback">Please enter the color</div>
-        </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-paint-brush"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  [ngClass]="{
+                    'is-invalid':
+                      addingForm.get('color').errors &&
+                      addingForm.get('color').touched
+                  }"
+                  class="form-control"
+                  formControlName="color"
+                  placeholder="Color"
+                />
+                <div class="invalid-feedback">Please enter the color</div>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <input
-            type="number"
-            [ngClass]="{
-              'is-invalid':
-                addingForm.get('price').errors &&
-                addingForm.get('price').touched
-            }"
-            class="form-control"
-            formControlName="price"
-            placeholder="Price"
-          />
-          <div class="invalid-feedback">Please enter the price</div>
-        </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-dollar"></i
+                  ></span>
+                </div>
+                <input
+                  type="number"
+                  [ngClass]="{
+                    'is-invalid':
+                      addingForm.get('price').errors &&
+                      addingForm.get('price').touched
+                  }"
+                  class="form-control"
+                  formControlName="price"
+                  placeholder="Price"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    addingForm.get('price').hasError('required') &&
+                    addingForm.get('price').touched
+                  "
+                >
+                  Please enter the price
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    addingForm.get('price').hasError('min') &&
+                    addingForm.get('price').touched
+                  "
+                >
+                  Price cannot be less than 0
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    addingForm.get('price').hasError('max') &&
+                    addingForm.get('price').touched
+                  "
+                >
+                  Price cannot be greater than 1000000
+                </div>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <input
-            type="number"
-            [ngClass]="{
-              'is-invalid':
-                addingForm.get('horsePowers').errors &&
-                addingForm.get('horsePowers').touched
-            }"
-            class="form-control"
-            formControlName="horsePowers"
-            placeholder="Horse Powers"
-          />
-          <div class="invalid-feedback">Please enter the amount of hp</div>
-        </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-calendar"></i
+                  ></span>
+                </div>
+                <input
+                  type="number"
+                  [ngClass]="{
+                    'is-invalid':
+                      addingForm.get('year').errors &&
+                      addingForm.get('year').touched
+                  }"
+                  min="1905"
+                  max="2019"
+                  class="form-control"
+                  formControlName="year"
+                  placeholder="Production Year"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    addingForm.get('year').hasError('required') &&
+                    addingForm.get('year').touched
+                  "
+                >
+                  Please enter the year
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    addingForm.get('year').hasError('min') &&
+                    addingForm.get('year').touched
+                  "
+                >
+                  Year cannot be less than 1900th
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    addingForm.get('year').hasError('max') &&
+                    addingForm.get('year').touched
+                  "
+                >
+                  Year cannot be greater than 2019
+                </div>
+              </div>
+            </div>
+            <hr />
+            <strong><h4>Optional fields:</h4></strong>
 
-        <div class="form-group">
-              <input
-                [ngClass]="{
-                  'is-invalid':
-                    addingForm.get('manufactured').errors &&
-                    addingForm.get('manufactured').touched
-                }"
-                type="text"
-                bsDatepicker
-                #dp="bsDatepicker"
-                [bsConfig]="bsConfig"
-                placement="top"
-                class="form-control"
-                placeholder="Year of production"
-                formControlName="manufactured"
-              />
-              <button
-                class="btn btn-primary btn-block mt-3"
-                (click)="dp.toggle()"
-                [attr.aria-expanded]="dp.isOpen"
-                type="button"
-              >
-                select date
-              </button>
-          <div
-            class="invalid-feedback"
-            *ngIf="
-              addingForm.get('manufactured').touched &&
-              addingForm.get('manufactured').hasError('required')
-            "
-          >
-            Date of Production is required
+            <div class="row justify-content-center text-center">
+              <div class="col-4">
+                <strong class="text-success">Engine power</strong>
+              </div>
+              <div class="form-group col-8">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"
+                      ><i class="fa fa-wrench"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="number"
+                    [ngClass]="{
+                      'is-invalid':
+                        addingForm.get('enginePower').errors &&
+                        addingForm.get('enginePower').touched
+                    }"
+                    step="0.1"
+                    min="0.1"
+                    max="12.0"
+                    class="form-control"
+                    formControlName="enginePower"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      addingForm.get('enginePower').hasError('min') &&
+                      addingForm.get('enginePower').touched
+                    "
+                  >
+                    Engine power must be greater than 0,1
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      addingForm.get('enginePower').hasError('max') &&
+                      addingForm.get('enginePower').touched
+                    "
+                  >
+                    Engine power cannot be greater than 12,0
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center text-center">
+              <div class="col-12">
+                <div class="form-group ml-5">
+                  <input type="checkbox" formControlName="isNew" />
+                  <label class="mr-3 text-success pl-1" for="isNew"
+                    >Is the car new?</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="row justify-content-center text-center">
+              <div class="form-group col-4">
+                <label class="text-success" for="body">Body Type </label>
+              </div>
+              <div class="col-8 input-group mb-3 pl-0 pr-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-cogs"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control ml-1"
+                  style="max-width: 70%; margin: 0 !important;"
+                  id="body"
+                  formControlName="body"
+                >
+                  <option *ngFor="let body of BodyList" [value]="body.value"
+                    >{{ body.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row justify-content-center text-center">
+              <div class="form-group col-4">
+                <label class="text-success" for="fuel">Fuel Type </label>
+              </div>
+              <div class="col-8 input-group mb-3 pl-0 pr-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-cogs"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control ml-1"
+                  style="max-width: 70%; margin: 0 !important;"
+                  id="fuel"
+                  formControlName="fuel"
+                >
+                  <option *ngFor="let fuel of FuelList" [value]="fuel.value"
+                    >{{ fuel.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row justify-content-center text-center">
+              <div class="form-group col-4">
+                <label class="text-success" for="fuel">Transmission </label>
+              </div>
+              <div class="col-8 input-group mb-3 pl-0 pr-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-cogs"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control ml-1"
+                  style="max-width: 70%; margin: 0 !important;"
+                  id="transmission"
+                  formControlName="transmission"
+                >
+                  <option
+                    *ngFor="let transmission of TransmissionList"
+                    [value]="transmission.value"
+                    >{{ transmission.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row justify-content-center text-center">
+              <div class="form-group col-4">
+                <label class="text-success" for="fuel">Drive Type </label>
+              </div>
+              <div class="col-8 input-group mb-3 pl-0 pr-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-cogs"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control ml-1"
+                  style="max-width: 70%; margin: 0 !important;"
+                  id="drive"
+                  formControlName="drive"
+                >
+                  <option *ngFor="let drive of DriveList" [value]="drive.value"
+                    >{{ drive.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row justify-content-center text-center">
+              <div class="form-group col-4">
+                <strong class="text-success">Milleage</strong>
+              </div>
+              <div class="col-8 form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">KM</span>
+                  </div>
+                  <input
+                    [ngClass]="{
+                      'is-invalid':
+                        addingForm.get('odometr').errors &&
+                        addingForm.get('odometr').touched
+                    }"
+                    step="1000"
+                    min="0"
+                    max="1000000"
+                    type="number"
+                    class="form-control"
+                    formControlName="odometr"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      addingForm.get('odometr').hasError('min') &&
+                      addingForm.get('odometr').touched
+                    "
+                  >
+                    Milleage must be greater than 0
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      addingForm.get('odometr').hasError('max') &&
+                      addingForm.get('odometr').touched
+                    "
+                  >
+                    Milleage cannot be greater than 1000000
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-pencil"></i
+                  ></span>
+                </div>
+                <textarea
+                  type="text"
+                  rows="5"
+                  maxlength="100"
+                  class="form-control"
+                  formControlName="description"
+                  placeholder="Description"
+                ></textarea>
+              </div>
+            </div>
           </div>
         </div>
-
         <div class="form-group text-center">
           <button
             class="btn btn-success"
             [disabled]="!addingForm.valid"
             type="submit"
           >
-            Add the car
+            <i class="fa fa-camera-retro mr-2"></i>
+            Next
           </button>
-          <button class="btn btn-danger" type="button" (click)="cancel()">
+          <button class="btn btn-default" type="button" (click)="cancel()">
+            <i class="fa fa-ban mr-2"></i>
             Cancel
           </button>
         </div>

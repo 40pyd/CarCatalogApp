@@ -38,8 +38,7 @@ export const appRoutes: Routes = [
       {
         path: 'cars/edit/:id',
         component: CarEditComponent,
-        resolve: { car: CarEditResolver },
-        canDeactivate: [PreventUnsavedChanges]
+        resolve: { car: CarEditResolver }
       },
       {
         path: 'cars/edit/photos/:id',

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateSeed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,12 @@ namespace Persistence.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Username = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
-                    PasswordSalt = table.Column<byte[]>(nullable: true)
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    DateBirth = table.Column<DateTime>(nullable: false),
+                    LastActive = table.Column<DateTime>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,9 +37,16 @@ namespace Persistence.Migrations
                     ModelName = table.Column<string>(nullable: true),
                     Color = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
-                    HorsePowers = table.Column<int>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Manufactured = table.Column<DateTime>(nullable: false),
+                    Year = table.Column<int>(nullable: false),
+                    EnginePower = table.Column<double>(nullable: false),
+                    IsNew = table.Column<bool>(nullable: false),
+                    Body = table.Column<string>(nullable: true),
+                    Fuel = table.Column<string>(nullable: true),
+                    Transmission = table.Column<string>(nullable: true),
+                    Drive = table.Column<string>(nullable: true),
+                    Odometr = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

@@ -9,3 +9,9 @@ img {
 .dropdown-menu {
     z-index: 9999;
 }
+.icon {
+    max-height: 30px;
+    border: 1px solid white;
+    display: inline;
+    border-radius: 0.8em;
+}

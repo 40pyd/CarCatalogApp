@@ -8,8 +8,14 @@ export interface Car {
     price: number;
     photoUrl: string;
     userId: number;
-    created?: Date;
-    manufactured?: Date;
-    horsePowers?: number;
+    year: number;
+    enginePower?: number;
+    isNew?: boolean;
+    body?: string;
+    fuel?: string;
+    transmission?: string;
+    drive?: string;
+    odometr?: number;
+    description?: string;
     photos?: Photo[];
 }

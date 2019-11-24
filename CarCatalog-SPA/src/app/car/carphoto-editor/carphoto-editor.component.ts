@@ -5,7 +5,7 @@ import { AuthService } from '../../_services/auth.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { FileUploader } from 'ng2-file-upload';
 import { CarService } from 'src/app/_services/car.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/_models/car';
 
 @Component({
@@ -26,7 +26,8 @@ export class CarphotoEditorComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private carService: CarService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -82,6 +83,7 @@ export class CarphotoEditorComponent implements OnInit {
             JSON.stringify(this.carService.currentCar)
           );
         }
+        this.alertify.success('Photo(s) has been added');
       }
     };
   }
@@ -122,6 +124,10 @@ export class CarphotoEditorComponent implements OnInit {
           }
         );
     });
+  }
+
+  cancel() {
+    this.router.navigate([`cars/${this.car.id}`]);
   }
 }
 

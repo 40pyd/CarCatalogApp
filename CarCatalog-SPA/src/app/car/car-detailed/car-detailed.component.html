@@ -1,5 +1,5 @@
 <div class="container mt-2">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-sm-4 pt-2">
       <div class="card text-center">
         <img
@@ -9,10 +9,9 @@
         />
         <div class="card-body mb-3">
           <div>
-            <h2>{{ car.brandName }} {{ car.modelName }}</h2>
-            <h4>
-              {{ car.manufactured | date: 'yyyy' }}
-              <span class="tab-1 ml-3">{{ car.price }} $</span>
+            <h3>{{ car.brandName }} {{ car.modelName }} {{ car.year }}</h3>
+            <h4 class="text-success">
+              <strong>{{ car.price }} $</strong>
             </h4>
           </div>
           <div *ngIf="isAuthorizedUser" class="btn-group">
@@ -25,77 +24,111 @@
             <button class="btn btn-danger" (click)="deleteCar()">
               <i class="fa fa-trash"></i> Delete car
             </button>
-            
           </div>
-        </div>
-        <div class="card-footer">
-            <div class="col-xs-12 col-12 text-center">
-                <button
-                  class="btn btn-primary btn-block mt-3"
-                  type="button"
-                  [routerLink]="['/cars']"
-                ><i class="fa fa-arrow-left mr-3"></i>
-                  Cancel
-                </button>
-              </div>
         </div>
       </div>
     </div>
     <div class="col-sm-8 pt-2">
       <div class="tab-panel">
         <tabset class="member-tabset" #memberTabs>
-          <tab *ngIf="car.photos.length>0" heading="Photos">
+          <tab *ngIf="car.photos.length > 0">
+            <ng-template tabHeading
+              ><i class="fa fa-camera-retro"></i> Photos</ng-template
+            >
             <div class="card text-center p-2 mt-2">
               <ngx-gallery
                 [options]="galleryOptions"
                 [images]="galleryImages"
               ></ngx-gallery>
             </div>
+            <div class="col-xs-12 col-12 text-center">
+              <button
+                class="btn btn-primary mt-3"
+                type="button"
+                [routerLink]="['/cars']"
+              >
+                <i class="fa fa-ban mr-2"></i>
+                Back to list
+              </button>
+            </div>
           </tab>
-          <tab class="mt-2" heading="Information">
+          <tab class="mt-2">
+            <ng-template tabHeading
+              ><i class="fa fa-info-circle"></i> Information</ng-template
+            >
             <div class="card text-center">
               <div class="card-body">
-                <div>
-                  <h4>
-                    Brand <span class="tab-1 ml-3">{{ car.brandName }}</span>
+                <div class="mt-3">
+                  <h4 class="text-success text-left">
+                    Drive Type
+                    <span class="tab-1 ml-3">{{ car.drive }} wheels</span>
                   </h4>
                 </div>
                 <div>
-                  <h4>
-                    Model <span class="tab-1 ml-3">{{ car.modelName }}</span>
+                  <h4 class="text-success text-left">
+                    Fuel <span class="tab-1 ml-3">{{ car.fuel }}</span>
                   </h4>
                 </div>
                 <div>
-                  <h4>
-                    Year
-                    <span class="tab-1 ml-3">{{
-                      car.manufactured | date: 'yyyy'
-                    }}</span>
+                  <h4 class="text-success text-left">
+                    Transmission
+                    <span class="tab-1 ml-3">{{ car.transmission }}</span>
                   </h4>
                 </div>
                 <div>
-                  <h4>
-                    HP <span class="tab-1 ml-3">{{ car.horsePowers }}</span>
+                  <h4 class="text-success text-left">
+                    Body <span class="tab-1 ml-3">{{ car.body }}</span>
                   </h4>
                 </div>
                 <div>
-                  <h4>
+                  <h4 class="text-success text-left">
                     Color <span class="tab-1 ml-3">{{ car.color }}</span>
                   </h4>
                 </div>
-              </div>
-              <div class="card-footer">
                 <div>
-                  <h4>
-                    <span class="tab-1 ml-3">{{ car.price }} $</span>
+                  <h4 class="text-success text-left">
+                    Engine power
+                    <span class="tab-1 ml-3"
+                      >{{ car.enginePower }} sm<sup><small>3</small></sup></span
+                    >
+                  </h4>
+                </div>
+                <div>
+                  <h4 class="text-success text-left">
+                    Milleage
+                    <span class="tab-1 ml-3">{{ car.odometr }} km</span>
+                  </h4>
+                </div>
+                <div *ngIf="car.isNew">
+                  <h4 class="text-success text-left">
+                    State
+                    <span class="tab-1 ml-3">is new</span>
+                  </h4>
+                </div>
+                <div *ngIf="!car.isNew">
+                  <h4 class="text-success text-left">
+                    State
+                    <span class="tab-1 ml-3">is used</span>
                   </h4>
                 </div>
               </div>
+              <div class="card-footer text-left pl-4 pr-4">
+                <span class="tab-1 p-3">{{ car.description }}</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-12 text-center">
+              <button
+                class="btn btn-primary mt-3"
+                type="button"
+                [routerLink]="['/cars']"
+              >
+                <i class="fa fa-ban mr-2"></i>
+                Back to list
+              </button>
             </div>
           </tab>
         </tabset>
       </div>
     </div>
-    
   </div>
 </div>

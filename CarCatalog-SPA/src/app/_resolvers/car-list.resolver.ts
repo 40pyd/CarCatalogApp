@@ -8,6 +8,9 @@ import { CarService } from '../_services/car.service';
 
 @Injectable()
 export class CarListResolver implements Resolve<Car[]> {
+  pageNumber = 1;
+  pageSize = 5;
+
   constructor(
     private carService: CarService,
     private router: Router,
@@ -15,7 +18,7 @@ export class CarListResolver implements Resolve<Car[]> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Car[]> {
-    return this.carService.getCars().pipe(
+    return this.carService.getCars(this.pageNumber, this.pageSize).pipe(
       catchError(error => {
         this.alertify.error('Problem retrieving data');
         this.router.navigate(['/home']);

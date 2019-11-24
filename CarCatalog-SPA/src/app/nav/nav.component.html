@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/cars']">Cars App</a>
+      <a class="navbar-brand text-success" [routerLink]="['/cars']"><span class="mr-3">
+          <img class="icon" src="{{'../../assets/car.png'}}" alt="">
+        </span><strong>CarCat</strong></a>
   
       <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active">

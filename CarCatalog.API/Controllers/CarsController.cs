@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Persistence.Data;
 using Persistence.Dtos;
+using Persistence.Helpers;
 
 namespace CarCatalog.API.Controllers
 {
@@ -40,10 +41,13 @@ namespace CarCatalog.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCars()
+        public async Task<IActionResult> GetCars([FromQuery]CarParams carParams)
         {
-            var cars = await _repo.GetCars();
+            var cars = await _repo.GetCars(carParams);
             var carsToReturn = _mapper.Map<List<CarForListDto>>(cars);
+
+            Response.AddPagination(cars.CurrentPage, cars.PageSize,
+                cars.TotalCount, cars.TotalPages);
 
             return Ok(carsToReturn);
         }

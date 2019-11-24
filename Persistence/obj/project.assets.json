@@ -28,6 +28,18 @@
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "LinqKit.Microsoft.EntityFrameworkCore/1.1.16": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Http/2.2.2": {
         "type": "package",
         "dependencies": {
@@ -796,6 +808,23 @@
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.pdb"
+      ]
+    },
+    "LinqKit.Microsoft.EntityFrameworkCore/1.1.16": {
+      "sha512": "CI6wcf1C6vXp3rGwp7brpxBJjVS/vDoHswmX55Rhe13VdhEunHAI7iDCmxMgAYO7s6rarYTjWkNMu6UU66YVdA==",
+      "type": "package",
+      "path": "linqkit.microsoft.entityframeworkcore/1.1.16",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net451/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/net451/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "lib/netstandard1.3/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/netstandard1.3/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "lib/netstandard2.0/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/netstandard2.0/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "linqkit.microsoft.entityframeworkcore.1.1.16.nupkg.sha512",
+        "linqkit.microsoft.entityframeworkcore.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Http/2.2.2": {
@@ -3049,6 +3078,7 @@
     ".NETStandard,Version=v2.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "Domain >= 1.0.0",
+      "LinqKit.Microsoft.EntityFrameworkCore >= 1.1.16",
       "Microsoft.AspNetCore.Http >= 2.2.2",
       "Microsoft.EntityFrameworkCore >= 2.2.6",
       "Microsoft.EntityFrameworkCore.Design >= 2.2.6",
@@ -3103,6 +3133,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[7.0.0, )"
+          },
+          "LinqKit.Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[1.1.16, )"
           },
           "Microsoft.AspNetCore.Http": {
             "target": "Package",

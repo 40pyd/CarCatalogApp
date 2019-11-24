@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div *ngIf="!registerMode" class="text-center">
-    <h1>Find the car of your dream or sell it!</h1>
+    <h1 class="text-success">Find the car of your dream or sell it!</h1>
     <p class="lead">
       Come on in to view the cars... All you need to do is sign up!
     </p>
@@ -13,7 +13,7 @@
 
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col">
         <app-register
           (cancelRegister)="cancelRegisterMode($event)"
         ></app-register>

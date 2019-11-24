@@ -2,6 +2,10 @@
     {
       "Username": "Deana",
       "Password": "password",
+      "Email": "Deana@test.net",
+      "PhoneNumber": "0661111111",
+      "DateBirth": "1960-05-15",
+      "Age": 25,
       "Photos": [
         {
           "url": "https://randomuser.me/api/portraits/women/27.jpg",
@@ -13,6 +17,10 @@
     {
       "Username": "Valarie",
       "Password": "password",
+      "Email": "Valarie@test.net",
+      "PhoneNumber": "0662222222",
+      "DateBirth": "1973-09-23",
+      "Age": 52,
       "Photos": [
         {
           "url": "https://randomuser.me/api/portraits/women/56.jpg",
@@ -24,6 +32,10 @@
     {
       "Username": "Flora",
       "Password": "password",
+      "Email": "Flora@test.net",
+      "PhoneNumber": "0661111111",
+      "DateBirth": "1982-01-28",
+      "Age": 33,
       "Photos": [
         {
           "url": "https://randomuser.me/api/portraits/women/77.jpg",
@@ -35,6 +47,10 @@
     {
       "Username": "Justine",
       "Password": "password",
+      "Email": "Justine@test.net",
+      "PhoneNumber": "0661111111",
+      "DateBirth": "1999-05-10",
+      "Age": 34,
       "Photos": [
         {
           "url": "https://randomuser.me/api/portraits/women/32.jpg",
@@ -46,6 +62,10 @@
     {
       "Username": "Evangeline",
       "Password": "password",
+      "Email": "Evangeline@test.net",
+      "PhoneNumber": "0661111111",
+      "DateBirth": "1989-02-23",
+      "Age": 16,
       "Photos": [
         {
           "url": "https://randomuser.me/api/portraits/women/60.jpg",
@@ -57,6 +77,10 @@
     {
       "Username": "Fleming",
       "Password": "password",
+      "Email": "Fleming@test.net",
+      "PhoneNumber": "0667777777",
+      "DateBirth": "1970-03-15",
+      "Age": 28,
       "Photos": [
         {
           "url": "https://randomuser.me/api/portraits/men/4.jpg",

@@ -1,14 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
+import {enGbLocale} from 'ngx-bootstrap/locale';
+import {BsLocaleService, defineLocale} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-register',
@@ -25,12 +23,18 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private alertify: AlertifyService,
     private fb: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private localeService: BsLocaleService
+  ) {
+    enGbLocale.invalidDate = 'Date of birth';
+    defineLocale('custom locale', enGbLocale);
+    this.localeService.use('custom locale');
+  }
 
   ngOnInit() {
     (this.bsConfig = {
-      containerClass: 'theme-red'
+      containerClass: 'theme-green',
+      value: new Date('1/1/1990')
     }),
       this.createRegisterForm();
   }
@@ -39,6 +43,16 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group(
       {
         username: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        phoneNumber: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(10)
+          ]
+        ],
+        dateBirth: [null, Validators.required],
         password: [
           '',
           [
@@ -71,7 +85,7 @@ export class RegisterComponent implements OnInit {
         },
         () => {
           this.authService.login(this.user).subscribe(() => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/cars']);
           });
         }
       );

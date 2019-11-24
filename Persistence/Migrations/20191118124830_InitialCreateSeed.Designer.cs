@@ -9,8 +9,8 @@ using Persistence.Data;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191109200743_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20191118124830_InitialCreateSeed")]
+    partial class InitialCreateSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,21 +23,35 @@ namespace Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Body");
+
                     b.Property<string>("BrandName");
 
                     b.Property<string>("Color");
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<int>("HorsePowers");
+                    b.Property<string>("Description");
 
-                    b.Property<DateTime>("Manufactured");
+                    b.Property<string>("Drive");
+
+                    b.Property<double>("EnginePower");
+
+                    b.Property<string>("Fuel");
+
+                    b.Property<bool>("IsNew");
 
                     b.Property<string>("ModelName");
 
+                    b.Property<int>("Odometr");
+
                     b.Property<int>("Price");
 
+                    b.Property<string>("Transmission");
+
                     b.Property<int>("UserId");
+
+                    b.Property<int>("Year");
 
                     b.HasKey("Id");
 
@@ -99,9 +113,19 @@ namespace Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("DateBirth");
+
+                    b.Property<string>("Email");
+
+                    b.Property<DateTime>("LastActive");
+
                     b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
+
+                    b.Property<string>("PhoneNumber");
 
                     b.Property<string>("Username");
 

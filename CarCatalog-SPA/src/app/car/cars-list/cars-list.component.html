@@ -1,7 +1,564 @@
-<div class="container">
-    <div class="row">
-        <div *ngFor="let car of cars" class="col-lg-2 col-md-3 col-sm-6">
-          <app-car-card [car]="car"></app-car-card>
-        </div>
+<div class="container text-left mt-3">
+  <div class="row justify-content-center text-center">
+    <div class="col col-lg-12 col-md-4 col-xs-4 text-left">
+      <h5>
+        <strong
+          >Total <i class="fa fa-automobile"></i> found
+          <span class="text-success">{{ pagination.totalItems }}</span></strong
+        >
+      </h5>
+    </div>
+  </div>
+
+  <div class="row justify-content-center text-center pt-2">
+    <div class=" col-3 col-lg-3 col-md-3 col-sm-3 pr-0">
+      <label class="text-success pl-0 pr-0" for="itemsPerPage"
+        ><strong>Cars on page</strong></label
+      >
+    </div>
+    <div class="col-3 col-lg-3 col-md-3 col-sm-3">
+      <select
+        class="form-control p-0"
+        style="max-width: 100%; font-size: 14px !important; margin: 0 !important;"
+        id="itemsPerPage"
+        name="itemsPerPage"
+        [(ngModel)]="pagination.itemsPerPage"
+        (change)="loadCars()"
+      >
+        <option *ngFor="let item of CountList" [value]="item.value"
+          >{{ item.display }}
+        </option>
+      </select>
+    </div>
+    <div class="col-2 col-lg-2 col-md-2 col-sm-2 pr-0 pl-0 text-center">
+      <label class="text-success pl-0 pr-0" for="itemsPerPage"
+        ><strong>Price</strong></label
+      >
+    </div>
+    <div class="col-4 col-lg-4 col-md-4 col-sm-4 pl-0">
+      <select
+        class="form-control pl-0 pr-0"
+        style="max-width: 86%; margin: 0 !important;"
+        id="orderBy"
+        name="orderBy"
+        [(ngModel)]="orderBy"
+        (change)="loadCars()"
+      >
+        <option *ngFor="let order of OrderList" [value]="order.value"
+          >{{ order.display }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="container mt-3">
+    <div class="text-left">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseBasic"
+      >
+        <i class="fa fa-search mr-2"></i>Filters
+      </button>
+    </div>
+    <div id="collapseBasic" [collapse]="isCollapsed">
+      <div class="card card-body mt-3">
+        <form [formGroup]="filterForm" (ngSubmit)="loadCars()">
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-0">
+              <label class="text-success pl-0 pr-1" for="brandName"
+                ><h6>Brand</h6></label
+              >
+            </div>
+            <div class="col-4 col-xs-4 pr-0 pl-1">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
+                    ><i class="fa fa-automobile"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="brandName"
+                  placeholder="Brand"
+                />
+              </div>
+            </div>
+
+            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
+              <label class="text-success pl-0 pr-0" for="modelName"
+                ><h6>Model</h6></label
+              >
+            </div>
+            <div class="col-4 col-md-4 col-xs-4 pr-1 pl-0">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
+                    ><i class="fa fa-automobile"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="modelName"
+                  placeholder="Model"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-4 col-md-4 col-xs-4">
+              <label class="text-success" for="minYear"
+                ><h5>Year From</h5></label
+              >
+            </div>
+            <div class="col-8 col-md-8 col-xs-8">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-calendar"></i
+                  ></span>
+                </div>
+                <input
+                  type="number"
+                  [ngClass]="{
+                    'is-invalid':
+                      filterForm.get('minYear').errors &&
+                      filterForm.get('minYear').touched
+                  }"
+                  min="1901"
+                  max="2019"
+                  class="form-control"
+                  formControlName="minYear"
+                  placeholder="Year From"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    filterForm.get('minYear').hasError('min') &&
+                    filterForm.get('minYear').touched
+                  "
+                >
+                  Year cannot be less than 1900th
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    filterForm.get('minYear').hasError('max') &&
+                    filterForm.get('minYear').touched
+                  "
+                >
+                  Year cannot be greater than 2019
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-4 col-md-4 col-xs-4">
+              <label class="text-success" for="maxYear"><h5>Year To</h5></label>
+            </div>
+            <div class="col-8 col-md-8 col-xs-8">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-calendar"></i>
+                  </span>
+                </div>
+                <input
+                  type="number"
+                  [ngClass]="{
+                    'is-invalid':
+                      filterForm.get('maxYear').errors &&
+                      filterForm.get('maxYear').touched
+                  }"
+                  min="1901"
+                  max="2019"
+                  class="form-control"
+                  formControlName="maxYear"
+                  placeholder="Year To"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    filterForm.get('maxYear').hasError('min') &&
+                    filterForm.get('maxYear').touched
+                  "
+                >
+                  Year cannot be less than 1900th
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    filterForm.get('maxYear').hasError('max') &&
+                    filterForm.get('maxYear').touched
+                  "
+                >
+                  Year cannot be greater than 2019
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-2 col-md-2 col-xs-2">
+              <label class="text-success" for="minPrice"
+                ><h5>Price from</h5></label
+              >
+            </div>
+            <div class="col-4 col-md-4 col-xs-4">
+              <input
+                type="number"
+                [ngClass]="{
+                  'is-invalid':
+                    filterForm.get('minPrice').errors &&
+                    filterForm.get('minPrice').touched
+                }"
+                min="1900"
+                max="2019"
+                class="form-control"
+                formControlName="minPrice"
+                placeholder="Min Price"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('minPrice').hasError('min') &&
+                  filterForm.get('minPrice').touched
+                "
+              >
+                Min price cannot be less than 0
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('minPrice').hasError('max') &&
+                  filterForm.get('minPrice').touched
+                "
+              >
+                Min price cannot be greater than 1000000
+              </div>
+            </div>
+            <div class="col-2 col-md-2 col-xs-2">
+              <label class="text-success" for="maxPrice"
+                ><h5>Price To</h5></label
+              >
+            </div>
+            <div class="col-4 col-md-4 col-xs-4">
+              <input
+                type="number"
+                min="1900"
+                max="2019"
+                [ngClass]="{
+                  'is-invalid':
+                    filterForm.get('maxPrice').errors &&
+                    filterForm.get('maxPrice').touched
+                }"
+                class="form-control"
+                formControlName="maxPrice"
+                placeholder="Max Price"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('maxPrice').hasError('min') &&
+                  filterForm.get('maxPrice').touched
+                "
+              >
+                Max price cannot be less than 0
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('maxPrice').hasError('max') &&
+                  filterForm.get('maxPrice').touched
+                "
+              >
+                Max price cannot be greater than 1000000
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-2 col-md-2 col-xs-2 pl-0 pr-1">
+              <label class="text-success pl-0 pr-0" for="enginePower"
+                ><h6>Engine Power</h6></label
+              >
+            </div>
+            <div class="col-3 col-md-3 col-xs-3 pr-0 pl-0">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
+                    ><i class="fa fa-wrench"></i
+                  ></span>
+                </div>
+                <input
+                  type="number"
+                  [ngClass]="{
+                    'is-invalid':
+                      filterForm.get('enginePower').errors &&
+                      filterForm.get('enginePower').touched
+                  }"
+                  step="0.1"
+                  min="0.1"
+                  max="12.0"
+                  class="form-control"
+                  formControlName="enginePower"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    filterForm.get('enginePower').hasError('min') &&
+                    filterForm.get('enginePower').touched
+                  "
+                >
+                  Engine power must be greater than 0,1
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    filterForm.get('enginePower').hasError('max') &&
+                    filterForm.get('enginePower').touched
+                  "
+                >
+                  Engine power cannot be greater than 12,0
+                </div>
+              </div>
+            </div>
+
+            <div class="col-2 col-md-2 col-xs-2 pl-0 pr-0">
+              <label class="text-success pl-0 pr-0" for="fuel"
+                ><h6>Fuel Type</h6></label
+              >
+            </div>
+            <div class="col-5 col-md-5 col-xs-5 pl-0 pr-0">
+              <div class="input-group mb-3 pl-0 pr-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
+                    ><i class="fa fa-wrench"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control pl-0 pr-0"
+                  style="max-width: 70%; margin: 0 !important;"
+                  id="fuel"
+                  formControlName="fuel"
+                >
+                  <option *ngFor="let fuel of FuelList" [value]="fuel.value"
+                    >{{ fuel.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
+              <label class="text-success pl-0 pr-0" for="color"
+                ><h6>Color</h6></label
+              >
+            </div>
+            <div class="col-3 col-md-3 col-xs-3 pr-0 pl-0">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
+                    ><i class="fa fa-paint-brush"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control text-center pl-0 pr-0"
+                  formControlName="color"
+                  placeholder="Color"
+                />
+              </div>
+            </div>
+
+            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
+              <label class="text-success pl-1 pr-1" for="body"
+                ><h6>Body Type</h6></label
+              >
+            </div>
+            <div class="col-5 col-md-5 col-xs-5 pl-0 pr-0">
+              <div class="input-group mb-3 pl-0 pr-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
+                    ><i class="fa fa-cogs"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control pl-0 pr-0"
+                  style="max-width: 67%; margin: 0 !important;"
+                  id="body"
+                  formControlName="body"
+                >
+                  <option *ngFor="let body of BodyList" [value]="body.value"
+                    >{{ body.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-5 col-md-5 col-xs-5">
+              <label class="text-success pl-0 pr-0" for="transmission"
+                ><h6>Transmission Type</h6></label
+              >
+            </div>
+            <div class="col-7 col-md-7 col-xs-7">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-cogs"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control"
+                  style="max-width: 70%; margin: 0 !important;"
+                  id="transmission"
+                  formControlName="transmission"
+                >
+                  <option
+                    *ngFor="let transmission of TransmissionList"
+                    [value]="transmission.value"
+                    >{{ transmission.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-3 col-md-3 col-xs-3 pl-1 pr-1">
+              <label class="text-success" for="odometr"
+                ><h6>Milleage</h6></label
+              >
+            </div>
+            <div class="col-3 col-md-3 col-xs-3 pl-0 pr-0">
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    filterForm.get('odometr').errors &&
+                    filterForm.get('odometr').touched
+                }"
+                type="number"
+                step="1000"
+                min="0"
+                max="1000000"
+                class="form-control text-center"
+                formControlName="odometr"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('odometr').hasError('min') &&
+                  filterForm.get('odometr').touched
+                "
+              >
+                Milleage must be greater than 0
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('odometr').hasError('max') &&
+                  filterForm.get('odometr').touched
+                "
+              >
+                Milleage cannot be greater than 1000000
+              </div>
+            </div>
+            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
+              <label class="text-success" for="isNew"><h6>State</h6></label>
+            </div>
+            <div class="col-4 col-md-4 col-xs-4 pr-0 pl-0 text-center">
+              <select
+                class="form-control"
+                style="max-width: 85%; margin: 0 !important;"
+                id="isNew"
+                formControlName="isNew"
+              >
+                <option *ngFor="let item of IsNewList" [value]="item.value"
+                  >{{ item.display }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <div class="col-5 col-md-5 col-xs-5">
+              <label class="text-success pl-0 pr-0" for="drive"
+                ><h6>Drive</h6></label
+              >
+            </div>
+            <div class="col-7 col-md-7 col-xs-7">
+              <div class="input-group mb-3 pl-0 pr-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
+                    ><i class="fa fa-cogs"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control pl-0 pr-0"
+                  style="max-width: 90%; margin: 0 !important;"
+                  id="drive"
+                  formControlName="drive"
+                >
+                  <option *ngFor="let drive of DriveList" [value]="drive.value"
+                    >{{ drive.display }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group justify-content-center text-center">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!filterForm.valid"
+              style="margin-left:10px"
+            >
+              <i class="fa fa-check-circle pr-2"></i>
+              Apply Filters
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="resetFilters()"
+              style="margin-left:10px"
+            >
+              <i class="fa fa-ban pr-2"></i>
+              Reset Filter
+            </button>
+          </div>
+        </form>
       </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let car of cars" class="col-lg-2 col-md-3 col-sm-6">
+        <app-car-card [car]="car"></app-car-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <pagination
+      [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+    >
+    </pagination>
+  </div>
 </div>

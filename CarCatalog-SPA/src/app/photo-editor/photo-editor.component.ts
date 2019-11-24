@@ -89,6 +89,7 @@ export class PhotoEditorComponent implements OnInit {
             'user',
             JSON.stringify(this.authService.currentUser)
           );
+          this.alertify.success('Main photo is changed!');
         },
         error => {
           this.alertify.error(error);
