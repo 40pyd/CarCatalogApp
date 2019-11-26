@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { User } from '../../_models/user';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-edit',
@@ -26,14 +27,17 @@ export class UserEditComponent implements OnInit {
     private route: ActivatedRoute,
     private alertify: AlertifyService,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
-    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    this.authService.currentPhotoUrl.subscribe(
+      photoUrl => (this.photoUrl = photoUrl)
+    );
   }
 
   updateUser() {
@@ -42,11 +46,11 @@ export class UserEditComponent implements OnInit {
       .updateUser(this.authService.decodedToken.nameid, this.user)
       .subscribe(
         next => {
-          this.alertify.success('Profile updated successfully');
+          this.alertify.success(this.translate.instant('ProfileChangeSuccess'));
           this.editForm.reset(this.user);
         },
         error => {
-          this.alertify.error('Username did not change');
+          this.alertify.error(this.translate.instant('ProfileChangeProblem'));
         }
       );
   }

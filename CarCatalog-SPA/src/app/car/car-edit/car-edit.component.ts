@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -11,6 +6,7 @@ import { CarService } from 'src/app/_services/car.service';
 import { Car } from 'src/app/_models/car';
 import { AuthService } from 'src/app/_services/auth.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-car-edit',
@@ -24,32 +20,32 @@ export class CarEditComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   editingForm: FormGroup;
   DriveList = [
-    { value: 'front', display: 'Front wheels' },
-    { value: 'back', display: 'Back wheels' },
-    { value: 'all', display: 'All wheels' }
+    { value: 'Front', display: 'Front' },
+    { value: 'Back', display: 'Back' },
+    { value: 'AllWheels', display: 'AllWheels' }
   ];
   TransmissionList = [
-    { value: 'manual', display: 'Manual' },
-    { value: 'automat', display: 'Automat' },
-    { value: 'tiptronic', display: 'Tiptronic' },
-    { value: 'adaptive', display: 'Adaptive' },
-    { value: 'variator', display: 'Variator' }
+    { value: 'Manual', display: 'Manual' },
+    { value: 'Automat', display: 'Automat' },
+    { value: 'Tiptronic', display: 'Tiptronic' },
+    { value: 'Adaptive', display: 'Adaptive' },
+    { value: 'Variator', display: 'Variator' }
   ];
   FuelList = [
-    { value: 'petrol', display: 'Petrol' },
-    { value: 'diesel', display: 'Diesel' },
-    { value: 'gas', display: 'Gas' },
-    { value: 'gibrid', display: 'Gibrid' },
-    { value: 'electro', display: 'Electro' },
-    { value: 'gas/petrol', display: 'Gas/Petrol' }
+    { value: 'Petrol', display: 'Petrol' },
+    { value: 'Diesel', display: 'Diesel' },
+    { value: 'Gas', display: 'Gas' },
+    { value: 'Gibrid', display: 'Gibrid' },
+    { value: 'Electro', display: 'Electro' },
+    { value: 'GasPet', display: 'GasPet' }
   ];
   BodyList = [
-    { value: 'universal', display: 'Universal' },
-    { value: 'hatchback', display: 'Hatchback' },
-    { value: 'coupe', display: 'Coupe' },
-    { value: 'sedan', display: 'Sedan' },
-    { value: 'crossover', display: 'Crossover' },
-    { value: 'cabriolet', display: 'Cabriolet' }
+    { value: 'Universal', display: 'Universal' },
+    { value: 'Hatchback', display: 'Hatchback' },
+    { value: 'Coupe', display: 'Coupe' },
+    { value: 'Sedan', display: 'Sedan' },
+    { value: 'Crossover', display: 'Crossover' },
+    { value: 'Cabriolet', display: 'Cabriolet' }
   ];
 
   constructor(
@@ -58,7 +54,8 @@ export class CarEditComponent implements OnInit {
     private carService: CarService,
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -84,7 +81,7 @@ export class CarEditComponent implements OnInit {
       .updateCar(this.authService.decodedToken.nameid, this.car.id, this.car)
       .subscribe(
         next => {
-          this.alertify.success('Car updated successfully');
+          this.alertify.success(this.translate.instant('CarUpdateSuccess'));
           this.createEditingForm();
           this.router.navigate([`cars/${this.car.id}`]);
         },

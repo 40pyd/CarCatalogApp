@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Car } from '../_models/car';
 import { CarService } from '../_services/car.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class CarListResolver implements Resolve<Car[]> {
@@ -14,13 +15,14 @@ export class CarListResolver implements Resolve<Car[]> {
   constructor(
     private carService: CarService,
     private router: Router,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private translate: TranslateService
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Car[]> {
     return this.carService.getCars(this.pageNumber, this.pageSize).pipe(
       catchError(error => {
-        this.alertify.error('Problem retrieving data');
+        this.alertify.error(this.translate.instant('DataProblem'));
         this.router.navigate(['/home']);
         return of(null);
       })

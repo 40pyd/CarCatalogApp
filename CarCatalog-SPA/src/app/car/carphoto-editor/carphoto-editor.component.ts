@@ -7,6 +7,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { CarService } from 'src/app/_services/car.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/_models/car';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-carphoto-editor',
@@ -27,7 +28,8 @@ export class CarphotoEditorComponent implements OnInit {
     private authService: AuthService,
     private carService: CarService,
     private alertify: AlertifyService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -83,7 +85,7 @@ export class CarphotoEditorComponent implements OnInit {
             JSON.stringify(this.carService.currentCar)
           );
         }
-        this.alertify.success('Photo(s) has been added');
+        this.alertify.success(this.translate.instant('PhotosAddSuccess'));
       }
     };
   }
@@ -102,7 +104,7 @@ export class CarphotoEditorComponent implements OnInit {
             'car',
             JSON.stringify(this.carService.currentCar)
           );
-          this.alertify.success('Main photo has been changed');
+          this.alertify.success(this.translate.instant('MainChangeSuccess'));
         },
         error => {
           this.alertify.error(error);
@@ -111,16 +113,19 @@ export class CarphotoEditorComponent implements OnInit {
   }
 
   deletePhoto(id: number) {
-    this.alertify.confirm('Are you sure you want to delete this photo?', () => {
+    this.alertify.confirm(this.translate.instant('PhotoDelConfirm'), () => {
       this.carService
         .deletePhoto(this.authService.decodedToken.nameid, this.car.id, id)
         .subscribe(
           () => {
-            this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
-            this.alertify.success('Photo has been deleted');
+            this.photos.splice(
+              this.photos.findIndex(p => p.id === id),
+              1
+            );
+            this.alertify.success(this.translate.instant('PhotoDelSuccess'));
           },
           error => {
-            this.alertify.error('Failed to delete the photo');
+            this.alertify.error(this.translate.instant('PhotoDelProblem'));
           }
         );
     });
@@ -130,4 +135,3 @@ export class CarphotoEditorComponent implements OnInit {
     this.router.navigate([`cars/${this.car.id}`]);
   }
 }
-

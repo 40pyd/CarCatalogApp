@@ -11,6 +11,7 @@ import {
 import { AuthService } from 'src/app/_services/auth.service';
 import { CarService } from 'src/app/_services/car.service';
 import { User } from 'src/app/_models/user';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-car-detailed',
@@ -30,7 +31,8 @@ export class CarDetailedComponent implements OnInit {
     private alertify: AlertifyService,
     private route: ActivatedRoute,
     private carService: CarService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class CarDetailedComponent implements OnInit {
     });
     this.user = JSON.parse(localStorage.getItem('user'));
     this.isAuthorizedUser =
-    +this.authService.decodedToken.nameid === this.car.userId ? true : false;
+      +this.authService.decodedToken.nameid === this.car.userId ? true : false;
     this.route.queryParams.subscribe(params => {
       const selectedTab = params['tab'];
       this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
@@ -89,16 +91,16 @@ export class CarDetailedComponent implements OnInit {
   }
 
   deleteCar() {
-    this.alertify.confirm('Are you sure you want to delete this car?', () => {
+    this.alertify.confirm(this.translate.instant('CarDelConfirm'), () => {
       this.carService
         .deleteCar(this.authService.decodedToken.nameid, this.car.id)
         .subscribe(
           next => {
-            this.alertify.success('Car was deleted successfully');
+            this.alertify.success(this.translate.instant('CarConfirm'));
             this.router.navigate(['cars']);
           },
           error => {
-            this.alertify.error('Problem on deleting the car');
+            this.alertify.error(this.translate.instant('CarDelProblem'));
           }
         );
     });

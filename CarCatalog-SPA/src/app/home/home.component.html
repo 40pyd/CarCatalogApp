@@ -1,12 +1,12 @@
 <div class="container mt-5">
   <div *ngIf="!registerMode" class="text-center">
-    <h1 class="text-success">Find the car of your dream or sell it!</h1>
+    <h1 class="text-success">{{ 'WelcomeTitle' | translate}}</h1>
     <p class="lead">
-      Come on in to view the cars... All you need to do is sign up!
+      {{ 'WelcomeText' | translate}}
     </p>
     <div class="text-center">
       <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">
-        Register
+          <i class="fa fa-user-plus pr-2"></i>{{ 'Register' | translate }}
       </button>
     </div>
   </div>

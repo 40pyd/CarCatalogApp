@@ -3,7 +3,8 @@
     <div class="col col-lg-12 col-md-4 col-xs-4 text-left">
       <h5>
         <strong
-          >Total <i class="fa fa-automobile"></i> found
+          >{{ 'Total' | translate }} <i class="fa fa-automobile"></i>
+          {{ 'found' | translate }}
           <span class="text-success">{{ pagination.totalItems }}</span></strong
         >
       </h5>
@@ -13,12 +14,12 @@
   <div class="row justify-content-center text-center pt-2">
     <div class=" col-3 col-lg-3 col-md-3 col-sm-3 pr-0">
       <label class="text-success pl-0 pr-0" for="itemsPerPage"
-        ><strong>Cars on page</strong></label
+        ><strong>{{ 'carsOnPage' | translate }}</strong></label
       >
     </div>
     <div class="col-3 col-lg-3 col-md-3 col-sm-3">
       <select
-        class="form-control p-0"
+        class="form-control pl-0 p-0"
         style="max-width: 100%; font-size: 14px !important; margin: 0 !important;"
         id="itemsPerPage"
         name="itemsPerPage"
@@ -32,26 +33,26 @@
     </div>
     <div class="col-2 col-lg-2 col-md-2 col-sm-2 pr-0 pl-0 text-center">
       <label class="text-success pl-0 pr-0" for="itemsPerPage"
-        ><strong>Price</strong></label
+        ><strong>{{ 'Price' | translate }}</strong></label
       >
     </div>
     <div class="col-4 col-lg-4 col-md-4 col-sm-4 pl-0">
       <select
         class="form-control pl-0 pr-0"
         style="max-width: 86%; margin: 0 !important;"
-        id="orderBy"
-        name="orderBy"
-        [(ngModel)]="orderBy"
+        id="order"
+        name="order"
+        [(ngModel)]="order"
         (change)="loadCars()"
       >
         <option *ngFor="let order of OrderList" [value]="order.value"
-          >{{ order.display }}
+          >{{ order.display | translate }}
         </option>
       </select>
     </div>
   </div>
 
-  <div class="container mt-3">
+  <div class="container mt-3 p-0">
     <div class="text-left">
       <button
         type="button"
@@ -60,19 +61,19 @@
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseBasic"
       >
-        <i class="fa fa-search mr-2"></i>Filters
+        <i class="fa fa-search mr-2"></i>{{ 'Filters' | translate }}
       </button>
     </div>
     <div id="collapseBasic" [collapse]="isCollapsed">
       <div class="card card-body mt-3">
         <form [formGroup]="filterForm" (ngSubmit)="loadCars()">
           <div class="row form-group justify-content-center text-center">
-            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-0">
+            <div class="col-2 col-md-2 col-xs-2 pl-0 pr-0">
               <label class="text-success pl-0 pr-1" for="brandName"
-                ><h6>Brand</h6></label
+                ><h6>{{ 'Brand' | translate }}</h6></label
               >
             </div>
-            <div class="col-4 col-xs-4 pr-0 pl-1">
+            <div class="col-4 col-xs-4 pr-0 pl-0">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text pl-1 pr-1" id="basic-addon1"
@@ -83,17 +84,17 @@
                   type="text"
                   class="form-control"
                   formControlName="brandName"
-                  placeholder="Brand"
+                  placeholder="{{ 'Brand' | translate }}"
                 />
               </div>
             </div>
 
-            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
+            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-0">
               <label class="text-success pl-0 pr-0" for="modelName"
-                ><h6>Model</h6></label
+                ><h6>{{ 'Model' | translate }}</h6></label
               >
             </div>
-            <div class="col-4 col-md-4 col-xs-4 pr-1 pl-0">
+            <div class="col-4 col-md-4 col-xs-4 pr-0 pl-1">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text pl-1 pr-1" id="basic-addon1"
@@ -104,7 +105,7 @@
                   type="text"
                   class="form-control"
                   formControlName="modelName"
-                  placeholder="Model"
+                  placeholder="{{ 'Model' | translate }}"
                 />
               </div>
             </div>
@@ -113,7 +114,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-4 col-md-4 col-xs-4">
               <label class="text-success" for="minYear"
-                ><h5>Year From</h5></label
+                ><h5>{{ 'YearFrom' | translate }}</h5></label
               >
             </div>
             <div class="col-8 col-md-8 col-xs-8">
@@ -134,7 +135,6 @@
                   max="2019"
                   class="form-control"
                   formControlName="minYear"
-                  placeholder="Year From"
                 />
                 <div
                   class="invalid-feedback"
@@ -143,7 +143,7 @@
                     filterForm.get('minYear').touched
                   "
                 >
-                  Year cannot be less than 1900th
+                  {{ 'YearLess' | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -152,7 +152,7 @@
                     filterForm.get('minYear').touched
                   "
                 >
-                  Year cannot be greater than 2019
+                  {{ 'YearGreater' | translate }}
                 </div>
               </div>
             </div>
@@ -160,7 +160,9 @@
 
           <div class="row form-group justify-content-center text-center">
             <div class="col-4 col-md-4 col-xs-4">
-              <label class="text-success" for="maxYear"><h5>Year To</h5></label>
+              <label class="text-success" for="maxYear"
+                ><h5>{{ 'YearTo' | translate }}</h5></label
+              >
             </div>
             <div class="col-8 col-md-8 col-xs-8">
               <div class="input-group mb-3">
@@ -180,7 +182,6 @@
                   max="2019"
                   class="form-control"
                   formControlName="maxYear"
-                  placeholder="Year To"
                 />
 
                 <div
@@ -190,7 +191,7 @@
                     filterForm.get('maxYear').touched
                   "
                 >
-                  Year cannot be less than 1900th
+                  {{ 'YearLess' | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -199,7 +200,7 @@
                     filterForm.get('maxYear').touched
                   "
                 >
-                  Year cannot be greater than 2019
+                  {{ 'YearGreater' | translate }}
                 </div>
               </div>
             </div>
@@ -208,7 +209,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-2 col-md-2 col-xs-2">
               <label class="text-success" for="minPrice"
-                ><h5>Price from</h5></label
+                ><h5>{{ 'PriceFrom' | translate }}</h5></label
               >
             </div>
             <div class="col-4 col-md-4 col-xs-4">
@@ -232,7 +233,7 @@
                   filterForm.get('minPrice').touched
                 "
               >
-                Min price cannot be less than 0
+                {{ 'MinPrice' | translate }}
               </div>
               <div
                 class="invalid-feedback"
@@ -241,12 +242,12 @@
                   filterForm.get('minPrice').touched
                 "
               >
-                Min price cannot be greater than 1000000
+                {{ 'MaxPrice' | translate }}
               </div>
             </div>
             <div class="col-2 col-md-2 col-xs-2">
               <label class="text-success" for="maxPrice"
-                ><h5>Price To</h5></label
+                ><h5>{{ 'PriceTo' | translate }}</h5></label
               >
             </div>
             <div class="col-4 col-md-4 col-xs-4">
@@ -270,7 +271,7 @@
                   filterForm.get('maxPrice').touched
                 "
               >
-                Max price cannot be less than 0
+                {{ 'MinPrice' | translate }}
               </div>
               <div
                 class="invalid-feedback"
@@ -279,7 +280,7 @@
                   filterForm.get('maxPrice').touched
                 "
               >
-                Max price cannot be greater than 1000000
+                {{ 'MaxPrice' | translate }}
               </div>
             </div>
           </div>
@@ -287,53 +288,46 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-2 col-md-2 col-xs-2 pl-0 pr-1">
               <label class="text-success pl-0 pr-0" for="enginePower"
-                ><h6>Engine Power</h6></label
+                ><h6>{{ 'EngPower' | translate }}</h6></label
               >
             </div>
-            <div class="col-3 col-md-3 col-xs-3 pr-0 pl-0">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text pl-1 pr-1" id="basic-addon1"
-                    ><i class="fa fa-wrench"></i
-                  ></span>
-                </div>
-                <input
-                  type="number"
-                  [ngClass]="{
-                    'is-invalid':
-                      filterForm.get('enginePower').errors &&
-                      filterForm.get('enginePower').touched
-                  }"
-                  step="0.1"
-                  min="0.1"
-                  max="12.0"
-                  class="form-control"
-                  formControlName="enginePower"
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="
-                    filterForm.get('enginePower').hasError('min') &&
+            <div class="col-2 col-md-2 col-xs-2 pr-0 pl-0">
+              <input
+                type="number"
+                [ngClass]="{
+                  'is-invalid':
+                    filterForm.get('enginePower').errors &&
                     filterForm.get('enginePower').touched
-                  "
-                >
-                  Engine power must be greater than 0,1
-                </div>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="
-                    filterForm.get('enginePower').hasError('max') &&
-                    filterForm.get('enginePower').touched
-                  "
-                >
-                  Engine power cannot be greater than 12,0
-                </div>
+                }"
+                step="0.1"
+                min="0.1"
+                max="12.0"
+                class="form-control"
+                formControlName="enginePower"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('enginePower').hasError('min') &&
+                  filterForm.get('enginePower').touched
+                "
+              >
+                {{ 'EngMin' | translate }}
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  filterForm.get('enginePower').hasError('max') &&
+                  filterForm.get('enginePower').touched
+                "
+              >
+                {{ 'EngMax' | translate }}
               </div>
             </div>
 
-            <div class="col-2 col-md-2 col-xs-2 pl-0 pr-0">
+            <div class="col-3 col-md-3 col-xs-3 pl-0 pr-0">
               <label class="text-success pl-0 pr-0" for="fuel"
-                ><h6>Fuel Type</h6></label
+                ><h6>{{ 'FuelType' | translate }}</h6></label
               >
             </div>
             <div class="col-5 col-md-5 col-xs-5 pl-0 pr-0">
@@ -350,7 +344,7 @@
                   formControlName="fuel"
                 >
                   <option *ngFor="let fuel of FuelList" [value]="fuel.value"
-                    >{{ fuel.display }}
+                    >{{ fuel.display | translate }}
                   </option>
                 </select>
               </div>
@@ -360,7 +354,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
               <label class="text-success pl-0 pr-0" for="color"
-                ><h6>Color</h6></label
+                ><h6>{{ 'Color' | translate }}</h6></label
               >
             </div>
             <div class="col-3 col-md-3 col-xs-3 pr-0 pl-0">
@@ -374,14 +368,14 @@
                   type="text"
                   class="form-control text-center pl-0 pr-0"
                   formControlName="color"
-                  placeholder="Color"
+                  placeholder="{{ 'Color' | translate }}"
                 />
               </div>
             </div>
 
             <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
               <label class="text-success pl-1 pr-1" for="body"
-                ><h6>Body Type</h6></label
+                ><h6>{{ 'BodyType' | translate }}</h6></label
               >
             </div>
             <div class="col-5 col-md-5 col-xs-5 pl-0 pr-0">
@@ -398,7 +392,7 @@
                   formControlName="body"
                 >
                   <option *ngFor="let body of BodyList" [value]="body.value"
-                    >{{ body.display }}
+                    >{{ body.display | translate }}
                   </option>
                 </select>
               </div>
@@ -408,7 +402,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-5 col-md-5 col-xs-5">
               <label class="text-success pl-0 pr-0" for="transmission"
-                ><h6>Transmission Type</h6></label
+                ><h6>{{ 'TransType' | translate }}</h6></label
               >
             </div>
             <div class="col-7 col-md-7 col-xs-7">
@@ -427,7 +421,7 @@
                   <option
                     *ngFor="let transmission of TransmissionList"
                     [value]="transmission.value"
-                    >{{ transmission.display }}
+                    >{{ transmission.display | translate }}
                   </option>
                 </select>
               </div>
@@ -437,7 +431,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-3 col-md-3 col-xs-3 pl-1 pr-1">
               <label class="text-success" for="odometr"
-                ><h6>Milleage</h6></label
+                ><h6>{{ 'Milleage' | translate }}</h6></label
               >
             </div>
             <div class="col-3 col-md-3 col-xs-3 pl-0 pr-0">
@@ -461,7 +455,7 @@
                   filterForm.get('odometr').touched
                 "
               >
-                Milleage must be greater than 0
+                {{ 'MilleageMin' | translate }}
               </div>
               <div
                 class="invalid-feedback"
@@ -470,30 +464,32 @@
                   filterForm.get('odometr').touched
                 "
               >
-                Milleage cannot be greater than 1000000
+                {{ 'MilleageMax' | translate }}
               </div>
             </div>
-            <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
-              <label class="text-success" for="isNew"><h6>State</h6></label>
+            <div class="col-3 col-md-3 col-xs-3 pl-0 pr-0">
+              <label class="text-success" for="isNew"
+                ><h6>{{ 'State' | translate }}</h6></label
+              >
             </div>
-            <div class="col-4 col-md-4 col-xs-4 pr-0 pl-0 text-center">
+            <div class="col-3 col-md-3 col-xs-3 pr-0 pl-0 text-center">
               <select
-                class="form-control"
+                class="form-control pl-0 pr-0"
                 style="max-width: 85%; margin: 0 !important;"
                 id="isNew"
                 formControlName="isNew"
               >
                 <option *ngFor="let item of IsNewList" [value]="item.value"
-                  >{{ item.display }}
+                  >{{ item.display | translate }}
                 </option>
               </select>
             </div>
           </div>
 
           <div class="row form-group justify-content-center text-center">
-            <div class="col-5 col-md-5 col-xs-5">
+            <div class="col-5 col-md-5 col-xs-5 pl-1 pr-0">
               <label class="text-success pl-0 pr-0" for="drive"
-                ><h6>Drive</h6></label
+                ><h6>{{ 'Drive' | translate }}</h6></label
               >
             </div>
             <div class="col-7 col-md-7 col-xs-7">
@@ -510,7 +506,7 @@
                   formControlName="drive"
                 >
                   <option *ngFor="let drive of DriveList" [value]="drive.value"
-                    >{{ drive.display }}
+                    >{{ drive.display | translate }}
                   </option>
                 </select>
               </div>
@@ -525,7 +521,7 @@
               style="margin-left:10px"
             >
               <i class="fa fa-check-circle pr-2"></i>
-              Apply Filters
+              {{ 'ApplyFilters' | translate }}
             </button>
             <button
               type="button"
@@ -534,7 +530,7 @@
               style="margin-left:10px"
             >
               <i class="fa fa-ban pr-2"></i>
-              Reset Filter
+              {{ 'ResetFilters' | translate }}
             </button>
           </div>
         </form>

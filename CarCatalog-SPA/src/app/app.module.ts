@@ -4,7 +4,7 @@ import {
   HAMMER_GESTURE_CONFIG
 } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -19,9 +19,11 @@ import {
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 import { AppComponent } from './app.component';
-import { CarComponent } from './_modules/car/car.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
@@ -57,10 +59,13 @@ export class CustomHammerConfig extends HammerGestureConfig {
   };
 }
 
+export const createTranslateLoader = (http: HttpClient) => {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+};
+
 @NgModule({
   declarations: [
     AppComponent,
-    CarComponent,
     NavComponent,
     HomeComponent,
     RegisterComponent,
@@ -93,6 +98,13 @@ export class CustomHammerConfig extends HammerGestureConfig {
         tokenGetter: tokenGet,
         whitelistedDomains: ['localhost:5000'],
         blacklistedRoutes: ['localhost:5000/api/auth']
+      }
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
       }
     })
   ],

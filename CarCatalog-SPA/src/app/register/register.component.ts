@@ -7,6 +7,7 @@ import { User } from '../_models/user';
 import { Router } from '@angular/router';
 import {enGbLocale} from 'ngx-bootstrap/locale';
 import {BsLocaleService, defineLocale} from 'ngx-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -24,9 +25,10 @@ export class RegisterComponent implements OnInit {
     private alertify: AlertifyService,
     private fb: FormBuilder,
     private router: Router,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private translate: TranslateService
   ) {
-    enGbLocale.invalidDate = 'Date of birth';
+    enGbLocale.invalidDate = this.translate.instant('DateBirth');
     defineLocale('custom locale', enGbLocale);
     this.localeService.use('custom locale');
   }
@@ -47,9 +49,7 @@ export class RegisterComponent implements OnInit {
         phoneNumber: [
           '',
           [
-            Validators.required,
-            Validators.minLength(10),
-            Validators.maxLength(10)
+            Validators.required
           ]
         ],
         dateBirth: [null, Validators.required],
@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
       this.user = Object.assign({}, this.registerForm.value);
       this.authService.register(this.user).subscribe(
         () => {
-          this.alertify.success('Registration successfull');
+          this.alertify.success(this.translate.instant('RegSuccess'));
         },
         error => {
           this.alertify.error(error);

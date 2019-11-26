@@ -19,34 +19,34 @@ export class CarsListComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   isCollapsed = true;
   filterForm: FormGroup;
-  orderBy: string;
+  order: string;
   DriveList = [
-    { value: 'front', display: 'Front wheels' },
-    { value: 'back', display: 'Back wheels' },
-    { value: 'all', display: 'All wheels' }
+    { value: 'Front', display: 'Front' },
+    { value: 'Back', display: 'Back' },
+    { value: 'AllWheels', display: 'AllWheels' }
   ];
   TransmissionList = [
-    { value: 'manual', display: 'Manual' },
-    { value: 'automat', display: 'Automat' },
-    { value: 'tiptronic', display: 'Tiptronic' },
-    { value: 'adaptive', display: 'Adaptive' },
-    { value: 'variator', display: 'Variator' }
+    { value: 'Manual', display: 'Manual' },
+    { value: 'Automat', display: 'Automat' },
+    { value: 'Tiptronic', display: 'Tiptronic' },
+    { value: 'Adaptive', display: 'Adaptive' },
+    { value: 'Variator', display: 'Variator' }
   ];
   FuelList = [
-    { value: 'petrol', display: 'Petrol' },
-    { value: 'diesel', display: 'Diesel' },
-    { value: 'gas', display: 'Gas' },
-    { value: 'gibrid', display: 'Gibrid' },
-    { value: 'electro', display: 'Electro' },
-    { value: 'gas/petrol', display: 'Gas/Petrol' }
+    { value: 'Petrol', display: 'Petrol' },
+    { value: 'Diesel', display: 'Diesel' },
+    { value: 'Gas', display: 'Gas' },
+    { value: 'Gibrid', display: 'Gibrid' },
+    { value: 'Electro', display: 'Electro' },
+    { value: 'GasPet', display: 'GasPet' }
   ];
   BodyList = [
-    { value: 'universal', display: 'Universal' },
-    { value: 'hatchback', display: 'Hatchback' },
-    { value: 'coupe', display: 'Coupe' },
-    { value: 'sedan', display: 'Sedan' },
-    { value: 'crossover', display: 'Crossover' },
-    { value: 'cabriolet', display: 'Cabriolet' }
+    { value: 'Universal', display: 'Universal' },
+    { value: 'Hatchback', display: 'Hatchback' },
+    { value: 'Coupe', display: 'Coupe' },
+    { value: 'Sedan', display: 'Sedan' },
+    { value: 'Crossover', display: 'Crossover' },
+    { value: 'Cabriolet', display: 'Cabriolet' }
   ];
   CountList = [
     { value: 10, display: '10' },
@@ -54,13 +54,13 @@ export class CarsListComponent implements OnInit {
     { value: 50, display: '50' }
   ];
   IsNewList = [
-    { value: 'new', display: 'New' },
-    { value: 'used', display: 'Used' },
-    { value: 'all', display: 'All' }
+    { value: 'New', display: 'New' },
+    { value: 'Used', display: 'Used' },
+    { value: 'All', display: 'All' }
   ];
   OrderList = [
-    { value: 'low', display: 'Decrease' },
-    { value: 'high', display: 'Increase' }
+    { value: 'low', display: 'low' },
+    { value: 'high', display: 'high' }
   ];
 
   constructor(
@@ -71,7 +71,7 @@ export class CarsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.orderBy = '';
+    this.order = '';
     (this.bsConfig = {
       dateInputFormat: 'YYYY',
       containerClass: 'theme-green'
@@ -118,7 +118,7 @@ export class CarsListComponent implements OnInit {
   loadCars() {
     if (this.filterForm.valid) {
       this.carParams = Object.assign({}, this.filterForm.value);
-      this.carParams.orderBy = this.orderBy;
+      this.carParams.orderBy = this.order;
       this.carService
         .getCars(
           this.pagination.currentPage,

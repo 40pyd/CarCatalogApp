@@ -19,10 +19,10 @@
               class="btn btn-primary"
               [routerLink]="['/cars/edit/', car.id]"
             >
-              <i class="fa fa-pencil"></i> Edit car
+              <i class="fa fa-pencil"></i> {{ 'EditCar' | translate }}
             </button>
             <button class="btn btn-danger" (click)="deleteCar()">
-              <i class="fa fa-trash"></i> Delete car
+              <i class="fa fa-trash"></i> {{ 'DelCar' | translate }}
             </button>
           </div>
         </div>
@@ -33,7 +33,8 @@
         <tabset class="member-tabset" #memberTabs>
           <tab *ngIf="car.photos.length > 0">
             <ng-template tabHeading
-              ><i class="fa fa-camera-retro"></i> Photos</ng-template
+              ><i class="fa fa-camera-retro pr-1"></i
+              >{{ 'Photos' | translate }}</ng-template
             >
             <div class="card text-center p-2 mt-2">
               <ngx-gallery
@@ -41,74 +42,72 @@
                 [images]="galleryImages"
               ></ngx-gallery>
             </div>
-            <div class="col-xs-12 col-12 text-center">
-              <button
-                class="btn btn-primary mt-3"
-                type="button"
-                [routerLink]="['/cars']"
-              >
-                <i class="fa fa-ban mr-2"></i>
-                Back to list
-              </button>
-            </div>
           </tab>
           <tab class="mt-2">
             <ng-template tabHeading
-              ><i class="fa fa-info-circle"></i> Information</ng-template
+              ><i class="fa fa-info-circle"></i>
+              {{ 'Information' | translate }}</ng-template
             >
             <div class="card text-center">
               <div class="card-body">
                 <div class="mt-3">
                   <h4 class="text-success text-left">
-                    Drive Type
-                    <span class="tab-1 ml-3">{{ car.drive }} wheels</span>
+                    {{ 'Drive' | translate }}
+                    <span class="tab-1 ml-3">{{ car.drive | translate }}</span>
                   </h4>
                 </div>
                 <div>
                   <h4 class="text-success text-left">
-                    Fuel <span class="tab-1 ml-3">{{ car.fuel }}</span>
+                    {{ 'FuelType' | translate }}
+                    <span class="tab-1 ml-3">{{ car.fuel | translate }}</span>
                   </h4>
                 </div>
                 <div>
                   <h4 class="text-success text-left">
-                    Transmission
-                    <span class="tab-1 ml-3">{{ car.transmission }}</span>
+                    {{ 'TransType' | translate }}
+                    <span class="tab-1 ml-3">{{
+                      car.transmission | translate
+                    }}</span>
                   </h4>
                 </div>
                 <div>
                   <h4 class="text-success text-left">
-                    Body <span class="tab-1 ml-3">{{ car.body }}</span>
+                    {{ 'BodyType' | translate }}
+                    <span class="tab-1 ml-3">{{ car.body | translate }}</span>
                   </h4>
                 </div>
                 <div>
                   <h4 class="text-success text-left">
-                    Color <span class="tab-1 ml-3">{{ car.color }}</span>
+                    {{ 'Color' | translate }}
+                    <span class="tab-1 ml-3">{{ car.color }}</span>
                   </h4>
                 </div>
                 <div>
                   <h4 class="text-success text-left">
-                    Engine power
+                    {{ 'EngPower' | translate }}
                     <span class="tab-1 ml-3"
-                      >{{ car.enginePower }} sm<sup><small>3</small></sup></span
+                      >{{ car.enginePower }} {{ 'l' | translate
+                      }}</span
                     >
                   </h4>
                 </div>
                 <div>
                   <h4 class="text-success text-left">
-                    Milleage
-                    <span class="tab-1 ml-3">{{ car.odometr }} km</span>
+                    {{ 'Milleage' | translate }}
+                    <span class="tab-1 ml-3">{{ car.odometr }} {{ 'km' | translate
+                      }}</span>
                   </h4>
                 </div>
                 <div *ngIf="car.isNew">
                   <h4 class="text-success text-left">
-                    State
-                    <span class="tab-1 ml-3">is new</span>
+                    {{ 'State' | translate }}
+                    <span class="tab-1 ml-3">{{ 'isNew' | translate }}</span>
                   </h4>
                 </div>
                 <div *ngIf="!car.isNew">
                   <h4 class="text-success text-left">
-                    State
-                    <span class="tab-1 ml-3">is used</span>
+                    {{ 'State' | translate }}
+                    <span class="tab-1 ml-3">{{ 'isUsed' | translate }}</span>
                   </h4>
                 </div>
               </div>
@@ -123,7 +122,7 @@
                 [routerLink]="['/cars']"
               >
                 <i class="fa fa-ban mr-2"></i>
-                Back to list
+                {{ 'BackList' | translate }}
               </button>
             </div>
           </tab>

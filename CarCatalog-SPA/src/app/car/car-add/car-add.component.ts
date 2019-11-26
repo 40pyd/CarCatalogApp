@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { CarService } from 'src/app/_services/car.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Photo } from 'src/app/_models/photo';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-car-add',
@@ -20,32 +21,32 @@ export class CarAddComponent implements OnInit {
   addingForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   DriveList = [
-    { value: 'front', display: 'Front wheels' },
-    { value: 'back', display: 'Back wheels' },
-    { value: 'all', display: 'All wheels' }
+    { value: 'Front', display: 'Front' },
+    { value: 'Back', display: 'Back' },
+    { value: 'AllWheels', display: 'AllWheels' }
   ];
   TransmissionList = [
-    { value: 'manual', display: 'Manual' },
-    { value: 'automat', display: 'Automat' },
-    { value: 'tiptronic', display: 'Tiptronic' },
-    { value: 'adaptive', display: 'Adaptive' },
-    { value: 'variator', display: 'Variator' }
+    { value: 'Manual', display: 'Manual' },
+    { value: 'Automat', display: 'Automat' },
+    { value: 'Tiptronic', display: 'Tiptronic' },
+    { value: 'Adaptive', display: 'Adaptive' },
+    { value: 'Variator', display: 'Variator' }
   ];
   FuelList = [
-    { value: 'petrol', display: 'Petrol' },
-    { value: 'diesel', display: 'Diesel' },
-    { value: 'gas', display: 'Gas' },
-    { value: 'gibrid', display: 'Gibrid' },
-    { value: 'electro', display: 'Electro' },
-    { value: 'gas/petrol', display: 'Gas/Petrol' }
+    { value: 'Petrol', display: 'Petrol' },
+    { value: 'Diesel', display: 'Diesel' },
+    { value: 'Gas', display: 'Gas' },
+    { value: 'Gibrid', display: 'Gibrid' },
+    { value: 'Electro', display: 'Electro' },
+    { value: 'GasPet', display: 'GasPet' }
   ];
   BodyList = [
-    { value: 'universal', display: 'Universal' },
-    { value: 'hatchback', display: 'Hatchback' },
-    { value: 'coupe', display: 'Coupe' },
-    { value: 'sedan', display: 'Sedan' },
-    { value: 'crossover', display: 'Crossover' },
-    { value: 'cabriolet', display: 'Cabriolet' }
+    { value: 'Universal', display: 'Universal' },
+    { value: 'Hatchback', display: 'Hatchback' },
+    { value: 'Coupe', display: 'Coupe' },
+    { value: 'Sedan', display: 'Sedan' },
+    { value: 'Crossover', display: 'Crossover' },
+    { value: 'Cabriolet', display: 'Cabriolet' }
   ];
 
   constructor(
@@ -53,7 +54,8 @@ export class CarAddComponent implements OnInit {
     private authService: AuthService,
     private alertify: AlertifyService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -95,7 +97,7 @@ export class CarAddComponent implements OnInit {
         .addCar(this.authService.decodedToken.nameid, this.car)
         .subscribe(
           () => {
-            this.alertify.success('Car added successfully');
+            this.alertify.success(this.translate.instant('CarSucess'));
             this.router.navigate([
               `cars/edit/photos/${this.carService.currentCar.id}`
             ]);
