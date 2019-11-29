@@ -24,7 +24,7 @@ namespace CarCatalog.API.Helpers
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<UserForRegisterDto, User>();
-            
+
             CreateMap<Car, CarForListDto>()
                 .ForMember(dest => dest.PhotoUrl,
                     opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url));
@@ -36,6 +36,13 @@ namespace CarCatalog.API.Helpers
             CreateMap<PhotoForCreationDto, CarPhoto>();
             CreateMap<CarForUpdateDto, Car>();
             CreateMap<CarForAddDto, Car>();
+
+            CreateMap<MessageForCreationDto, Message>().ReverseMap();
+            CreateMap<Message, MessageForReturnDto>()
+                .ForMember(dest => dest.SenderPhotoUrl,
+                    opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
+                .ForMember(dest => dest.SenderKnownAs,
+                    opt => opt.MapFrom(src => src.Sender.Username));
         }
     }
 }

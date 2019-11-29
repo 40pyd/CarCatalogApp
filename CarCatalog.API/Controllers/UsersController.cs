@@ -10,7 +10,6 @@ using Persistence.Dtos;
 
 namespace CarCatalog.API.Controllers
 {
-    // [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

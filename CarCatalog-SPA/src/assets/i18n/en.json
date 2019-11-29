@@ -124,8 +124,9 @@
   "CarConfirm": "Car was deleted successfully!",
   "CarDelProblem": "Problem on deleting the car!",
   "CarUpdateSuccess": "Car updated successfully!",
-  "Photo(s) has been added": "Photo(s) has been added!",
+  "PhotosAddSuccess": "Photo(s) has been added!",
   "MainChangeSuccess": "Main photo has been changed!",
+  "MainChangeProblem": "This is already the main foto!",
   "PhotoDelConfirm": "Are you sure you want to delete this photo?",
   "PhotoDelSuccess": "Photo has been deleted!",
   "PhotoDelProblem": "Failed to delete the photo!",
@@ -133,5 +134,13 @@
   "LoggedOut": "Logged Out!",
   "ProfileChangeSuccess": "Profile updated successfully!",
   "ProfileChangeProblem": "Username did not change!",
-  "YourProfile": "Your Profile"
+  "YourProfile": "Your Profile",
+  "RequiredFields": "Required Fields",
+  "OptionalFields": "Optional Fields",
+  "Next": "Next",
+  "Send": "Send",
+  "CommentPlaceholder": "Place a comment",
+  "MesDelConfirm": "Are you sure you want to delete message?",
+  "MesDelSuccess": "Message has been deleted!",
+  "MesDelError": "Failed to delete the message!"
 }

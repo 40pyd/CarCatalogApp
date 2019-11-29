@@ -16,12 +16,12 @@
           </div>
           <div *ngIf="isAuthorizedUser" class="btn-group">
             <button
-              class="btn btn-primary"
+              class="btn btn-success"
               [routerLink]="['/cars/edit/', car.id]"
             >
               <i class="fa fa-pencil"></i> {{ 'EditCar' | translate }}
             </button>
-            <button class="btn btn-danger" (click)="deleteCar()">
+            <button class="btn btn-primary" (click)="deleteCar()">
               <i class="fa fa-trash"></i> {{ 'DelCar' | translate }}
             </button>
           </div>
@@ -86,16 +86,16 @@
                   <h4 class="text-success text-left">
                     {{ 'EngPower' | translate }}
                     <span class="tab-1 ml-3"
-                      >{{ car.enginePower }} {{ 'l' | translate
-                      }}</span
+                      >{{ car.enginePower }} {{ 'l' | translate }}</span
                     >
                   </h4>
                 </div>
                 <div>
                   <h4 class="text-success text-left">
                     {{ 'Milleage' | translate }}
-                    <span class="tab-1 ml-3">{{ car.odometr }} {{ 'km' | translate
-                      }}</span>
+                    <span class="tab-1 ml-3"
+                      >{{ car.odometr }} {{ 'km' | translate }}</span
+                    >
                   </h4>
                 </div>
                 <div *ngIf="car.isNew">
@@ -114,6 +114,9 @@
               <div class="card-footer text-left pl-4 pr-4">
                 <span class="tab-1 p-3">{{ car.description }}</span>
               </div>
+            </div>
+            <div class="mt-3">
+              <app-messages [carId]="car.id"></app-messages>
             </div>
             <div class="col-xs-12 col-12 text-center">
               <button

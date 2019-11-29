@@ -23,5 +23,6 @@ namespace Domain
         public int UserId { get; set; }
         public User User { get; set; }
         public ICollection<CarPhoto> Photos { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }

@@ -33,13 +33,17 @@
   </div>
 
   <div class="row justify-content-center text-center">
-    <div class="col col-lg-8 col-md-8 col-xs-12">
+    <div class="col-12 col-lg-12 col-md-8 col-xs-12">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="{{ 'EditCar' | translate }}">
+          <tab class="mt-2"
+            ><ng-template tabHeading
+              ><i class="fa fa-info-circle pr-1"></i>
+              {{ 'EditCar' | translate }}</ng-template
+            >
             <form [formGroup]="editingForm" (ngSubmit)="updateCar()">
               <div class="row form-group justify-content-center text-center">
-                <div class="col col-lg-5 col-md-5 col-xs-4">
+                <div class="col col-lg-5 col-md-5 col-xs-4"> 
                   <h4 class="text-success">{{ 'Brand' | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
@@ -299,8 +303,8 @@
                       id="fuel"
                       formControlName="fuel"
                     >
-                      <option *ngFor="let body of FuelList" [value]="body.value"
-                        >{{ body.display | translate }}
+                      <option *ngFor="let fuel of FuelList" [value]="fuel.value"
+                        >{{ fuel.display | translate }}
                       </option>
                     </select>
                   </div>
@@ -476,7 +480,11 @@
               </div>
             </form>
           </tab>
-          <tab heading="{{ 'EditPhotos' | translate }}">
+          <tab class="mt-2"
+            ><ng-template tabHeading
+              ><i class="fa fa-camera-retro pr-1"></i>
+              {{ 'EditPhotos' | translate }}</ng-template
+            >
             <app-carphoto-editor
               [photos]="car.photos"
               (getCarPhotoChange)="updateMainPhoto($event)"

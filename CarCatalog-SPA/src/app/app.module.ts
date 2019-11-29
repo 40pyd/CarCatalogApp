@@ -21,7 +21,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -47,6 +47,8 @@ import { CarphotoEditorComponent } from './car/carphoto-editor/carphoto-editor.c
 import { CarphotoEditResolver } from './_resolvers/carphoto-edit.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { CarAddComponent } from './car/car-add/car-add.component';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { MessagesComponent } from './messages/messages.component';
 
 export function tokenGet() {
   return localStorage.getItem('token');
@@ -76,7 +78,9 @@ export const createTranslateLoader = (http: HttpClient) => {
     CarDetailedComponent,
     CarEditComponent,
     CarAddComponent,
-    CarphotoEditorComponent
+    CarphotoEditorComponent,
+    MessagesComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -119,6 +123,7 @@ export const createTranslateLoader = (http: HttpClient) => {
     CarListResolver,
     CarEditResolver,
     CarphotoEditResolver,
+    MessagesResolver,
     PreventUnsavedChanges,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],

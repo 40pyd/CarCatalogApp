@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="row justify-content-center">
     <h2 class="text-center text-success">
-      <span class="text-primary"></span>Car information
+      <span class="text-primary"></span>{{ 'Information' | translate }}
     </h2>
 
     <div class="col-sm-12">
@@ -9,7 +9,9 @@
         <div class="row justify-content-center">
           <div class="col-9 col-sm-12 col-md-9">
             <hr />
-            <strong><h4>Required fields:</h4></strong>
+            <strong
+              ><h4>{{ 'RequiredFields' | translate }}:</h4></strong
+            >
 
             <div class="form-group">
               <div class="input-group mb-3">
@@ -27,10 +29,10 @@
                   }"
                   class="form-control"
                   formControlName="brandName"
-                  placeholder="Brand"
+                  placeholder="{{ 'Brand' | translate }}"
                 />
                 <div class="invalid-feedback">
-                  Please enter the brand's name
+                  {{ 'BrandRequired' | translate }}
                 </div>
               </div>
             </div>
@@ -51,9 +53,11 @@
                   }"
                   class="form-control"
                   formControlName="modelName"
-                  placeholder="Model"
+                  placeholder="{{ 'Model' | translate }}"
                 />
-                <div class="invalid-feedback">Please enter the model name</div>
+                <div class="invalid-feedback">
+                  {{ 'ModelRequired' | translate }}
+                </div>
               </div>
             </div>
 
@@ -73,9 +77,11 @@
                   }"
                   class="form-control"
                   formControlName="color"
-                  placeholder="Color"
+                  placeholder="{{ 'Color' | translate }}"
                 />
-                <div class="invalid-feedback">Please enter the color</div>
+                <div class="invalid-feedback">
+                  {{ 'ColorRequired' | translate }}
+                </div>
               </div>
             </div>
 
@@ -95,7 +101,7 @@
                   }"
                   class="form-control"
                   formControlName="price"
-                  placeholder="Price"
+                  placeholder="{{ 'Price' | translate }}"
                 />
                 <div
                   class="invalid-feedback"
@@ -104,7 +110,7 @@
                     addingForm.get('price').touched
                   "
                 >
-                  Please enter the price
+                  {{ 'PriceRequired' | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -113,7 +119,7 @@
                     addingForm.get('price').touched
                   "
                 >
-                  Price cannot be less than 0
+                  {{ 'MinPrice' | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -122,7 +128,7 @@
                     addingForm.get('price').touched
                   "
                 >
-                  Price cannot be greater than 1000000
+                  {{ 'MaxPrice' | translate }}
                 </div>
               </div>
             </div>
@@ -145,7 +151,7 @@
                   max="2019"
                   class="form-control"
                   formControlName="year"
-                  placeholder="Production Year"
+                  placeholder="{{ 'Year' | translate }}"
                 />
                 <div
                   class="invalid-feedback"
@@ -154,7 +160,7 @@
                     addingForm.get('year').touched
                   "
                 >
-                  Please enter the year
+                  {{ 'YearRequired' | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -163,7 +169,7 @@
                     addingForm.get('year').touched
                   "
                 >
-                  Year cannot be less than 1900th
+                  {{ 'YearLess' | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -172,16 +178,20 @@
                     addingForm.get('year').touched
                   "
                 >
-                  Year cannot be greater than 2019
+                  {{ 'YearGreater' | translate }}
                 </div>
               </div>
             </div>
             <hr />
-            <strong><h4>Optional fields:</h4></strong>
+            <strong
+              ><h4>{{ 'OptionalFields' | translate }}:</h4></strong
+            >
 
             <div class="row justify-content-center text-center">
               <div class="col-4">
-                <strong class="text-success">Engine power</strong>
+                <strong class="text-success">{{
+                  'EngPower' | translate
+                }}</strong>
               </div>
               <div class="form-group col-8">
                 <div class="input-group mb-3">
@@ -210,7 +220,7 @@
                       addingForm.get('enginePower').touched
                     "
                   >
-                    Engine power must be greater than 0,1
+                    {{ 'EngMin' | translate }}
                   </div>
                   <div
                     class="invalid-feedback"
@@ -219,7 +229,7 @@
                       addingForm.get('enginePower').touched
                     "
                   >
-                    Engine power cannot be greater than 12,0
+                    {{ 'EngMax' | translate }}
                   </div>
                 </div>
               </div>
@@ -228,16 +238,18 @@
               <div class="col-12">
                 <div class="form-group ml-5">
                   <input type="checkbox" formControlName="isNew" />
-                  <label class="mr-3 text-success pl-1" for="isNew"
-                    >Is the car new?</label
-                  >
+                  <label class="mr-3 text-success pl-1" for="isNew">{{
+                    'IsNew' | translate
+                  }}</label>
                 </div>
               </div>
             </div>
 
             <div class="row justify-content-center text-center">
               <div class="form-group col-4">
-                <label class="text-success" for="body">Body Type </label>
+                <label class="text-success" for="body"
+                  >{{ 'BodyType' | translate }}
+                </label>
               </div>
               <div class="col-8 input-group mb-3 pl-0 pr-0">
                 <div class="input-group-prepend">
@@ -252,7 +264,7 @@
                   formControlName="body"
                 >
                   <option *ngFor="let body of BodyList" [value]="body.value"
-                    >{{ body.display }}
+                    >{{ body.display | translate }}
                   </option>
                 </select>
               </div>
@@ -260,7 +272,9 @@
 
             <div class="row justify-content-center text-center">
               <div class="form-group col-4">
-                <label class="text-success" for="fuel">Fuel Type </label>
+                <label class="text-success" for="fuel"
+                  >{{ 'FuelType' | translate }}
+                </label>
               </div>
               <div class="col-8 input-group mb-3 pl-0 pr-0">
                 <div class="input-group-prepend">
@@ -275,7 +289,7 @@
                   formControlName="fuel"
                 >
                   <option *ngFor="let fuel of FuelList" [value]="fuel.value"
-                    >{{ fuel.display }}
+                    >{{ fuel.display | translate }}
                   </option>
                 </select>
               </div>
@@ -283,7 +297,9 @@
 
             <div class="row justify-content-center text-center">
               <div class="form-group col-4">
-                <label class="text-success" for="fuel">Transmission </label>
+                <label class="text-success" for="fuel"
+                  >{{ 'TransType' | translate }}
+                </label>
               </div>
               <div class="col-8 input-group mb-3 pl-0 pr-0">
                 <div class="input-group-prepend">
@@ -300,7 +316,7 @@
                   <option
                     *ngFor="let transmission of TransmissionList"
                     [value]="transmission.value"
-                    >{{ transmission.display }}
+                    >{{ transmission.display | translate }}
                   </option>
                 </select>
               </div>
@@ -308,7 +324,9 @@
 
             <div class="row justify-content-center text-center">
               <div class="form-group col-4">
-                <label class="text-success" for="fuel">Drive Type </label>
+                <label class="text-success" for="fuel"
+                  >{{ 'Drive' | translate }}
+                </label>
               </div>
               <div class="col-8 input-group mb-3 pl-0 pr-0">
                 <div class="input-group-prepend">
@@ -323,7 +341,7 @@
                   formControlName="drive"
                 >
                   <option *ngFor="let drive of DriveList" [value]="drive.value"
-                    >{{ drive.display }}
+                    >{{ drive.display | translate }}
                   </option>
                 </select>
               </div>
@@ -331,12 +349,16 @@
 
             <div class="row justify-content-center text-center">
               <div class="form-group col-4">
-                <strong class="text-success">Milleage</strong>
+                <strong class="text-success">{{
+                  'Milleage' | translate
+                }}</strong>
               </div>
               <div class="col-8 form-group">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">KM</span>
+                    <span class="input-group-text" id="basic-addon1">{{
+                      'km' | translate
+                    }}</span>
                   </div>
                   <input
                     [ngClass]="{
@@ -358,7 +380,7 @@
                       addingForm.get('odometr').touched
                     "
                   >
-                    Milleage must be greater than 0
+                    {{ 'MilleageMin' | translate }}
                   </div>
                   <div
                     class="invalid-feedback"
@@ -367,7 +389,7 @@
                       addingForm.get('odometr').touched
                     "
                   >
-                    Milleage cannot be greater than 1000000
+                    {{ 'MilleageMax' | translate }}
                   </div>
                 </div>
               </div>
@@ -386,7 +408,7 @@
                   maxlength="100"
                   class="form-control"
                   formControlName="description"
-                  placeholder="Description"
+                  placeholder="{{ 'Description' | translate }}"
                 ></textarea>
               </div>
             </div>
@@ -399,11 +421,11 @@
             type="submit"
           >
             <i class="fa fa-camera-retro mr-2"></i>
-            Next
+            {{ 'Next' | translate }}
           </button>
-          <button class="btn btn-default" type="button" (click)="cancel()">
+          <button class="btn btn-primary" type="button" (click)="cancel()">
             <i class="fa fa-ban mr-2"></i>
-            Cancel
+            {{ 'Cancel' | translate }}
           </button>
         </div>
       </form>

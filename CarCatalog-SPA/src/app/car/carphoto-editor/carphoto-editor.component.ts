@@ -107,7 +107,7 @@ export class CarphotoEditorComponent implements OnInit {
           this.alertify.success(this.translate.instant('MainChangeSuccess'));
         },
         error => {
-          this.alertify.error(error);
+          this.alertify.error(this.translate.instant('MainChangeProblem'));
         }
       );
   }

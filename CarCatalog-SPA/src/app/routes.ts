@@ -13,6 +13,8 @@ import { CarEditResolver } from './_resolvers/car-edit.resolver';
 import { CarphotoEditorComponent } from './car/carphoto-editor/carphoto-editor.component';
 import { CarphotoEditResolver } from './_resolvers/carphoto-edit.resolver';
 import { CarAddComponent } from './car/car-add/car-add.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -50,7 +52,12 @@ export const appRoutes: Routes = [
         component: UserEditComponent,
         resolve: { user: UserEditResolver },
         canDeactivate: [PreventUnsavedChanges]
-      }
+      },
+      {
+        path: 'messages/:carId',
+        component: MessagesComponent,
+        resolve: { messages: MessagesResolver }
+      },
     ]
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }

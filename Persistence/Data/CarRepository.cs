@@ -47,24 +47,23 @@ namespace Persistence.Data
 
         public async Task<PagedList<Car>> GetCars(CarParams carParams)
         {
-            System.Console.WriteLine(carParams.MinPrice);
-            System.Console.WriteLine(carParams.MaxPrice);
-            System.Console.WriteLine(carParams.MinYear);
-            System.Console.WriteLine(carParams.MaxYear);
-            System.Console.WriteLine(carParams.Color);
-            System.Console.WriteLine(carParams.EnginePower);
-            System.Console.WriteLine(carParams.IsNew);
-            System.Console.WriteLine(carParams.Odometr);
-            System.Console.WriteLine(carParams.OrderBy);
-            System.Console.WriteLine(carParams.Fuel);
-            System.Console.WriteLine(carParams.OrderBy);
-            System.Console.WriteLine(carParams.Transmission);
-            System.Console.WriteLine();
-            System.Console.WriteLine();
-            System.Console.WriteLine();
             var cars = _context.Cars.Include(x => x.Photos).OrderByDescending(c => c.Price).AsQueryable();
 
+            if (!string.IsNullOrEmpty(carParams.OrderBy))
+            {
+                switch (carParams.OrderBy)
+                {
+                    case "low":
+                        cars = cars.OrderByDescending(u => u.Price);
+                        break;
+                    default:
+                        cars = cars.OrderBy(u => u.Price);
+                        break;
+                }
+            }
+
             var predicate = PredicateBuilder.New<Car>(true);
+
             if (!string.IsNullOrEmpty(carParams.ModelName))
                 predicate = predicate.And(c => c.ModelName == carParams.ModelName);
             if (!string.IsNullOrEmpty(carParams.BrandName))
@@ -92,19 +91,6 @@ namespace Persistence.Data
             if (carParams.MaxPrice != 10000000)
                 predicate = predicate.And(c => c.Price <= carParams.MaxPrice);
 
-            if (!string.IsNullOrEmpty(carParams.OrderBy))
-            {
-                switch (carParams.OrderBy)
-                {
-                    case "low":
-                        cars = cars.OrderByDescending(u => u.Price);
-                        break;
-                    default:
-                        cars = cars.OrderBy(u => u.Price);
-                        break;
-                }
-            }
-
             if (!string.IsNullOrEmpty(carParams.IsNew))
             {
                 switch (carParams.IsNew)
@@ -128,6 +114,20 @@ namespace Persistence.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Message> GetMessage(int id)
+        {
+            return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public async Task<IEnumerable<Message>> GetMessages(int carId)
+        {
+            var messages =  await _context.Messages
+            .Include(u => u.Sender).ThenInclude(p => p.Photos)
+            .Where(m => m.CarId == carId).ToListAsync();
+
+            return messages;
         }
     }
 }

@@ -5,6 +5,7 @@ import { Car } from '../_models/car';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PaginatedResult } from '../_models/pagination';
+import { Message } from '../_models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -55,17 +56,19 @@ export class CarService {
       params = params.append('isNew', carParams.isNew);
     }
 
-    return this.http.get<Car[]>(this.baseUrl + 'cars', { observe: 'response', params }).pipe(
-      map(response => {
-        paginatedResult.result = response.body;
-        if (response.headers.get('Pagination') != null) {
-          paginatedResult.pagination = JSON.parse(
-            response.headers.get('Pagination')
-          );
-        }
-        return paginatedResult;
-      })
-    );
+    return this.http
+      .get<Car[]>(this.baseUrl + 'cars', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
+          }
+          return paginatedResult;
+        })
+      );
   }
 
   getCar(id: number): Observable<Car> {
@@ -134,6 +137,26 @@ export class CarService {
   deletePhoto(userId: number, carId: number, id: number) {
     return this.http.delete(
       this.baseUrl + 'users/' + userId + '/cars/' + carId + '/' + id
+    );
+  }
+
+  getMessages(userId: number, carId: number) {
+    return this.http.get<Message[]>(
+      this.baseUrl + 'cars/' + userId + '/messages/comments/' + carId
+    );
+  }
+
+  deleteMessage(id: number, userId: number) {
+    return this.http.post(
+      this.baseUrl + 'cars/' + userId + '/messages/' + id,
+      {}
+    );
+  }
+
+  sendMessage(userId: number, message: Message) {
+    return this.http.post(
+      this.baseUrl + 'cars/' + userId + '/messages',
+      message
     );
   }
 }

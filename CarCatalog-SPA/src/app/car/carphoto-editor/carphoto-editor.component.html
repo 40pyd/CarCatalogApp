@@ -5,7 +5,7 @@
         <span class="text-primary"></span>{{ 'CarPhotos' | translate }}
       </h2>
       <div class="row pb-3">
-        <div class="col-sm-4 pt-2" *ngFor="let photo of photos">
+        <div class="col-sm-4 pt-2  text-center" *ngFor="let photo of photos">
           <img src="{{ photo.url }}" class="img-thumbnail p-1" alt="" />
           <div class="text-center">
             <button
@@ -107,7 +107,7 @@
               </button>
               <button
                 type="button"
-                class="btn btn-warning btn-s"
+                class="btn btn-primary btn-s"
                 (click)="uploader.cancelAll()"
                 [disabled]="!uploader.isUploading"
               >

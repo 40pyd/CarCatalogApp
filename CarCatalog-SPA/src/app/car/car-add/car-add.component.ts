@@ -79,13 +79,13 @@ export class CarAddComponent implements OnInit {
         null,
         [Validators.required, Validators.min(1900), Validators.max(2019)]
       ],
-      enginePower: [0, [Validators.min(0.1), Validators.max(12)]],
+      enginePower: [0, [Validators.min(0), Validators.max(12)]],
       isNew: false,
       body: '',
       fuel: '',
       transmission: '',
       drive: '',
-      odometr: [0, [Validators.min(0.1), Validators.max(1000000)]],
+      odometr: [0, [Validators.min(0), Validators.max(1000000)]],
       description: ''
     });
   }

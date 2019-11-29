@@ -1,0 +1,104 @@
+<!-- <div class="container mt-5">
+  <div class="row" *ngIf="messages.length == 0">
+    <div class="col text-center">
+    <h4 class="text-success">No comments already!</h4>
+  </div>
+  </div>
+
+  <div class="row" *ngIf="messages.length > 0">
+    <table class="table table-hover" style="cursor: pointer">
+      <tr>
+        <th style="width: 40%">Message</th>
+        <th style="width: 20%">From / To</th>
+        <th style="width: 20%">Sent / Received</th>
+        <th style="width: 20%"></th>
+      </tr>
+      <tr
+        *ngFor="let message of messages"
+      >
+        <td>{{ message.content }}</td>
+        <td>
+          <div>
+            <img
+              src="{{ message?.senderPhotoUrl }}"
+              class="img-circle rounded-circle mr-1"
+            />
+            <strong>{{ message.senderKnownAs }}</strong>
+          </div>
+        </td>
+        <td class="text-success">{{ message.messageSent | timeAgo }}</td>
+        <td>
+          <button
+            class="btn btn-danger"
+            (click)="$event.stopPropagation()"
+            (click)="deleteMessage(message.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div> -->
+
+<div class="card">
+  <div class="card-body p-1" id="comment">
+    <div *ngIf="messages?.length === 0">
+      <p>No messages yet... say hi using the message box below</p>
+    </div>
+
+    <ul class="chat">
+      <li class="p-2" *ngFor="let message of messages">
+        <div>
+          <span class="chat-img float-left pr-2">
+            <img
+              src="{{ message?.senderPhotoUrl }}"
+              class="img-circle rounded-circle mr-1"
+            />
+          </span>
+          <div class="chat-body">
+            <div class="header">
+              <strong class="primary-font text-success">{{
+                message.senderKnownAs
+              }}</strong>
+              <small class="text-muted float-right pr-1">
+                <span class="fa fa-clock-o text-white">
+                  {{ message.messageSent | timeAgo }}</span
+                >
+              </small>
+            </div>
+            <p>{{ message.content }}</p>
+          </div>
+          <div class="col text-right" *ngIf="message.senderId == userId">
+            <button
+              class="btn btn-primary btn-sm"
+              (click)="$event.stopPropagation()"
+              (click)="deleteMessage(message.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="card-footer" id="commentInput">
+    <form #messageForm="ngForm" (ngSubmit)="messageForm.valid && sendMessage()">
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="newMessage.content"
+          name="content"
+          required
+          class="form-control input-sm"
+          placeholder="{{ 'CommentPlaceholder' | translate }}"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-success" [disabled]="!messageForm.valid">
+            <i class="fa fa-send-o mr-2"></i>{{ 'Send' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
