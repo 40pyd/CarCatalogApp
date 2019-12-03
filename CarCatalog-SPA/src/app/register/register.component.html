@@ -1,7 +1,7 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()">
   <div class="row justify-content-center text-center">
     <div class="col col-lg-8 col-md-8 col-xs-12">
-      <h2 class="text-center text-success">{{ 'SignUp' | translate }}</h2>
+      <h2 class="text-center text-success">{{ "SignUp" | translate }}</h2>
     </div>
   </div>
   <hr />
@@ -20,7 +20,7 @@
           formControlName="username"
           placeholder="{{ 'Username' | translate }}"
         />
-        <div class="invalid-feedback">{{ 'UsernameRequired' | translate }}</div>
+        <div class="invalid-feedback">{{ "UsernameRequired" | translate }}</div>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
             registerForm.get('email').hasError('required')
           "
         >
-          {{ 'EmailRequired' | translate }}
+          {{ "EmailRequired" | translate }}
         </div>
         <div
           class="invalid-feedback"
@@ -55,7 +55,7 @@
             registerForm.get('email').hasError('email')
           "
         >
-          {{ 'EmailValid' | translate }}
+          {{ "EmailValid" | translate }}
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
               registerForm.get('phoneNumber').errors &&
               registerForm.get('phoneNumber').touched
           }"
-          type="number"
+          type="phone"
           class="form-control"
           placeholder="{{ 'PhoneNumber' | translate }}"
           formControlName="phoneNumber"
@@ -82,7 +82,25 @@
             registerForm.get('phoneNumber').hasError('required')
           "
         >
-          {{ 'PhoneNumberRequired' | translate }}
+          {{ "PhoneNumberRequired" | translate }}
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            registerForm.get('phoneNumber').touched &&
+            registerForm.get('phoneNumber').hasError('minlength')
+          "
+        >
+          {{ "PhoneNumberMin" | translate }}
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            registerForm.get('phoneNumber').touched &&
+            registerForm.get('phoneNumber').hasError('maxlength')
+          "
+        >
+          {{ "PhoneNumberMin" | translate }}
         </div>
       </div>
     </div>
@@ -106,7 +124,7 @@
             registerForm.get('dateBirth').hasError('required')
           "
         >
-          {{ 'DateBirthRequired' | translate }}
+          {{ "DateBirthRequired" | translate }}
         </div>
       </div>
     </div>
@@ -133,7 +151,7 @@
             registerForm.get('password').touched
           "
         >
-          {{ 'PasswordRequired' | translate }}
+          {{ "PasswordRequired" | translate }}
         </div>
         <div
           class="invalid-feedback"
@@ -142,7 +160,7 @@
             registerForm.get('password').touched
           "
         >
-          {{ 'PasswordMin' | translate }}
+          {{ "PasswordMin" | translate }}
         </div>
         <div
           class="invalid-feedback"
@@ -151,7 +169,7 @@
             registerForm.get('password').touched
           "
         >
-          {{ 'PasswordMax' | translate }}
+          {{ "PasswordMax" | translate }}
         </div>
       </div>
     </div>
@@ -180,7 +198,7 @@
             registerForm.get('confirmPassword').touched
           "
         >
-          {{ 'ConfirmPasswordRequired' | translate }}
+          {{ "ConfirmPasswordRequired" | translate }}
         </div>
         <div
           class="invalid-feedback"
@@ -189,7 +207,7 @@
             registerForm.get('confirmPassword').touched
           "
         >
-          {{ 'ConfirmPasswordValid' | translate }}
+          {{ "ConfirmPasswordValid" | translate }}
         </div>
       </div>
     </div>
@@ -203,11 +221,11 @@
           [disabled]="!registerForm.valid"
           type="submit"
         >
-          <i class="fa fa-user-plus pr-2"></i>{{ 'Register' | translate }}
+          <i class="fa fa-user-plus pr-2"></i>{{ "Register" | translate }}
         </button>
         <button class="btn btn-default" type="button" (click)="cancel()">
           <i class="fa fa-ban pr-2"></i>
-          {{ 'Cancel' | translate }}
+          {{ "Cancel" | translate }}
         </button>
       </div>
     </div>

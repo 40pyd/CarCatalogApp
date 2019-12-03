@@ -12,5 +12,7 @@ namespace Persistence.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarPhoto> CarPhotos { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<LikedCar> LikedCars { get; set; }
+
     }
 }

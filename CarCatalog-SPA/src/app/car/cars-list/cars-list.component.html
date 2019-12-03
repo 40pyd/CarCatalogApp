@@ -3,8 +3,8 @@
     <div class="col col-lg-12 col-md-4 col-xs-4 text-left">
       <h5>
         <strong
-          >{{ 'Total' | translate }} <i class="fa fa-automobile"></i>
-          {{ 'found' | translate }}
+          >{{ "Total" | translate }} <i class="fa fa-automobile"></i>
+          {{ "found" | translate }}
           <span class="text-success">{{ pagination.totalItems }}</span></strong
         >
       </h5>
@@ -14,13 +14,13 @@
   <div class="row justify-content-center text-center pt-2">
     <div class=" col-3 col-lg-3 col-md-3 col-sm-3 pr-0">
       <label class="text-success pl-0 pr-0" for="itemsPerPage"
-        ><strong>{{ 'carsOnPage' | translate }}</strong></label
+        ><strong>{{ "carsOnPage" | translate }}</strong></label
       >
     </div>
     <div class="col-3 col-lg-3 col-md-3 col-sm-3">
       <select
-        class="form-control pl-0 p-0"
-        style="max-width: 100%; font-size: 14px !important; margin: 0 !important;"
+        class="form-control pl-3 p-0"
+        style="max-width: 90%; font-size: 14px !important; margin: 0 !important;"
         id="itemsPerPage"
         name="itemsPerPage"
         [(ngModel)]="pagination.itemsPerPage"
@@ -33,7 +33,7 @@
     </div>
     <div class="col-2 col-lg-2 col-md-2 col-sm-2 pr-0 pl-0 text-center">
       <label class="text-success pl-0 pr-0" for="itemsPerPage"
-        ><strong>{{ 'Price' | translate }}</strong></label
+        ><strong>{{ "Price" | translate }}</strong></label
       >
     </div>
     <div class="col-4 col-lg-4 col-md-4 col-sm-4 pl-0">
@@ -61,7 +61,7 @@
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseBasic"
       >
-        <i class="fa fa-search mr-2"></i>{{ 'Filters' | translate }}
+        <i class="fa fa-search mr-2"></i>{{ "Filters" | translate }}
       </button>
     </div>
     <div id="collapseBasic" [collapse]="isCollapsed">
@@ -70,7 +70,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-2 col-md-2 col-xs-2 pl-0 pr-0">
               <label class="text-success pl-0 pr-1" for="brandName"
-                ><h6>{{ 'Brand' | translate }}</h6></label
+                ><h6>{{ "Brand" | translate }}</h6></label
               >
             </div>
             <div class="col-4 col-xs-4 pr-0 pl-0">
@@ -91,7 +91,7 @@
 
             <div class="col-2 col-md-2 col-xs-2 pl-1 pr-0">
               <label class="text-success pl-0 pr-0" for="modelName"
-                ><h6>{{ 'Model' | translate }}</h6></label
+                ><h6>{{ "Model" | translate }}</h6></label
               >
             </div>
             <div class="col-4 col-md-4 col-xs-4 pr-0 pl-1">
@@ -114,7 +114,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-4 col-md-4 col-xs-4">
               <label class="text-success" for="minYear"
-                ><h5>{{ 'YearFrom' | translate }}</h5></label
+                ><h5>{{ "YearFrom" | translate }}</h5></label
               >
             </div>
             <div class="col-8 col-md-8 col-xs-8">
@@ -143,7 +143,7 @@
                     filterForm.get('minYear').touched
                   "
                 >
-                  {{ 'YearLess' | translate }}
+                  {{ "YearLess" | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -152,7 +152,7 @@
                     filterForm.get('minYear').touched
                   "
                 >
-                  {{ 'YearGreater' | translate }}
+                  {{ "YearGreater" | translate }}
                 </div>
               </div>
             </div>
@@ -161,7 +161,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-4 col-md-4 col-xs-4">
               <label class="text-success" for="maxYear"
-                ><h5>{{ 'YearTo' | translate }}</h5></label
+                ><h5>{{ "YearTo" | translate }}</h5></label
               >
             </div>
             <div class="col-8 col-md-8 col-xs-8">
@@ -191,7 +191,7 @@
                     filterForm.get('maxYear').touched
                   "
                 >
-                  {{ 'YearLess' | translate }}
+                  {{ "YearLess" | translate }}
                 </div>
                 <div
                   class="invalid-feedback"
@@ -200,7 +200,7 @@
                     filterForm.get('maxYear').touched
                   "
                 >
-                  {{ 'YearGreater' | translate }}
+                  {{ "YearGreater" | translate }}
                 </div>
               </div>
             </div>
@@ -209,7 +209,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-2 col-md-2 col-xs-2">
               <label class="text-success" for="minPrice"
-                ><h5>{{ 'PriceFrom' | translate }}</h5></label
+                ><h5>{{ "PriceFrom" | translate }}</h5></label
               >
             </div>
             <div class="col-4 col-md-4 col-xs-4">
@@ -233,7 +233,7 @@
                   filterForm.get('minPrice').touched
                 "
               >
-                {{ 'MinPrice' | translate }}
+                {{ "MinPrice" | translate }}
               </div>
               <div
                 class="invalid-feedback"
@@ -242,12 +242,12 @@
                   filterForm.get('minPrice').touched
                 "
               >
-                {{ 'MaxPrice' | translate }}
+                {{ "MaxPrice" | translate }}
               </div>
             </div>
             <div class="col-2 col-md-2 col-xs-2">
               <label class="text-success" for="maxPrice"
-                ><h5>{{ 'PriceTo' | translate }}</h5></label
+                ><h5>{{ "PriceTo" | translate }}</h5></label
               >
             </div>
             <div class="col-4 col-md-4 col-xs-4">
@@ -271,7 +271,7 @@
                   filterForm.get('maxPrice').touched
                 "
               >
-                {{ 'MinPrice' | translate }}
+                {{ "MinPrice" | translate }}
               </div>
               <div
                 class="invalid-feedback"
@@ -280,7 +280,7 @@
                   filterForm.get('maxPrice').touched
                 "
               >
-                {{ 'MaxPrice' | translate }}
+                {{ "MaxPrice" | translate }}
               </div>
             </div>
           </div>
@@ -288,7 +288,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-2 col-md-2 col-xs-2 pl-0 pr-1">
               <label class="text-success pl-0 pr-0" for="enginePower"
-                ><h6>{{ 'EngPower' | translate }}</h6></label
+                ><h6>{{ "EngPower" | translate }}</h6></label
               >
             </div>
             <div class="col-2 col-md-2 col-xs-2 pr-0 pl-0">
@@ -312,7 +312,7 @@
                   filterForm.get('enginePower').touched
                 "
               >
-                {{ 'EngMin' | translate }}
+                {{ "EngMin" | translate }}
               </div>
               <div
                 class="invalid-feedback"
@@ -321,13 +321,13 @@
                   filterForm.get('enginePower').touched
                 "
               >
-                {{ 'EngMax' | translate }}
+                {{ "EngMax" | translate }}
               </div>
             </div>
 
             <div class="col-3 col-md-3 col-xs-3 pl-0 pr-0">
               <label class="text-success pl-0 pr-0" for="fuel"
-                ><h6>{{ 'FuelType' | translate }}</h6></label
+                ><h6>{{ "FuelType" | translate }}</h6></label
               >
             </div>
             <div class="col-5 col-md-5 col-xs-5 pl-0 pr-0">
@@ -354,7 +354,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
               <label class="text-success pl-0 pr-0" for="color"
-                ><h6>{{ 'Color' | translate }}</h6></label
+                ><h6>{{ "Color" | translate }}</h6></label
               >
             </div>
             <div class="col-3 col-md-3 col-xs-3 pr-0 pl-0">
@@ -375,7 +375,7 @@
 
             <div class="col-2 col-md-2 col-xs-2 pl-1 pr-1">
               <label class="text-success pl-1 pr-1" for="body"
-                ><h6>{{ 'BodyType' | translate }}</h6></label
+                ><h6>{{ "BodyType" | translate }}</h6></label
               >
             </div>
             <div class="col-5 col-md-5 col-xs-5 pl-0 pr-0">
@@ -402,7 +402,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-5 col-md-5 col-xs-5">
               <label class="text-success pl-0 pr-0" for="transmission"
-                ><h6>{{ 'TransType' | translate }}</h6></label
+                ><h6>{{ "TransType" | translate }}</h6></label
               >
             </div>
             <div class="col-7 col-md-7 col-xs-7">
@@ -431,7 +431,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-3 col-md-3 col-xs-3 pl-1 pr-1">
               <label class="text-success" for="odometr"
-                ><h6>{{ 'Milleage' | translate }}</h6></label
+                ><h6>{{ "Milleage" | translate }}</h6></label
               >
             </div>
             <div class="col-3 col-md-3 col-xs-3 pl-0 pr-0">
@@ -455,7 +455,7 @@
                   filterForm.get('odometr').touched
                 "
               >
-                {{ 'MilleageMin' | translate }}
+                {{ "MilleageMin" | translate }}
               </div>
               <div
                 class="invalid-feedback"
@@ -464,12 +464,12 @@
                   filterForm.get('odometr').touched
                 "
               >
-                {{ 'MilleageMax' | translate }}
+                {{ "MilleageMax" | translate }}
               </div>
             </div>
             <div class="col-3 col-md-3 col-xs-3 pl-0 pr-0">
               <label class="text-success" for="isNew"
-                ><h6>{{ 'State' | translate }}</h6></label
+                ><h6>{{ "State" | translate }}</h6></label
               >
             </div>
             <div class="col-3 col-md-3 col-xs-3 pr-0 pl-0 text-center">
@@ -489,7 +489,7 @@
           <div class="row form-group justify-content-center text-center">
             <div class="col-5 col-md-5 col-xs-5 pl-1 pr-0">
               <label class="text-success pl-0 pr-0" for="drive"
-                ><h6>{{ 'Drive' | translate }}</h6></label
+                ><h6>{{ "Drive" | translate }}</h6></label
               >
             </div>
             <div class="col-7 col-md-7 col-xs-7">
@@ -521,7 +521,7 @@
               style="margin-left:10px"
             >
               <i class="fa fa-check-circle pr-2"></i>
-              {{ 'ApplyFilters' | translate }}
+              {{ "ApplyFilters" | translate }}
             </button>
             <button
               type="button"
@@ -529,8 +529,8 @@
               (click)="resetFilters()"
               style="margin-left:10px"
             >
-              <i class="fa fa-ban pr-2"></i>
-              {{ 'ResetFilters' | translate }}
+              <i class="fa fa-refresh pr-2"></i>
+              {{ "ResetFilters" | translate }}
             </button>
           </div>
         </form>

@@ -1,0 +1,11 @@
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netstandard2.1/Persistence.deps.json
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netstandard2.1/Persistence.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netstandard2.1/Persistence.pdb
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netstandard2.1/Domain.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netstandard2.1/Domain.pdb
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.1/Persistence.csprojAssemblyReference.cache
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.1/Persistence.AssemblyInfoInputs.cache
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.1/Persistence.AssemblyInfo.cs
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.1/Persistence.csproj.CopyComplete
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.1/Persistence.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.1/Persistence.pdb

@@ -11,7 +11,7 @@
   "Register": "Register",
   "Total": "Total",
   "found": "found",
-  "carsOnPage": "Cars on page",
+  "carsOnPage": "On page",
   "Filters": "Filters",
   "Price": "Price",
   "Brand": "Brand",
@@ -134,7 +134,8 @@
   "LoggedOut": "Logged Out!",
   "ProfileChangeSuccess": "Profile updated successfully!",
   "ProfileChangeProblem": "Username did not change!",
-  "YourProfile": "Your Profile",
+  "YourProfile": "Edit your Profile",
+  "YourCar": "Edit your Car",
   "RequiredFields": "Required Fields",
   "OptionalFields": "Optional Fields",
   "Next": "Next",
@@ -142,5 +143,13 @@
   "CommentPlaceholder": "Place a comment",
   "MesDelConfirm": "Are you sure you want to delete message?",
   "MesDelSuccess": "Message has been deleted!",
-  "MesDelError": "Failed to delete the message!"
+  "MesDelError": "Failed to delete the message!",
+  "NoMessages": "No comments yet... say hi using the message box below",
+  "PhoneNumberMin": "Phone number has to be between 5 and 10 numbers",
+  "favorite": "you liked",
+  "Favorites": "Favorites",
+  "YouLiked": "You have liked ",
+  "Like": "Like",
+  "UnLike": "Dislike",
+  "LikeError": "You already liked this car!"
 }

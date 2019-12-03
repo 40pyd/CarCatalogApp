@@ -5,9 +5,12 @@ img {
     max-height: 40px;
     border: 2px solid white;
     display: inline;
+    border-radius: 2px;
 }
 .dropdown-menu {
     z-index: 9999;
+    right: 0px !important;
+    left: auto !important;
 }
 .icon {
     max-height: 30px;
@@ -15,3 +18,9 @@ img {
     display: inline;
     border-radius: 0.8em;
 }
+/* .nav-item{
+    border: 1px white solid;
+    margin: 5px;
+    border-radius: 15px;
+    padding: 0px 8px 0px 8px;
+} */

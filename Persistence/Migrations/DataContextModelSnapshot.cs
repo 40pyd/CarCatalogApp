@@ -82,6 +82,24 @@ namespace Persistence.Migrations
                     b.ToTable("CarPhotos");
                 });
 
+            modelBuilder.Entity("Domain.LikedCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CarId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LikedCars");
+                });
+
             modelBuilder.Entity("Domain.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -167,6 +185,19 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Car", "Car")
                         .WithMany("Photos")
                         .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.LikedCar", b =>
+                {
+                    b.HasOne("Domain.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.User", "User")
+                        .WithMany("LikedCars")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -1,19 +1,32 @@
-<div class="card mb-4 mt-3">
+<div class="card mb-4 mt-3 p-1">
   <div class="card-img-wrapper">
     <img
       src="{{ car.photoUrl || '../../../assets/car.png' }}"
-      class="card-img-top"
+      class="card-img-top img-thumbnail"
       alt="{{ car.modelName }}"
     />
+    <ul class="list-inline member-icons animate text-center">
+      <li *ngIf="!isLiked" class="list-inline-item">
+        <button class="btn btn-success btn-xs" (click)="sendLike(car.id)">
+          <i class="fa fa-star mr-2"></i>{{ "Like" | translate }}
+        </button>
+      </li>
+      <li *ngIf="isLiked" class="list-inline-item">
+        <button class="btn btn-primary" (click)="deleteLike(car.id)">
+          <i class="fa fa-thumbs-down mr-2"></i>{{ "UnLike" | translate }}
+        </button>
+      </li>
+    </ul>
   </div>
   <div class="card-body p-2">
-    <h6 class="card-title text-center mb-1">
-      <i class="fa fa-car"></i> {{ car.brandName }} {{ car.modelName }}
-      {{ car.year }}
+    <h6 class="card-title text-center mb-1 text-success">
+      <i class="fa fa-car text-primary"></i> {{ car.brandName }}
+      {{ car.modelName }}
+      <span class="text-primary">{{ car.year }}</span>
     </h6>
     <p class="card-text text-muted text-center">{{ car.price }} $</p>
     <button class="btn btn-primary" [routerLink]="['/cars/', car.id]">
-      <i class="fa fa-info-circle"></i> {{ 'Details' | translate }}
+      <i class="fa fa-info-circle"></i> {{ "Details" | translate }}
     </button>
   </div>
 </div>

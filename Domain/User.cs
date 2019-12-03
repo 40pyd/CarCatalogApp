@@ -16,5 +16,6 @@ namespace Domain
         public DateTime Created { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Car> Cars { get; set; }
+        public ICollection<LikedCar> LikedCars { get; set; }
     }
 }

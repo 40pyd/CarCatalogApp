@@ -16,9 +16,8 @@ namespace Persistence.Dtos
 
         [Required]
         public int Price { get; set; }
-
         public DateTime Created { get; set; }
-
+        
         [Required]
         public int Year { get; set; }
         public double EnginePower { get; set; }

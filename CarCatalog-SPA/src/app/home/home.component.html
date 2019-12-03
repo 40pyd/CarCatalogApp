@@ -1,12 +1,12 @@
 <div class="container mt-5">
   <div *ngIf="!registerMode" class="text-center">
-    <h1 class="text-success">{{ 'WelcomeTitle' | translate}}</h1>
+    <h1 class="text-success">{{ "WelcomeTitle" | translate }}</h1>
     <p class="lead">
-      {{ 'WelcomeText' | translate}}
+      {{ "WelcomeText" | translate }}
     </p>
     <div class="text-center">
       <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">
-          <i class="fa fa-user-plus pr-2"></i>{{ 'Register' | translate }}
+        <i class="fa fa-user-plus pr-2"></i>{{ "Register" | translate }}
       </button>
     </div>
   </div>

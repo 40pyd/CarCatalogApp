@@ -1,12 +1,12 @@
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-sm-4 text-center pb-3">
-      <h2 class="text-success">{{ 'YourProfile' | translate }}</h2>
+      <h2 class="text-success">{{ "YourProfile" | translate }}</h2>
     </div>
     <div class="col-sm-8">
       <div *ngIf="editForm.dirty" class="alert alert-info">
-        <strong>{{ 'Information' | translate }}:</strong>
-        {{ 'Warning' | translate }}
+        <strong>{{ "Information" | translate }}:</strong>
+        {{ "Warning" | translate }}
       </div>
     </div>
   </div>
@@ -26,17 +26,17 @@
           <tab class="mt-2"
             ><ng-template tabHeading
               ><i class="fa fa-info-circle pr-1"></i>
-              {{ 'EditProf' | translate }}</ng-template
+              {{ "EditProf" | translate }}</ng-template
             >
             <h2 class="text-center text-success">
-              <span class="text-primary"></span>{{ 'Information' | translate }}
+              <span class="text-primary"></span>{{ "Information" | translate }}
             </h2>
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
               <div class="row form-group justify-content-center text-center">
                 <div class="form-inline mt-2">
                   <div class="col-3">
                     <label for="username" class="mr-2">{{
-                      'Username' | translate
+                      "Username" | translate
                     }}</label>
                   </div>
                   <div class="col-7">
@@ -58,7 +58,7 @@
                     class="btn btn-success"
                   >
                     <i class="fa fa-check-square-o mr-2"></i>
-                    {{ 'Save' | translate }}
+                    {{ "Save" | translate }}
                   </button>
                   <button
                     class="btn btn-primary ml-1"
@@ -66,7 +66,7 @@
                     [routerLink]="['/cars']"
                   >
                     <i class="fa fa-ban mr-2"></i>
-                    {{ 'Cancel' | translate }}
+                    {{ "Cancel" | translate }}
                   </button>
                 </div>
               </div>
@@ -75,7 +75,7 @@
           <tab class="mt-2"
             ><ng-template tabHeading
               ><i class="fa fa-camera-retro pr-1"></i>
-              {{ 'EditPhotos' | translate }}</ng-template
+              {{ "EditPhotos" | translate }}</ng-template
             >
             <app-photo-editor
               [photos]="user.photos"

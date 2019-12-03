@@ -49,9 +49,9 @@ export class CarsListComponent implements OnInit {
     { value: 'Cabriolet', display: 'Cabriolet' }
   ];
   CountList = [
-    { value: 10, display: '10' },
-    { value: 20, display: '20' },
-    { value: 50, display: '50' }
+    { value: 12, display: '12' },
+    { value: 24, display: '24' },
+    { value: 48, display: '48' }
   ];
   IsNewList = [
     { value: 'New', display: 'New' },
@@ -80,7 +80,7 @@ export class CarsListComponent implements OnInit {
         this.cars = data['cars'].result;
         this.pagination = data['cars'].pagination;
       });
-    this.pagination.itemsPerPage = 10;
+    this.pagination.itemsPerPage = 12;
     this.createEditingForm();
     this.loadCars();
   }

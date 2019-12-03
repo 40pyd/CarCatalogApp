@@ -15,6 +15,8 @@ import { CarphotoEditResolver } from './_resolvers/carphoto-edit.resolver';
 import { CarAddComponent } from './car/car-add/car-add.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { ListsResolver } from './_resolvers/lists.resolver';
+import { ListsComponent } from './lists/lists.component';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -58,6 +60,11 @@ export const appRoutes: Routes = [
         component: MessagesComponent,
         resolve: { messages: MessagesResolver }
       },
+      {
+        path: 'favorites',
+        component: ListsComponent,
+        resolve: { cars: ListsResolver }
+      }
     ]
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }

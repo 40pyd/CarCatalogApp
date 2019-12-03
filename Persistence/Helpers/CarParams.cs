@@ -6,12 +6,13 @@ namespace Persistence.Helpers
     {
         private const int maxPageSize = 50;
         public int PageNumber { get; set; } = 1;
-        private int pageSize = 10;
+        private int pageSize = 12;
         public int PageSize
         {
             get { return pageSize; }
             set { pageSize = (value >= maxPageSize) ? maxPageSize : value; }
         }
+        public int UserId { get; set; }
         public string BrandName { get; set; }
         public string ModelName { get; set; }
         public int MinPrice { get; set; } = 0;
@@ -27,5 +28,6 @@ namespace Persistence.Helpers
         public string Drive { get; set; }
         public string IsNew { get; set; }
         public int Odometr { get; set; }
+        public bool IsLiked { get; set; } = false;
     }
 }

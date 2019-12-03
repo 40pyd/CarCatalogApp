@@ -49,7 +49,9 @@ export class RegisterComponent implements OnInit {
         phoneNumber: [
           '',
           [
-            Validators.required
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(10)
           ]
         ],
         dateBirth: [null, Validators.required],

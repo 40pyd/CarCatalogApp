@@ -49,6 +49,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { CarAddComponent } from './car/car-add/car-add.component';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MessagesComponent } from './messages/messages.component';
+import { ListsResolver } from './_resolvers/lists.resolver';
+import { ListsComponent } from './lists/lists.component';
 
 export function tokenGet() {
   return localStorage.getItem('token');
@@ -66,38 +68,39 @@ export const createTranslateLoader = (http: HttpClient) => {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    HomeComponent,
-    RegisterComponent,
-    CarsListComponent,
-    UserEditComponent,
-    PhotoEditorComponent,
-    CarCardComponent,
-    CarDetailedComponent,
-    CarEditComponent,
-    CarAddComponent,
-    CarphotoEditorComponent,
-    MessagesComponent,
-    TimeAgoPipe
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot(),
-    TabsModule.forRoot(),
-    ButtonsModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
-    CollapseModule.forRoot(),
-    NgxGalleryModule,
-    FileUploadModule,
-    JwtModule.forRoot({
+   declarations: [
+      AppComponent,
+      NavComponent,
+      HomeComponent,
+      RegisterComponent,
+      CarsListComponent,
+      UserEditComponent,
+      PhotoEditorComponent,
+      CarCardComponent,
+      CarDetailedComponent,
+      CarEditComponent,
+      CarAddComponent,
+      CarphotoEditorComponent,
+      MessagesComponent,
+      ListsComponent,
+      TimeAgoPipe
+   ],
+   imports: [
+      BrowserModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      BsDropdownModule.forRoot(),
+      BsDatepickerModule.forRoot(),
+      PaginationModule.forRoot(),
+      TabsModule.forRoot(),
+      ButtonsModule.forRoot(),
+      RouterModule.forRoot(appRoutes),
+      BrowserAnimationsModule,
+      CollapseModule.forRoot(),
+      NgxGalleryModule,
+      FileUploadModule,
+      JwtModule.forRoot({
       config: {
         tokenGetter: tokenGet,
         whitelistedDomains: ['localhost:5000'],
@@ -124,6 +127,7 @@ export const createTranslateLoader = (http: HttpClient) => {
     CarEditResolver,
     CarphotoEditResolver,
     MessagesResolver,
+    ListsResolver,
     PreventUnsavedChanges,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],

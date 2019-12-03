@@ -65,7 +65,7 @@ namespace CarCatalog.API.Controllers
         public async Task<IActionResult> AddCar(int id, CarForAddDto carForAddDto)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized(); 
+                return Unauthorized();
 
             var carToAdd = _mapper.Map<Car>(carForAddDto);
             carToAdd.UserId = id;
@@ -132,6 +132,59 @@ namespace CarCatalog.API.Controllers
             }
 
             _repo.Delete(carFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete the car");
+        }
+
+
+        [HttpPost("{userId}/like/{carId}")]
+        public async Task<IActionResult> LikeCar(int userId, int carId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var like = await _repo.GetLike(userId, carId);
+
+            if (like != null)
+                return BadRequest("You already liked this car!");
+
+            if (await _repo.GetCar(carId) == null)
+                return NotFound();
+
+            like = new LikedCar
+            {
+                UserId = userId,
+                CarId = carId
+            };
+
+            _repo.Add<LikedCar>(like);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to like the car!");
+        }
+
+        [HttpDelete("{userId}/like/{id}")]
+        public async Task<IActionResult> DeleteLikedCar(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _userRepo.GetUser(userId);
+
+            var likedCarFromRepo = await _repo.GetLike(userId, id);
+
+            if (likedCarFromRepo == null)
+                return NotFound();
+
+            if (likedCarFromRepo.UserId != userId)
+                return Unauthorized();
+
+            _repo.Delete(likedCarFromRepo);
 
             if (await _repo.SaveAll())
                 return Ok();

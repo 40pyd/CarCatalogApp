@@ -62,6 +62,12 @@ namespace Persistence.Data
                 }
             }
 
+            if(carParams.IsLiked && carParams.UserId != 0)
+            {
+                var userLikedCars = await getUserLikedCars(carParams.UserId);
+                cars = cars.Where(c => userLikedCars.Contains(c.Id));
+            }
+
             var predicate = PredicateBuilder.New<Car>(true);
 
             if (!string.IsNullOrEmpty(carParams.ModelName))
@@ -123,11 +129,27 @@ namespace Persistence.Data
 
         public async Task<IEnumerable<Message>> GetMessages(int carId)
         {
-            var messages =  await _context.Messages
+            var messages = await _context.Messages
             .Include(u => u.Sender).ThenInclude(p => p.Photos)
             .Where(m => m.CarId == carId).ToListAsync();
 
             return messages;
+        }
+
+        public async Task<LikedCar> GetLike(int userId, int carId)
+        {
+            return await _context.LikedCars
+                .FirstOrDefaultAsync(x => x.UserId == userId && x.CarId == carId);
+        }
+
+        private async Task<IEnumerable<int>> getUserLikedCars(int id)
+        {
+            var user = await _context.Users
+                .Include(x => x.LikedCars)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            return user.LikedCars.Where(c => c.UserId == id)
+                    .Select(i => i.CarId);
         }
     }
 }

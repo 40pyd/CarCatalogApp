@@ -1,0 +1,8 @@
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/bin/Debug/netstandard2.1/Domain.deps.json
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/bin/Debug/netstandard2.1/Domain.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/bin/Debug/netstandard2.1/Domain.pdb
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/obj/Debug/netstandard2.1/Domain.csprojAssemblyReference.cache
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/obj/Debug/netstandard2.1/Domain.AssemblyInfoInputs.cache
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/obj/Debug/netstandard2.1/Domain.AssemblyInfo.cs
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/obj/Debug/netstandard2.1/Domain.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Domain/obj/Debug/netstandard2.1/Domain.pdb

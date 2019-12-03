@@ -25,7 +25,9 @@ export class CarService {
   getCars(
     page?,
     itemsPerPage?,
-    carParams?
+    carParams?,
+    likesParams?,
+    userId?
   ): Observable<PaginatedResult<Car[]>> {
     const paginatedResult: PaginatedResult<Car[]> = new PaginatedResult<
       Car[]
@@ -54,6 +56,15 @@ export class CarService {
       params = params.append('drive', carParams.drive);
       params = params.append('odometr', carParams.odometr);
       params = params.append('isNew', carParams.isNew);
+    }
+
+    if (likesParams) {
+      params = params.append('IsLiked', 'true');
+    }
+
+    if (userId != null) {
+      console.log(userId);
+      params = params.append('UserId', userId);
     }
 
     return this.http
@@ -157,6 +168,20 @@ export class CarService {
     return this.http.post(
       this.baseUrl + 'cars/' + userId + '/messages',
       message
+    );
+  }
+
+  sendLike(userId: number, carId: number) {
+    return this.http.post(
+      this.baseUrl + 'cars/' + userId + '/like/' + carId,
+      {}
+    );
+  }
+
+  deleteLike(userId: number, carId: number) {
+    return this.http.post(
+      this.baseUrl + 'cars/' + userId + '/like/' + carId,
+      {}
     );
   }
 }

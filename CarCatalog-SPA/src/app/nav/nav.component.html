@@ -1,16 +1,21 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary pt-3">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary pt-2">
   <div class="container justify-content-center">
     <a class="navbar-brand text-success" [routerLink]="['/cars']"
       ><span class="mr-3">
         <img class="icon" src="{{ '../../assets/car.png' }}" alt="" /> </span
-      ><strong>{{ 'Title' | translate }}</strong></a
+      ><strong>{{ "Title" | translate }}</strong></a
     >
 
-    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/cars']">{{
-          'All Cars' | translate
-        }}</a>
+    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto pb-1 pl-3">
+      <li class="nav-item p-0" routerLinkActive="active">
+        <a class="btn btn-primary btn-xs" [routerLink]="['/cars']"
+          >{{ "All Cars" | translate }}<i class="fa fa-automobile pl-2"></i
+        ></a>
+      </li>
+      <li class="nav-item p-0" routerLinkActive="active">
+        <a class="btn btn-primary btn-xs" [routerLink]="['/favorites']"
+          >{{ "Favorites" | translate }}<i class="fa fa-star-o pl-2"></i
+        ></a>
       </li>
     </ul>
     <span class="mr-3" style="position: absolute; right: 10px; top: 10px;">
@@ -25,25 +30,25 @@
     </span>
 
     <div *ngIf="loggedIn()" class="dropdown pr-3" dropdown>
-      <button class="btn btn-success mr-3" [routerLink]="['/addcar']">
-        <i class="fa fa-plus mr-3"></i>{{ 'Add car' | translate }}
+      <button class="btn btn-success btn-xs mr-3" [routerLink]="['/addcar']">
+        <i class="fa fa-plus mr-3"></i>{{ "Add car" | translate }}
       </button>
 
       <span class="mr-3">
         <img src="{{ photoUrl || '../../assets/user.png' }}" alt="" />
       </span>
       <a class="dropdown-toggle text-light" dropdownToggle>
-        {{ 'Welcome' | translate }}
+        {{ "Welcome" | translate }}
         {{ authService.decodedToken?.unique_name | titlecase }}
       </a>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" [routerLink]="['/user/edit']"
-          ><i class="fa fa-user mr-3"></i>{{ 'EditProf' | translate }}</a
+          ><i class="fa fa-user mr-3"></i>{{ "EditProf" | translate }}</a
         >
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()" [routerLink]="['/home']"
-          ><i class="fa fa-sign-out mr-3"></i>{{ 'Logout' | translate }}</a
+          ><i class="fa fa-sign-out mr-3"></i>{{ "Logout" | translate }}</a
         >
       </div>
     </div>
@@ -76,7 +81,7 @@
         type="submit"
       >
         <i class="fa fa-home pr-2"></i>
-        {{ 'Login' | translate }}
+        {{ "Login" | translate }}
       </button>
     </form>
   </div>

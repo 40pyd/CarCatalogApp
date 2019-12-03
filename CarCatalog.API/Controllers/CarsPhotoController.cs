@@ -14,8 +14,8 @@ using Persistence.Dtos;
 
 namespace CarCatalog.API.Controllers
 {
-    [Authorize]  
-    [Route("api/users/{userId}/cars/{carId}")] 
+    [Authorize]
+    [Route("api/users/{userId}/cars/{carId}")]
     [ApiController]
     public class CarsPhotoController : ControllerBase
     {
@@ -95,7 +95,7 @@ namespace CarCatalog.API.Controllers
             if (await _repo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetCarPhoto", new { id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetCarPhoto", new { userId, carId, id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");

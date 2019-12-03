@@ -4,7 +4,6 @@
 /Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netstandard2.0/Domain.dll
 /Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netstandard2.0/Domain.pdb
 /Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.0/Persistence.csprojAssemblyReference.cache
-/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.0/Persistence.csproj.CoreCompileInputs.cache
 /Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.0/Persistence.AssemblyInfoInputs.cache
 /Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.0/Persistence.AssemblyInfo.cs
 /Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netstandard2.0/Persistence.csproj.CopyComplete

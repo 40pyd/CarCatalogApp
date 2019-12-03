@@ -1,12 +1,12 @@
 <div class="container mt-4">
   <div class="row">
-    <div class="col-sm-4 text-center pb-3">
-      <h2 class="text-success">{{ 'YourProfile' | translate }}</h2>
+    <div class="col-sm-4 text-center pb-2">
+      <h2 class="text-success">{{ "YourCar" | translate }}</h2>
     </div>
     <div class="col-lg-12 col-md-12 col-xs-12 pb-3">
       <div *ngIf="editingForm.dirty" class="alert alert-info">
-        <strong>{{ 'Information' | translate }}:</strong>
-        {{ 'Warning' | translate }}
+        <strong>{{ "Information" | translate }}:</strong>
+        {{ "Warning" | translate }}
       </div>
     </div>
   </div>
@@ -39,12 +39,12 @@
           <tab class="mt-2"
             ><ng-template tabHeading
               ><i class="fa fa-info-circle pr-1"></i>
-              {{ 'EditCar' | translate }}</ng-template
+              {{ "EditCar" | translate }}</ng-template
             >
             <form [formGroup]="editingForm" (ngSubmit)="updateCar()">
               <div class="row form-group justify-content-center text-center">
-                <div class="col col-lg-5 col-md-5 col-xs-4"> 
-                  <h4 class="text-success">{{ 'Brand' | translate }}</h4>
+                <div class="col col-lg-5 col-md-5 col-xs-4">
+                  <h4 class="text-success">{{ "Brand" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -63,7 +63,7 @@
                       class="form-control"
                     />
                     <div class="invalid-feedback">
-                      {{ 'BrandRequired' | translate }}
+                      {{ "BrandRequired" | translate }}
                     </div>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-4">
-                  <h4 class="text-success">{{ 'Model' | translate }}</h4>
+                  <h4 class="text-success">{{ "Model" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -90,7 +90,7 @@
                       class="form-control"
                     />
                     <div class="invalid-feedback">
-                      {{ 'ModelRequired' | translate }}
+                      {{ "ModelRequired" | translate }}
                     </div>
                   </div>
                 </div>
@@ -98,7 +98,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-4">
-                  <h4 class="text-success">{{ 'Color' | translate }}</h4>
+                  <h4 class="text-success">{{ "Color" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -117,7 +117,7 @@
                       class="form-control"
                     />
                     <div class="invalid-feedback">
-                      {{ 'ColorRequired' | translate }}
+                      {{ "ColorRequired" | translate }}
                     </div>
                   </div>
                 </div>
@@ -125,7 +125,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-4">
-                  <h4 class="text-success">{{ 'Price' | translate }}</h4>
+                  <h4 class="text-success">{{ "Price" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -150,7 +150,7 @@
                         editingForm.get('price').touched
                       "
                     >
-                      {{ 'PriceRequired' | translate }}
+                      {{ "PriceRequired" | translate }}
                     </div>
                     <div
                       class="invalid-feedback"
@@ -159,7 +159,7 @@
                         editingForm.get('price').touched
                       "
                     >
-                      {{ 'MinPrice' | translate }}
+                      {{ "MinPrice" | translate }}
                     </div>
                     <div
                       class="invalid-feedback"
@@ -168,7 +168,7 @@
                         editingForm.get('price').touched
                       "
                     >
-                      {{ 'MaxPrice' | translate }}
+                      {{ "MaxPrice" | translate }}
                     </div>
                   </div>
                 </div>
@@ -176,7 +176,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-4">
-                  <h4 class="text-success">{{ 'Year' | translate }}</h4>
+                  <h4 class="text-success">{{ "Year" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -204,7 +204,7 @@
                         editingForm.get('year').touched
                       "
                     >
-                      {{ 'YearRequired' | translate }}
+                      {{ "YearRequired" | translate }}
                     </div>
                     <div
                       class="invalid-feedback"
@@ -213,7 +213,7 @@
                         editingForm.get('year').touched
                       "
                     >
-                      {{ 'YearLess' | translate }}
+                      {{ "YearLess" | translate }}
                     </div>
                     <div
                       class="invalid-feedback"
@@ -222,7 +222,7 @@
                         editingForm.get('year').touched
                       "
                     >
-                      {{ 'YearGreater' | translate }}
+                      {{ "YearGreater" | translate }}
                     </div>
                   </div>
                 </div>
@@ -230,7 +230,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-4">
-                  <h4 class="text-success">{{ 'EngPower' | translate }}</h4>
+                  <h4 class="text-success">{{ "EngPower" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -259,7 +259,7 @@
                         editingForm.get('enginePower').touched
                       "
                     >
-                      {{ 'EngMin' | translate }}
+                      {{ "EngMin" | translate }}
                     </div>
                     <div
                       class="invalid-feedback"
@@ -268,7 +268,7 @@
                         editingForm.get('enginePower').touched
                       "
                     >
-                      {{ 'EngMax' | translate }}
+                      {{ "EngMax" | translate }}
                     </div>
                   </div>
                 </div>
@@ -276,19 +276,19 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-3 col-md-3 col-xs-3">
-                  <h4 class="text-success">{{ 'State' | translate }}</h4>
+                  <h4 class="text-success">{{ "State" | translate }}</h4>
                 </div>
                 <div class="col col-lg-4 col-md-4 col-xs-8">
                   <input type="checkbox" formControlName="isNew" />
                   <label class="mr-3 text-success pl-2" for="isNew">{{
-                    'IsNew' | translate
+                    "IsNew" | translate
                   }}</label>
                 </div>
               </div>
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-3">
-                  <h4 class="text-success">{{ 'FuelType' | translate }}</h4>
+                  <h4 class="text-success">{{ "FuelType" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -313,7 +313,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-3">
-                  <h4 class="text-success">{{ 'BodyType' | translate }}</h4>
+                  <h4 class="text-success">{{ "BodyType" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -338,7 +338,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-4">
-                  <h4 class="text-success">{{ 'TransType' | translate }}</h4>
+                  <h4 class="text-success">{{ "TransType" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -365,7 +365,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-3">
-                  <h4 class="text-success">{{ 'Drive' | translate }}</h4>
+                  <h4 class="text-success">{{ "Drive" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
@@ -392,13 +392,13 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col col-lg-5 col-md-5 col-xs-4">
-                  <h4 class="text-success">{{ 'Milleage' | translate }}</h4>
+                  <h4 class="text-success">{{ "Milleage" | translate }}</h4>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-xs-8">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">{{
-                        'km' | translate
+                        "km" | translate
                       }}</span>
                     </div>
                     <input
@@ -421,7 +421,7 @@
                         editingForm.get('odometr').touched
                       "
                     >
-                      {{ 'MilleageMin' | translate }}
+                      {{ "MilleageMin" | translate }}
                     </div>
                     <div
                       class="invalid-feedback"
@@ -430,7 +430,7 @@
                         editingForm.get('odometr').touched
                       "
                     >
-                      {{ 'MilleageMax' | translate }}
+                      {{ "MilleageMax" | translate }}
                     </div>
                   </div>
                 </div>
@@ -438,7 +438,7 @@
 
               <div class="row form-group justify-content-center text-center">
                 <div class="col-lg-5 col-md-5 col-xs-5">
-                  <h4 class="text-success">{{ 'Description' | translate }}</h4>
+                  <h4 class="text-success">{{ "Description" | translate }}</h4>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
                   <div class="input-group mb-3">
@@ -467,7 +467,7 @@
                   class="btn btn-success"
                 >
                   <i class="fa fa-check-square-o mr-2"></i>
-                  {{ 'Save' | translate }}
+                  {{ "Save" | translate }}
                 </button>
                 <button
                   class="btn btn-primary"
@@ -475,7 +475,7 @@
                   (click)="cancel()"
                 >
                   <i class="fa fa-ban mr-2"></i>
-                  {{ 'Cancel' | translate }}
+                  {{ "Cancel" | translate }}
                 </button>
               </div>
             </form>
@@ -483,7 +483,7 @@
           <tab class="mt-2"
             ><ng-template tabHeading
               ><i class="fa fa-camera-retro pr-1"></i>
-              {{ 'EditPhotos' | translate }}</ng-template
+              {{ "EditPhotos" | translate }}</ng-template
             >
             <app-carphoto-editor
               [photos]="car.photos"

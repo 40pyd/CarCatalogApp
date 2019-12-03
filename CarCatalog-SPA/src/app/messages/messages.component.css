@@ -35,8 +35,9 @@ td {
   height: auto;
 }
 
-#comment li {
-  background-color: #28a74667;
+#comment li p {
+  margin-left: 60px;
+  background-color: #25b446f8;
   color: white;
   border-radius: 5px;
 }
@@ -45,3 +46,5 @@ td {
   border: 0;
   background-color: transparent;
 }
+
+

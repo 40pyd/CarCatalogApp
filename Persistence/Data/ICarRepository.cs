@@ -13,5 +13,6 @@ namespace Persistence.Data
         Task<CarPhoto> GetMainPhoto(int userId);
         Task<Message> GetMessage(int id);
         Task<IEnumerable<Message>> GetMessages(int carId);
+        Task<LikedCar> GetLike(int userId, int carId);
     }
 }
