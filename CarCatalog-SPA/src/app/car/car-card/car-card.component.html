@@ -12,7 +12,7 @@
         </button>
       </li>
       <li *ngIf="isLiked" class="list-inline-item">
-        <button class="btn btn-primary" (click)="deleteLike(car.id)">
+        <button class="btn btn-primary" (click)="deleteLike()">
           <i class="fa fa-thumbs-down mr-2"></i>{{ "UnLike" | translate }}
         </button>
       </li>

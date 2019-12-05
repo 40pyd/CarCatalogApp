@@ -40,14 +40,14 @@ namespace Persistence.Data
 
         public async Task<Car> GetCar(int id)
         {
-            var car = await _context.Cars.Include(x => x.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var car = await _context.Cars.FirstOrDefaultAsync(u => u.Id == id);
 
             return car;
         }
 
         public async Task<PagedList<Car>> GetCars(CarParams carParams)
         {
-            var cars = _context.Cars.Include(x => x.Photos).OrderByDescending(c => c.Price).AsQueryable();
+            var cars = _context.Cars.OrderByDescending(c => c.Price).AsQueryable();
 
             if (!string.IsNullOrEmpty(carParams.OrderBy))
             {
@@ -62,7 +62,7 @@ namespace Persistence.Data
                 }
             }
 
-            if(carParams.IsLiked && carParams.UserId != 0)
+            if (carParams.IsLiked && carParams.UserId != 0)
             {
                 var userLikedCars = await getUserLikedCars(carParams.UserId);
                 cars = cars.Where(c => userLikedCars.Contains(c.Id));
@@ -101,10 +101,10 @@ namespace Persistence.Data
             {
                 switch (carParams.IsNew)
                 {
-                    case "used":
+                    case "Used":
                         predicate = predicate.And(c => c.IsNew == true);
                         break;
-                    case "new":
+                    case "New":
                         predicate = predicate.And(c => c.IsNew == false);
                         break;
                     default:
@@ -130,7 +130,6 @@ namespace Persistence.Data
         public async Task<IEnumerable<Message>> GetMessages(int carId)
         {
             var messages = await _context.Messages
-            .Include(u => u.Sender).ThenInclude(p => p.Photos)
             .Where(m => m.CarId == carId).ToListAsync();
 
             return messages;
@@ -145,11 +144,10 @@ namespace Persistence.Data
         private async Task<IEnumerable<int>> getUserLikedCars(int id)
         {
             var user = await _context.Users
-                .Include(x => x.LikedCars)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             return user.LikedCars.Where(c => c.UserId == id)
-                    .Select(i => i.CarId);
+                .Select(i => i.CarId);
         }
     }
 }

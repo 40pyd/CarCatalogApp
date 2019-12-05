@@ -14,42 +14,59 @@ namespace Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Domain.Car", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("Body");
+                    b.Property<string>("Body")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("BrandName");
+                    b.Property<string>("BrandName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Color");
+                    b.Property<string>("Color")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("Created");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Drive");
+                    b.Property<string>("Drive")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<double>("EnginePower");
+                    b.Property<double>("EnginePower")
+                        .HasColumnType("double");
 
-                    b.Property<string>("Fuel");
+                    b.Property<string>("Fuel")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsNew");
+                    b.Property<bool>("IsNew")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("ModelName");
+                    b.Property<string>("ModelName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Odometr");
+                    b.Property<int>("Odometr")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Price");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Transmission");
+                    b.Property<string>("Transmission")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Year");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -61,19 +78,26 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.CarPhoto", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CarId");
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("DateAdded");
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsMain");
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("PublicId");
+                    b.Property<string>("PublicId")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Url");
+                    b.Property<string>("Url")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -85,11 +109,14 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.LikedCar", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CarId");
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -103,15 +130,20 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Message", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CarId");
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Content");
+                    b.Property<string>("Content")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("MessageSent");
+                    b.Property<DateTime>("MessageSent")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("SenderId");
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -125,19 +157,26 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Photo", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("DateAdded");
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsMain");
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("PublicId");
+                    b.Property<string>("PublicId")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Url");
+                    b.Property<string>("Url")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -149,23 +188,32 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Created");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("DateBirth");
+                    b.Property<DateTime>("DateBirth")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("LastActive");
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("PasswordHash");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("longblob");
 
-                    b.Property<byte[]>("PasswordSalt");
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("longblob");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Username");
+                    b.Property<string>("Username")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -177,7 +225,8 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.User", "User")
                         .WithMany("Cars")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.CarPhoto", b =>
@@ -185,7 +234,8 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Car", "Car")
                         .WithMany("Photos")
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.LikedCar", b =>
@@ -193,12 +243,14 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Car", "Car")
                         .WithMany()
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "User")
                         .WithMany("LikedCars")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Message", b =>
@@ -206,12 +258,14 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Car", "Car")
                         .WithMany("Messages")
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>
@@ -219,7 +273,8 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

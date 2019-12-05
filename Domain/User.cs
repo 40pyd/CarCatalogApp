@@ -14,8 +14,8 @@ namespace Domain
         public DateTime DateBirth { get; set; }
         public DateTime LastActive { get; set; }
         public DateTime Created { get; set; }
-        public ICollection<Photo> Photos { get; set; }
-        public ICollection<Car> Cars { get; set; }
-        public ICollection<LikedCar> LikedCars { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
+        public virtual ICollection<LikedCar> LikedCars { get; set; }
     }
 }

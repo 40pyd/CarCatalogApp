@@ -1,0 +1,13 @@
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netcoreapp3.0/Persistence.deps.json
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netcoreapp3.0/Persistence.runtimeconfig.json
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netcoreapp3.0/Persistence.runtimeconfig.dev.json
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netcoreapp3.0/Persistence.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netcoreapp3.0/Persistence.pdb
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netcoreapp3.0/Domain.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/bin/Debug/netcoreapp3.0/Domain.pdb
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netcoreapp3.0/Persistence.csprojAssemblyReference.cache
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netcoreapp3.0/Persistence.AssemblyInfoInputs.cache
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netcoreapp3.0/Persistence.AssemblyInfo.cs
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netcoreapp3.0/Persistence.csproj.CopyComplete
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netcoreapp3.0/Persistence.dll
+/Users/andrej/Desktop/Demo/CarCatalogApp/Persistence/obj/Debug/netcoreapp3.0/Persistence.pdb

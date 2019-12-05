@@ -21,8 +21,8 @@ namespace Domain
         public int Odometr { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
-        public ICollection<CarPhoto> Photos { get; set; }
-        public ICollection<Message> Messages { get; set; }
+        public virtual User User { get; set; }
+        public virtual ICollection<CarPhoto> Photos { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

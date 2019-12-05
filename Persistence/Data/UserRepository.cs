@@ -37,14 +37,14 @@ namespace Persistence.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(x => x.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _context.Users.Include(x => x.Photos).ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         public async Task<bool> SaveAll()
