@@ -17,6 +17,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { ListsComponent } from './lists/lists.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -64,6 +65,11 @@ export const appRoutes: Routes = [
         path: 'favorites',
         component: ListsComponent,
         resolve: { cars: ListsResolver }
+      },
+      {
+        path: 'admin',
+        component: AdminPanelComponent,
+        data: {roles: ['Admin', 'Moderator']}
       }
     ]
   },

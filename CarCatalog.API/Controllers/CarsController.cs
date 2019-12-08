@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -7,7 +8,9 @@ using CarCatalog.API.Helpers;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Persistence.Data;
 using Persistence.Dtos;
@@ -24,8 +27,10 @@ namespace CarCatalog.API.Controllers
         private readonly IUserRepository _userRepo;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
-        public CarsController(ICarRepository repo, IMapper mapper, IUserRepository userRepo, IOptions<CloudinarySettings> cloudinaryConfig)
+        private readonly DataContext _context;
+        public CarsController(ICarRepository repo, IMapper mapper, IUserRepository userRepo, DataContext context, IOptions<CloudinarySettings> cloudinaryConfig)
         {
+            _context = context;
             _cloudinaryConfig = cloudinaryConfig;
             _userRepo = userRepo;
             _repo = repo;
@@ -55,7 +60,12 @@ namespace CarCatalog.API.Controllers
         [HttpGet("{id}", Name = "GetCar")]
         public async Task<IActionResult> GetCar(int id)
         {
-            var car = await _repo.GetCar(id);
+            var isCurrent = false;
+            var user = await _userRepo.GetUser(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value), true);
+            if (user.Cars.Any(x => x.Id == id))
+                isCurrent = true;
+
+            var car = await _repo.GetCar(id, isCurrent);
             var carToReturn = _mapper.Map<CarForDetailedDto>(car);
 
             return Ok(carToReturn);
@@ -86,7 +96,7 @@ namespace CarCatalog.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var carFromRepo = await _repo.GetCar(id);
+            var carFromRepo = await _repo.GetCar(id, true);
             _mapper.Map(carForUpdateDto, carFromRepo);
             carFromRepo.Created = DateTime.Now;
 
@@ -102,9 +112,9 @@ namespace CarCatalog.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _userRepo.GetUser(userId);
+            var user = await _userRepo.GetUser(userId, true);
 
-            var carFromRepo = await _repo.GetCar(id);
+            var carFromRepo = await _repo.GetCar(id, true);
 
             if (carFromRepo.UserId != userId)
                 return Unauthorized();
@@ -151,7 +161,7 @@ namespace CarCatalog.API.Controllers
             if (like != null)
                 return BadRequest("You already liked this car!");
 
-            if (await _repo.GetCar(carId) == null)
+            if (await _repo.GetCar(carId, false) == null)
                 return NotFound();
 
             like = new LikedCar
@@ -174,7 +184,7 @@ namespace CarCatalog.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _userRepo.GetUser(userId);
+            var user = await _userRepo.GetUser(userId, true);
 
             var likedCarFromRepo = await _repo.GetLike(userId, id);
 
@@ -190,6 +200,72 @@ namespace CarCatalog.API.Controllers
                 return Ok();
 
             return BadRequest("Failed to delete the car");
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpGet("carPhotosForModeration")]
+        public async Task<IActionResult> GetCarPhotosForModeration()
+        {
+            var photos = await _context.CarPhotos
+                .IgnoreQueryFilters()
+                .Where(p => p.IsApproved == false)
+                .Select(u => new
+                {
+                    Id = u.Id,
+                    ModelName = u.Car.ModelName,
+                    Url = u.Url,
+                    IsApproved = u.IsApproved
+                }).ToListAsync();
+
+            return Ok(photos);
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("approvePhoto/{photoId}")]
+        public async Task<IActionResult> ApprovePhoto(int photoId)
+        {
+            var photo = await _context.CarPhotos
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p => p.Id == photoId);
+
+            photo.IsApproved = true;
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("rejectPhoto/{photoId}")]
+        public async Task<IActionResult> RejectPhoto(int photoId)
+        {
+            var photo = await _context.CarPhotos
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p => p.Id == photoId);
+
+            if (photo.IsMain)
+                return BadRequest("You cannot reject main photo");
+
+            if (photo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photo.PublicId);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _context.CarPhotos.Remove(photo);
+                }
+            }
+
+            if (photo.PublicId == null)
+            {
+                _context.CarPhotos.Remove(photo);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

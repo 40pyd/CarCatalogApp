@@ -17,6 +17,11 @@
           >{{ "Favorites" | translate }}<i class="fa fa-star-o pl-2"></i
         ></a>
       </li>
+      <li *appHasRole="['Admin', 'Moderator']" class="nav-item p-0" routerLinkActive="active">
+        <a class="btn btn-primary btn-xs" [routerLink]="['/admin']"
+          >Admin<i class="fa fa-diamond pl-2"></i
+        ></a>
+      </li>
     </ul>
     <span class="mr-3" style="position: absolute; right: 10px; top: 10px;">
       <select #langSelect (change)="changeLang(langSelect.value)">

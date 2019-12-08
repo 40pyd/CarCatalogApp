@@ -11,7 +11,6 @@ using Persistence.Dtos;
 
 namespace CarCatalog.API.Controllers
 {
-    [Authorize]
     [Route("api/cars/{userId}/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
@@ -53,13 +52,13 @@ namespace CarCatalog.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDto messageForCreationDto)
         {
-            var sender = await _userRepo.GetUser(userId); // for automapper magic!!!!
+            var sender = await _userRepo.GetUser(userId, true); // for automapper magic!!!!
             if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             messageForCreationDto.SenderId = userId;
 
-            var car = await _repo.GetCar(messageForCreationDto.CarId); // for automapper magic!!!!
+            var car = await _repo.GetCar(messageForCreationDto.CarId, false); // for automapper magic!!!!
 
             if (car == null)
                 return BadRequest("Could not find the car");

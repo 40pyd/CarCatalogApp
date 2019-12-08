@@ -71,7 +71,8 @@ export class CarphotoEditorComponent implements OnInit {
           url: res.url,
           dateAdded: res.dateAdded,
           description: res.description,
-          isMain: res.isMain
+          isMain: res.isMain,
+          isApproved: res.isApproved
         };
         if (!this.photos) {
           this.photos = [];

@@ -5,15 +5,28 @@
         <span class="text-primary"></span>{{ "CarPhotos" | translate }}
       </h2>
       <div class="row pb-3">
-        <div class="col-sm-4 pt-2  text-center" *ngFor="let photo of photos">
-          <img src="{{ photo.url }}" class="img-thumbnail p-1" alt="" />
+        <div
+          class="col-sm-4 pt-2  text-center img-wrapper"
+          *ngFor="let photo of photos"
+        >
+          <img
+            src="{{ photo.url }}"
+            class="img-thumbnail p-1"
+            alt=""
+            [ngClass]="!photo.isApproved && 'not-approved'"
+          />
+
+          <div class="text-center" *ngIf="!photo.isApproved">
+            <span class="text-danger">Approving...</span>
+          </div>
+
           <div class="text-center">
             <button
               type="button"
               class="btn btn-sm mr-1"
               (click)="setMainPhoto(photo)"
               [ngClass]="photo.isMain ? 'btn-success active' : 'btn-secondary'"
-              [disabled]="photo.isMain"
+              [disabled]="photo.isMain || !photo.isApproved"
             >
               {{ "Main" | translate }}
             </button>

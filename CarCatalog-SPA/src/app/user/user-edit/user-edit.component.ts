@@ -41,7 +41,7 @@ export class UserEditComponent implements OnInit {
   }
 
   updateUser() {
-    this.user.username = this.user.username.toLowerCase();
+    this.user.userName = this.user.userName.toLowerCase();
     this.userService
       .updateUser(this.authService.decodedToken.nameid, this.user)
       .subscribe(

@@ -30,14 +30,19 @@ namespace Persistence.Data
 
         public async Task<Photo> GetPhoto(int id)
         {
-            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
-
+            var photo = await _context.Photos.IgnoreQueryFilters().FirstOrDefaultAsync(p => p.Id == id);
+            
             return photo;
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> GetUser(int id, bool isCurrent)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var query = _context.Users.Include(u => u.Photos).AsQueryable();
+
+            if(isCurrent)
+                query = query.IgnoreQueryFilters();
+
+            var user = await query.FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }

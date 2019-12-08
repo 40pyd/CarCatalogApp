@@ -14,7 +14,8 @@ import {
   BsDatepickerModule,
   PaginationModule,
   ButtonsModule,
-  CollapseModule
+  CollapseModule,
+  ModalModule
 } from 'ngx-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -51,6 +52,13 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MessagesComponent } from './messages/messages.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { ListsComponent } from './lists/lists.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminService } from './_services/admin.service';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { CarPhotoManagementComponent } from './admin/carPhoto-management/carPhoto-management.component';
 
 export function tokenGet() {
   return localStorage.getItem('token');
@@ -83,7 +91,13 @@ export const createTranslateLoader = (http: HttpClient) => {
       CarphotoEditorComponent,
       MessagesComponent,
       ListsComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      AdminPanelComponent,
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      CarPhotoManagementComponent,
+      RolesModalComponent
    ],
    imports: [
       BrowserModule,
@@ -101,19 +115,20 @@ export const createTranslateLoader = (http: HttpClient) => {
       NgxGalleryModule,
       FileUploadModule,
       JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGet,
-        whitelistedDomains: ['localhost:5000'],
-        blacklistedRoutes: ['localhost:5000/api/auth']
-      }
-    }),
+        config: {
+          tokenGetter: tokenGet,
+          whitelistedDomains: ['localhost:5000'],
+          blacklistedRoutes: ['localhost:5000/api/auth']
+        }
+      }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -121,6 +136,7 @@ export const createTranslateLoader = (http: HttpClient) => {
     AlertifyService,
     AuthGuard,
     UserService,
+    AdminService,
     UserEditResolver,
     CarDetailedResolver,
     CarListResolver,
@@ -130,6 +146,9 @@ export const createTranslateLoader = (http: HttpClient) => {
     ListsResolver,
     PreventUnsavedChanges,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
+  ],
+  entryComponents: [
+    RolesModalComponent
   ],
   bootstrap: [AppComponent]
 })

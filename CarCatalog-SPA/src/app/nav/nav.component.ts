@@ -41,7 +41,8 @@ export class NavComponent implements OnInit {
         this.alertify.success(this.translate.instant('LoggedSuccess'));
       },
       error => {
-        this.alertify.error(error);
+        this.alertify.error(this.translate.instant('LoginError'));
+        this.alertify.error(this.translate.instant('LoginTryAgain'));
       },
       () => {
         this.router.navigate(['/cars']);

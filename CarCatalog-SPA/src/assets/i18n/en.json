@@ -151,5 +151,7 @@
   "YouLiked": "You have liked ",
   "Like": "Like",
   "UnLike": "Dislike",
-  "LikeError": "You already liked this car!"
+  "LikeError": "You already liked this car!",
+  "LoginError": "Username or password are incorrect!",
+  "LoginTryAgain": "Please try again"
 }

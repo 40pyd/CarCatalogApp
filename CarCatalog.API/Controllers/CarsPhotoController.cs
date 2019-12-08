@@ -14,7 +14,6 @@ using Persistence.Dtos;
 
 namespace CarCatalog.API.Controllers
 {
-    [Authorize]
     [Route("api/users/{userId}/cars/{carId}")]
     [ApiController]
     public class CarsPhotoController : ControllerBase
@@ -59,7 +58,7 @@ namespace CarCatalog.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var carFromRepo = await _repo.GetCar(carId);
+            var carFromRepo = await _repo.GetCar(carId, true);
 
             if (carFromRepo.UserId != userId)
                 return Unauthorized();
@@ -107,7 +106,7 @@ namespace CarCatalog.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var carFromRepo = await _repo.GetCar(carId);
+            var carFromRepo = await _repo.GetCar(carId, true);
 
             if (carFromRepo.UserId != userId)
                 return Unauthorized();
@@ -134,7 +133,7 @@ namespace CarCatalog.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var carFromRepo = await _repo.GetCar(carId);
+            var carFromRepo = await _repo.GetCar(carId, true);
 
             if (carFromRepo.UserId != userId)
                 return Unauthorized();

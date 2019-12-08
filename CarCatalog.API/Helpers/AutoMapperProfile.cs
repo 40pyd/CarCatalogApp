@@ -42,7 +42,7 @@ namespace CarCatalog.API.Helpers
                 .ForMember(dest => dest.SenderPhotoUrl,
                     opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.SenderKnownAs,
-                    opt => opt.MapFrom(src => src.Sender.Username));
+                    opt => opt.MapFrom(src => src.Sender.UserName));
         }
     }
 }
