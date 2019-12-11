@@ -50,8 +50,8 @@ export class RegisterComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(10)
+            Validators.minLength(9),
+            Validators.maxLength(9)
           ]
         ],
         dateBirth: [null, Validators.required],

@@ -120,6 +120,10 @@ export class CarService {
     return this.http.delete(this.baseUrl + 'cars/' + userId + '/' + id);
   }
 
+  adminDeleteCar(id: number) {
+    return this.http.delete(this.baseUrl + 'cars/' + id);
+  }
+
   setMainPhoto(userId: number, carId: number, id: number) {
     return this.http
       .post(
@@ -179,7 +183,7 @@ export class CarService {
   }
 
   deleteLike(userId: number, carId: number) {
-    return this.http.post(
+    return this.http.delete(
       this.baseUrl + 'cars/' + userId + '/like/' + carId,
       {}
     );

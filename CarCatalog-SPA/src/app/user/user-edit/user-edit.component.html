@@ -82,6 +82,14 @@
               (getMemberPhotoChange)="updateMainPhoto($event)"
             ></app-photo-editor>
           </tab>
+          <tab class="mt-2"
+            ><ng-template tabHeading
+              ><i class="fa fa-lock pr-1"></i>
+              {{ "EditPassword" | translate }}</ng-template
+            >
+            <app-change-password>
+            </app-change-password>
+          </tab>
         </tabset>
       </div>
     </div>

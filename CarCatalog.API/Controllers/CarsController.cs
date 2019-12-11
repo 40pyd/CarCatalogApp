@@ -149,6 +149,41 @@ namespace CarCatalog.API.Controllers
             return BadRequest("Failed to delete the car");
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> AdminDeleteCar(int id)
+        {
+            var carFromRepo = await _repo.GetCar(id, true);
+
+            if (carFromRepo.Photos.Count > 0)
+            {
+                foreach (var photo in carFromRepo.Photos)
+                {
+                    if (photo.PublicId != null)
+                    {
+                        var deleteParams = new DeletionParams(photo.PublicId);
+
+                        var result = _cloudinary.Destroy(deleteParams);
+
+                        if (result.Result == "ok")
+                        {
+                            _repo.Delete(photo);
+                        }
+                    }
+                    else
+                    {
+                        _repo.Delete(photo);
+                    }
+                }
+            }
+
+            _repo.Delete(carFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete the car");
+        }
 
         [HttpPost("{userId}/like/{carId}")]
         public async Task<IActionResult> LikeCar(int userId, int carId)

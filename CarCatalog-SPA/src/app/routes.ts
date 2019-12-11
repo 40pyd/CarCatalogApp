@@ -18,6 +18,7 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { ListsComponent } from './lists/lists.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },

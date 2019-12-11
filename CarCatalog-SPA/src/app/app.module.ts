@@ -59,6 +59,7 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { CarPhotoManagementComponent } from './admin/carPhoto-management/carPhoto-management.component';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 export function tokenGet() {
   return localStorage.getItem('token');
@@ -97,7 +98,8 @@ export const createTranslateLoader = (http: HttpClient) => {
       UserManagementComponent,
       PhotoManagementComponent,
       CarPhotoManagementComponent,
-      RolesModalComponent
+      RolesModalComponent,
+      ChangePasswordComponent
    ],
    imports: [
       BrowserModule,
@@ -109,7 +111,9 @@ export const createTranslateLoader = (http: HttpClient) => {
       PaginationModule.forRoot(),
       TabsModule.forRoot(),
       ButtonsModule.forRoot(),
-      RouterModule.forRoot(appRoutes),
+      RouterModule.forRoot(appRoutes, {
+        onSameUrlNavigation: 'reload'
+      }),
       BrowserAnimationsModule,
       CollapseModule.forRoot(),
       NgxGalleryModule,

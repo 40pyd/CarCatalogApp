@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class CarCardComponent implements OnInit {
   @Input() car: Car;
   @Input() isLiked = false;
+  isCurrentUsersCar = false;
 
  constructor(
     private authService: AuthService,
@@ -24,6 +25,7 @@ export class CarCardComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.isCurrentUsersCar = +this.authService.decodedToken.nameid === this.car.userId ? true : false;
   }
 
   sendLike(carId: number) {
@@ -40,13 +42,33 @@ export class CarCardComponent implements OnInit {
   }
 
   deleteLike() {
-    this.alertify.confirm(this.translate.instant('CarDelConfirm'), () => {
+    this.alertify.confirm(this.translate.instant('CarLikeDelConfirm'), () => {
       this.carService
         .deleteLike(this.authService.decodedToken.nameid, this.car.id)
         .subscribe(
           next => {
             this.alertify.success(this.translate.instant('CarConfirm'));
-            this.router.navigate(['favorites']);
+            this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/favorites']);
+          });
+          },
+          error => {
+            this.alertify.error(this.translate.instant('CarDelProblem'));
+          }
+        );
+    });
+  }
+
+  deleteCar() {
+    this.alertify.confirm(this.translate.instant('CarDelConfirm'), () => {
+      this.carService
+        .adminDeleteCar(this.car.id)
+        .subscribe(
+          next => {
+            this.alertify.success(this.translate.instant('CarConfirm'));
+            this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/cars']);
+            });
           },
           error => {
             this.alertify.error(this.translate.instant('CarDelProblem'));

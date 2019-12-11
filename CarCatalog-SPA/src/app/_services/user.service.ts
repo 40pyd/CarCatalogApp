@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../_models/user';
 import { Observable } from 'rxjs';
+import { Password } from '../_models/password';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,9 @@ export class UserService {
       this.baseUrl + 'users/' + id + '/like/' + recipientId,
       {}
     );
+  }
+
+  changePassword(password: Password) {
+    return this.http.post(this.baseUrl + 'users/changePassword', password);
   }
 }

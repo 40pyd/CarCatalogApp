@@ -43,4 +43,8 @@ rejectCarPhoto(photoId) {
   return this.http.post(this.baseUrl + 'cars/rejectPhoto/' + photoId, {});
 }
 
+deleteUser(userId) {
+  return this.http.delete(this.baseUrl + 'users/' + userId);
+}
+
 }

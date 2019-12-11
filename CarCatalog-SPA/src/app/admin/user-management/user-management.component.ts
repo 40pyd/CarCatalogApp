@@ -3,6 +3,7 @@ import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-management',
@@ -13,7 +14,7 @@ export class UserManagementComponent implements OnInit {
   users: User[];
   bsModalRef: BsModalRef;
 
-  constructor(private adminService: AdminService, private modalService: BsModalService) { }
+  constructor(private adminService: AdminService, private modalService: BsModalService, private router: Router) { }
 
   ngOnInit() {
     this.getUsersWithRoles();
@@ -26,6 +27,20 @@ export class UserManagementComponent implements OnInit {
       console.log(error);
     }
     );
+  }
+
+  deleteUser(userId) {
+      this.adminService
+        .deleteUser(userId)
+        .subscribe(
+          next => {
+            this.router.onSameUrlNavigation = 'reload';
+            this.router.navigate(['admin']);
+          },
+          error => {
+            console.log(error);
+          }
+        );
   }
 
   editRolesModal(user: User) {
@@ -58,8 +73,10 @@ export class UserManagementComponent implements OnInit {
       {name: 'VIP', value: 'VIP'}
     ];
 
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < avalableRoles.length; i++) {
       let isMatch = false;
+      // tslint:disable-next-line: prefer-for-of
       for (let j = 0; j < userRoles.length; j++) {
         if (avalableRoles[i].name === userRoles[j]) {
           isMatch = true;

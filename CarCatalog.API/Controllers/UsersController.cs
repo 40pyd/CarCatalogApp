@@ -78,11 +78,47 @@ namespace CarCatalog.API.Controllers
         public async Task<IActionResult> GetUser(int id)
         {
             var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
-            
+
             var user = await _repo.GetUser(id, isCurrentUser);
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
 
             return Ok(userToReturn);
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var userFromRepo = await _repo.GetUser(id, true);
+
+            if (userFromRepo.Photos.Count > 0)
+            {
+                foreach (var photo in userFromRepo.Photos)
+                {
+                    if (photo.PublicId != null)
+                    {
+                        var deleteParams = new DeletionParams(photo.PublicId);
+
+                        var result = _cloudinary.Destroy(deleteParams);
+
+                        if (result.Result == "ok")
+                        {
+                            _repo.Delete(photo);
+                        }
+                    }
+                    else
+                    {
+                        _repo.Delete(photo);
+                    }
+                }
+            }
+
+            _repo.Delete(userFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete the user");
         }
 
         [HttpPut("{id}")]
@@ -170,10 +206,10 @@ namespace CarCatalog.API.Controllers
                 .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(p => p.Id == photoId);
 
-            if(photo.IsMain)
+            if (photo.IsMain)
                 return BadRequest("You cannot reject main photo");
 
-            if(photo.PublicId != null)
+            if (photo.PublicId != null)
             {
                 var deleteParams = new DeletionParams(photo.PublicId);
 
@@ -181,16 +217,36 @@ namespace CarCatalog.API.Controllers
 
                 if (result.Result == "ok")
                 {
-                            _context.Photos.Remove(photo);
+                    _context.Photos.Remove(photo);
                 }
             }
 
-            if(photo.PublicId == null)
+            if (photo.PublicId == null)
             {
                 _context.Photos.Remove(photo);
             }
 
             await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("changePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            if (int.Parse(changePasswordDto.Id) != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _userManager.FindByIdAsync(changePasswordDto.Id);
+
+            if (user == null)
+                return NotFound();
+
+            var result = await _userManager.ChangePasswordAsync(user,
+                changePasswordDto.OldPassword, changePasswordDto.NewPassword);
+
+            if (!result.Succeeded)
+                return BadRequest("Failed to change password");
 
             return Ok();
         }

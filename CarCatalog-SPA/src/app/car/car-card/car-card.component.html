@@ -5,7 +5,7 @@
       class="card-img-top img-thumbnail"
       alt="{{ car.modelName }}"
     />
-    <ul class="list-inline member-icons animate text-center">
+    <ul *ngIf="!isCurrentUsersCar" class="list-inline member-icons animate text-center">
       <li *ngIf="!isLiked" class="list-inline-item">
         <button class="btn btn-success btn-xs" (click)="sendLike(car.id)">
           <i class="fa fa-star mr-2"></i>{{ "Like" | translate }}
@@ -19,14 +19,20 @@
     </ul>
   </div>
   <div class="card-body p-2">
-    <h6 class="card-title text-center mb-1 text-success">
+    <h5 *ngIf="!isCurrentUsersCar" class="card-title text-center mb-1 text-success">
       <i class="fa fa-car text-primary"></i> {{ car.brandName }}
       {{ car.modelName }}
       <span class="text-primary">{{ car.year }}</span>
-    </h6>
-    <p class="card-text text-muted text-center">{{ car.price }} $</p>
+    </h5>
+    <h3 *ngIf="isCurrentUsersCar" class="card-title text-center mb-3 text-success">
+        {{ "IsYourCar" | translate }}
+      </h3>
+    <p *ngIf="!isCurrentUsersCar" class="card-text text-muted text-center">{{ car.price }} $</p>
     <button class="btn btn-primary" [routerLink]="['/cars/', car.id]">
       <i class="fa fa-info-circle"></i> {{ "Details" | translate }}
+    </button>
+    <button *appHasRole="['Admin']" class="btn btn-danger ml-3" (click)="deleteCar(car.id)">
+      <i class="fa fa-trash"></i> {{ "DelCar" | translate }}
     </button>
   </div>
 </div>
